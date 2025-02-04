@@ -16,6 +16,7 @@ public class NetworkRelayManager : MonoBehaviour
     [SerializeField] private Button hostButton;
     [SerializeField] private TMP_Text joinCodeText;
     [SerializeField] private TMP_InputField joinCodeInput;
+    [SerializeField] private GameObject startingPlayerPrefab;
 
     private async void Start(){
         await UnityServices.InitializeAsync();
@@ -25,37 +26,6 @@ public class NetworkRelayManager : MonoBehaviour
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
-
-    // private async void CreateRelay(){
-    //     try {
-    //         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
-    //         string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-    //         Debug.Log("Join Code: " + joinCode);
-
-    //         // Setup Relay
-    //         RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
-    //         NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-    //         NetworkManager.Singleton.StartHost();
-
-    //     } catch (RelayServiceException e){
-    //         Debug.Log(e);
-    //     }
-    // }
-
-    // private async void JoinRelay(string joinCode){
-    //     try {
-    //         Debug.Log("Join Code: " + joinCode);
-    //         JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-    //         // Setup Relay
-    //         RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-    //         NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-    //         NetworkManager.Singleton.StartClient();
-
-    //     } catch (RelayServiceException e){
-    //         Debug.Log(e);
-    //     }
-    // }
 
 
     private void Awake()
@@ -69,7 +39,7 @@ public class NetworkRelayManager : MonoBehaviour
         string joinCode = await StartHostWithRelay();
         Debug.Log("Host Started with Join Code: " + joinCode);
 
-        // ✅ Update the TMP Text UI
+        // Update the TMP Text UI
         if (joinCodeText != null)
             joinCodeText.text = "Join Code: " + joinCode;
     }
@@ -87,7 +57,7 @@ public class NetworkRelayManager : MonoBehaviour
         string enteredCode = joinCodeInput.text.Trim();
         Debug.Log("Entered Join Code: " + enteredCode);
 
-        // ✅ Validate join code format
+        // Validate join code format
         if (!System.Text.RegularExpressions.Regex.IsMatch(enteredCode, "^[6789BCDFGHJKLMNPQRTWbcdfghjklmnpqrtw]{6,12}$"))
         {
             Debug.LogError($"Invalid Join Code: {enteredCode}. Must be 6-12 characters long and contain only '6789BCDFGHJKLMNPQRTW'.");
@@ -107,7 +77,6 @@ public class NetworkRelayManager : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Debug.Log("Join Code: " + joinCode);
             var relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
-            // RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             NetworkManager.Singleton.StartHost();
 
@@ -131,7 +100,6 @@ public class NetworkRelayManager : MonoBehaviour
 
             // Setup Relay
             var relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
-            // RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             NetworkManager.Singleton.StartClient();
 
