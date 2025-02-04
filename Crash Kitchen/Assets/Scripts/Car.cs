@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
-using UnityEngine.InputSystem; // Import this for InputAction usage
+using UnityEngine.InputSystem;
 
 public class Car : MonoBehaviour
 {
     public XRKnob knob;
     public XRLever lever;
-    public float speed;
-    public InputActionReference gripAction; // Reference to the XRI Left/Grip action
-    private int direction;
+    public float maxSpeed;
+    public float maxAccel;
+    public float speedDecayRate;
+    public float acceleration = 0;
+    public float speed = 0;
+    public int direction;
+
+    public InputActionReference driveAction;
+
 
     void Start()
     {
@@ -17,41 +23,32 @@ public class Car : MonoBehaviour
 
         // Set the knob's value to default
         knob.value = 0;
-
-        // Get the direction of the car
-        direction = lever.value ? 1 : -1;
-
-        // Enable the grip action
-        if (gripAction != null && gripAction.action != null)
-        {
-            gripAction.action.Enable();
-        }
     }
 
     void Update()
     {
-        // Adjust speed based on the grip input
-        if (gripAction != null && gripAction.action != null)
-        {
-            float gripValue = gripAction.action.ReadValue<float>();
-            speed = gripValue * 10f; // Scale grip value to a usable speed range
-        }
-
-        // Move the car forward or backward based on speed and direction
-        transform.position += transform.forward * speed * Time.deltaTime * direction;
-
         // Rotate the car based on the knob's value
         transform.Rotate(Vector3.up, knob.value * 360 * Time.deltaTime);
 
-        Debug.Log("Lever value: " + lever.value + ", Grip value: " + speed);
-    }
+        acceleration = driveAction.action.ReadValue<float>();
 
-    private void OnDisable()
-    {
-        // Disable the grip action when the script is disabled
-        if (gripAction != null && gripAction.action != null)
+        // Get the direction of the car
+        direction = lever.value ? 1 : -1;
+        
+        if (acceleration > 0)
         {
-            gripAction.action.Disable();
+            // Increase the speed of the car
+            speed += acceleration * maxAccel * Time.deltaTime;
+            speed = Mathf.Min(speed, maxSpeed);
         }
+        else
+        {
+            // Decrease the speed of the car
+            speed -= maxAccel * Time.deltaTime * speedDecayRate;
+            speed = Mathf.Max(speed, 0);
+        }
+
+        // Move the car forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime * direction);
     }
 }
