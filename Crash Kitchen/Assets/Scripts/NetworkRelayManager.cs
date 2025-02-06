@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
@@ -10,13 +11,16 @@ using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
 using Unity.Networking.Transport.Relay; 
 
-public class NetworkRelayManager : MonoBehaviour
+
+public class NetworkRelayManager : NetworkBehaviour
 {
     [SerializeField] private Button clientButton;
     [SerializeField] private Button hostButton;
     [SerializeField] private TMP_Text joinCodeText;
     [SerializeField] private TMP_InputField joinCodeInput;
     [SerializeField] private GameObject startingPlayerPrefab;
+    [SerializeField] private string m_SceneName;
+    // public UnityEditor.SceneAsset SceneAsset;
 
     private async void Start(){
         await UnityServices.InitializeAsync();
@@ -42,6 +46,16 @@ public class NetworkRelayManager : MonoBehaviour
         // Update the TMP Text UI
         if (joinCodeText != null)
             joinCodeText.text = "Join Code: " + joinCode;
+
+        Debug.Log("Attempting to route player to GameScene");
+        // Send the player to new scene HERE:
+        if( IsServer && !string.IsNullOrEmpty(m_SceneName))
+        {
+            Debug.Log("Trying to switch scene?");
+            NetworkManager.Singleton.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
+        } else {
+            Debug.LogWarning("Failed to load scene: " + m_SceneName);
+        }
     }
 
     private async void HandleClientButton()
@@ -66,7 +80,19 @@ public class NetworkRelayManager : MonoBehaviour
 
         Debug.Log("Client trying to start with Join Code: " + enteredCode);
         await StartClientWithRelay(enteredCode);
-        
+
+        // run this code after the client has connected to the server
+
+        Debug.Log("Attempting to route player to GameScene");
+        // Send the player to new scene HERE:
+        if( IsServer && !string.IsNullOrEmpty(m_SceneName))
+        {
+            Debug.Log("Trying to switch scene?");
+            NetworkManager.Singleton.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
+        } else {
+            Debug.LogWarning("Failed to load scene: " + m_SceneName);
+        }
+
     }
 
 

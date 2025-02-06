@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NetworkingTest.unity
     guid: 49e5e2f4b26802c499941b0d5eb47b9e
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 054ecde161a39724b941483c102ebec9
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 46f19cc13d6122e4e8ba9938417b15cf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
