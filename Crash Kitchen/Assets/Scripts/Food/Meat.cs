@@ -1,11 +1,12 @@
 using UnityEngine;
 
 public class Meat : Ingredient
-{
-    public float cookTime;
+{   
+    [Header("Cook Properties")]
+    public float cookPercent;
+    public int cookRate;
     public bool isCooked;
     public bool isCooking;
-    public float cookPercent;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class Meat : Ingredient
     {
         if (cookPercent < 100 & isCooking)
         {
-            cookPercent += 10 * Time.deltaTime;
+            cookPercent += cookRate * Time.deltaTime;
         }
     }
 
@@ -38,13 +39,12 @@ public class Meat : Ingredient
     {
         if (cookPercent > 50 & cookPercent < 100)
         {
-            Debug.Log("This is happening");
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
         }
         else if (cookPercent >= 100)
         {
-            Debug.Log("Bruh moment");
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.black);
+            isCooked = true;
         }
     }
 
