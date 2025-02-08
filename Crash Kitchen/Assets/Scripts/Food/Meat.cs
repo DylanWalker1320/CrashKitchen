@@ -43,7 +43,7 @@ public class Meat : Ingredient
         }
         else if (cookPercent >= 100)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.black);
+            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
             isCooked = true;
         }
     }
