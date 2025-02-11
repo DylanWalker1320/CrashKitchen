@@ -13,6 +13,7 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
 
         CreateShape();
+        UpdateMesh();
     }
 
     void CreateShape()
@@ -32,7 +33,7 @@ public class MeshGenerator : MonoBehaviour
 
     void UpdateMesh() {
         mesh.Clear();
-
+        print("Woo this runs!");
         mesh.vertices = vertices;
         mesh.triangles = triangles;
     }
