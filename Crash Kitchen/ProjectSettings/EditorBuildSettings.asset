@@ -11,10 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NetworkingTest.unity
     guid: 49e5e2f4b26802c499941b0d5eb47b9e
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 054ecde161a39724b941483c102ebec9
+  - enabled: 1
+    path: Assets/Scenes/Networking2.unity
+    guid: 586f9f432a3bb9d4db4aef60ede5c48e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 46f19cc13d6122e4e8ba9938417b15cf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c8c1a7718c54a59438e87505245b8d3e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5316921da09447a48b79d62ba8fd942d, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ebf43eb6e9ef66a49bbd05f7b40c479b, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 87b413c5a910b15498a98200731b1754, type: 2}
   m_UseUCBPForAssetBundles: 0
