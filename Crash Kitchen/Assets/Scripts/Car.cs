@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class Car : MonoBehaviour
 {
     public XRKnob knob;
+    
     public XRLever lever;
     public float maxSpeed;
     public float maxAccel;
