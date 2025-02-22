@@ -331,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Patty
   cookPercent: 0
-  cookRate: 0
+  cookRate: 20
   isCooked: 0
   isCooking: 0
 --- !u!1001 &6312998511157241519

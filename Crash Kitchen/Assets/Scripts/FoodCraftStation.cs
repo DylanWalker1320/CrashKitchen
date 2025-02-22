@@ -27,34 +27,45 @@ public class FoodCraftStation : MonoBehaviour
     {
         if(presentIngredients.Count > 1 && checkRecipes)
         {
+            bool recipeFound = false;
             checkRecipes = false;
+            // Iterate through recipes
             for(int i = 0; i < recipes.myRecipeList.recipes.Length; i++)
             {
-                foreach (Ingredient name in presentIngredients)
+                // Verify a recipe found
+                if(presentIngredients.Count == recipes.myRecipeList.recipes[i].ingredients.Count)
                 {
-                    if(!recipes.myRecipeList.recipes[i].ingredients.Contains(name.name))
+                    // Iterate through each ingredient name
+                    foreach (Ingredient name in presentIngredients)
                     {
-                        Debug.Log("UH OH");
-                        break;
-                    }
-                    else
-                    {
-                        if(presentIngredients[presentIngredients.Count - 1].name == name.name && 
-                            presentIngredients.Count == recipes.myRecipeList.recipes[i].ingredients.Count)
+                        // Check if ingredient exists in current recipe index
+                        if(!recipes.myRecipeList.recipes[i].ingredients.Contains(name.name))
                         {
-                            foreach(Ingredient ingredient in presentIngredients)
-                            {
-                                Destroy(ingredient.gameObject);
-                            }
-                            GameObject dish = Resources.Load<GameObject>("Prefabs/" + recipes.myRecipeList.recipes[i].name);
-                            Debug.Log(dish);
-                            if(dish != null)
-                            {
-                                Debug.Log("SHEESH");
-                                Instantiate(dish, gameObject.transform.position, Quaternion.identity);
-                                break;
-                            }
+                            Debug.Log("UH OH");
+                            recipeFound = false;
+                            break;
                         }
+                        else
+                        {
+                            recipeFound = true;
+                        }
+
+                    }
+                }
+                // Spawn Dish
+                if(recipeFound)
+                {
+                    recipeFound = false;
+                    foreach(Ingredient ingredient in presentIngredients)
+                    {
+                        Destroy(ingredient.gameObject);
+                    }
+                    GameObject dish = Resources.Load<GameObject>("Prefabs/" + recipes.myRecipeList.recipes[i].name);
+                    Debug.Log(dish);
+                    if(dish != null)
+                    {
+                        Debug.Log("SHEESH");
+                        Instantiate(dish, gameObject.transform.position, Quaternion.identity);
                     }
                 }
             }

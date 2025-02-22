@@ -2,7 +2,7 @@
     "recipes": [
         {
             "name": "Hamburger",
-            "ingredients": ["Bun", "Bun", "Lettuce", "Patty"]
+            "ingredients": ["Bun", "Bun", "Lettuce", "Cooked Patty"]
         },
         {
             "name": "Steak",

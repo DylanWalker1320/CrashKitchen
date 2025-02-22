@@ -41,10 +41,11 @@ public class Meat : Ingredient
         {
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
         }
-        else if (cookPercent >= 100)
+        else if (cookPercent >= 100 && !isCooked)
         {
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
             isCooked = true;
+            name = "Cooked " + this.name;
         }
     }
 
