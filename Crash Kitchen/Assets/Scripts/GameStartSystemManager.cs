@@ -57,7 +57,7 @@ public class GameStartSystemManager : NetworkBehaviour
 
             // Set the player as a child of the Truck
             transform.SetParent(Truck.transform);
-            transform.localPosition = new Vector3(0f, 0f, -4.1f);
+            transform.localPosition = new Vector3(0f, 1f, -3.9f);
             transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
         }
         else if (other == cookCollider)
