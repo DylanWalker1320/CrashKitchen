@@ -49,7 +49,7 @@ public class CarControl : MonoBehaviour
     {
         // Get player input for acceleration
         float vInput = driveAction.action.ReadValue<float>(); // Read trigger input (0 to 1)
-        float hInput = Input.GetAxis("Horizontal"); // Steering input
+        float hInput = knob.value * 2 - 1; // Read knob input (0 to 1) scaled to (-1 to 1)
 
         // Calculate current speed along the car's forward axis
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
@@ -59,16 +59,15 @@ public class CarControl : MonoBehaviour
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
         float currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
-        // Get the direction of the car (forward = 1, reverse = -1)
-        float direction = lever.value ? 1 : -1;
+        // Get the direction of the car (forward = -1, reverse = 1)
+        float direction = lever.value ? -1 : 1;
 
         foreach (var wheel in wheels)
         {
-            Debug.Log(knob.value);
             // Apply steering to wheels that support steering
             if (wheel.steerable)
             {
-                wheel.WheelCollider.steerAngle = hInput * currentSteerRange * direction;
+                wheel.WheelCollider.steerAngle = hInput * currentSteerRange;
             }
 
             if (vInput > accelThreshold)
@@ -76,7 +75,7 @@ public class CarControl : MonoBehaviour
                 // Apply torque to motorized wheels
                 if (wheel.motorized)
                 {
-                    wheel.WheelCollider.motorTorque = vInput * currentMotorTorque;
+                    wheel.WheelCollider.motorTorque = vInput * currentMotorTorque * direction;
                 }
                 // Release brakes while accelerating
                 wheel.WheelCollider.brakeTorque = 0f;
