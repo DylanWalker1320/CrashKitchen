@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class CarControl : MonoBehaviour
+
+public class CarControl : NetworkBehaviour
 {
     [Header("Car Properties")]
     public float motorTorque = 2000f;

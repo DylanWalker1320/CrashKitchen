@@ -9,6 +9,9 @@ TagManager:
   - Projectile
   - Target
   - Anchor
+  - DriverPlatform
+  - CookPlatform
+  - Truck
   layers:
   - Default
   - TransparentFX
