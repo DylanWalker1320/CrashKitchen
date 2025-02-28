@@ -9,6 +9,7 @@ public class MeshGenerator : MonoBehaviour
 
     [SerializeField] private int xSize = 10;
     [SerializeField] private int zSize = 10;
+    [SerializeField] private int spacing = 1;
     [SerializeField] private float yAmplification = 4f;
     [SerializeField] private float perlinNoiseScale = 0.07f;
 
@@ -43,9 +44,9 @@ public class MeshGenerator : MonoBehaviour
         // Verts
         vertices = new Vector3[(xSize +1) * (zSize +1)];
 
-        for (int i = 0, z = 0; z <= zSize; z++)
+        for (int i = 0, z = 0; z <= zSize * spacing; z += spacing)
         {
-            for (int x = 0; x <= xSize; x++, i++)
+            for (int x = 0; x <= xSize * spacing; x += spacing, i++)
             {
                 float y = Mathf.PerlinNoise((x + Random.value) * perlinNoiseScale, (z + Random.value) * perlinNoiseScale) * yAmplification;
                 vertices[i] = new Vector3(x, y, z);

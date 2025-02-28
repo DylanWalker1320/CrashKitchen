@@ -165,11 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd1aa8e30edf47d796a9daf65423065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
   xSize: 50
   zSize: 50
-  noiseScale: 4
-  noiseReduction: 0.07
+  spacing: 10
+  yAmplification: 4
+  perlinNoiseScale: 0.07
 --- !u!23 &706222272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 1584758672}
   - component: {fileID: 1584758674}
   m_Layer: 0
-  m_Name: CubdeMeshGen
+  m_Name: CubeMeshGen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,10 +580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286dca65318234025b0bff2b895e32f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
-  xSize: 1
-  ySize: 2
-  zSize: 1
+  xSize: 10
+  ySize: 30
+  zSize: 10
+  maxSize: 10
   shaderType: Universal Render Pipeline/Lit
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -10,6 +10,7 @@ public class CubeMeshGen : MonoBehaviour
     [SerializeField] private float ySize = 1.0f;
     [SerializeField] private float zSize = 1.0f;
 
+    [SerializeField, Range(1.0f, 100.0f)] private float maxSize = 50.0f;
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
