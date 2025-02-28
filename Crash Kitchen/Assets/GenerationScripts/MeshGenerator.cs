@@ -3,14 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGenerator : MonoBehaviour
 {
-    [SerializeField] private Mesh mesh;
+    private Mesh mesh;
     private Vector3[] vertices;
     private int[] triangles;
 
-    [SerializeField] private int xSize = 20;
-    [SerializeField] private int zSize = 20;
-    [SerializeField] private float noiseScale = 2f;
-    [SerializeField] private float noiseReduction = 0.3f;
+    [SerializeField] private int xSize = 10;
+    [SerializeField] private int zSize = 10;
+    [SerializeField] private float yAmplification = 4f;
+    [SerializeField] private float perlinNoiseScale = 0.07f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,11 +45,10 @@ public class MeshGenerator : MonoBehaviour
 
         for (int i = 0, z = 0; z <= zSize; z++)
         {
-            for (int x = 0; x <= xSize; x++)
+            for (int x = 0; x <= xSize; x++, i++)
             {
-                float y = Mathf.PerlinNoise((x + Random.value) * noiseReduction, (z + Random.value) * noiseReduction) * noiseScale;
+                float y = Mathf.PerlinNoise((x + Random.value) * perlinNoiseScale, (z + Random.value) * perlinNoiseScale) * yAmplification;
                 vertices[i] = new Vector3(x, y, z);
-                i++;
             }
         }
 

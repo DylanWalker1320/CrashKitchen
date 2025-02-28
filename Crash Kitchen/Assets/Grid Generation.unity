@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 706222269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5936012, y: -1.21555, z: 0.31873968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,9 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
   xSize: 50
-  zSize: 20
-  noiseScale: 2
-  noiseReduction: 0.3
+  zSize: 50
+  noiseScale: 4
+  noiseReduction: 0.07
 --- !u!23 &706222272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -509,7 +509,7 @@ Transform:
   m_GameObject: {fileID: 1584758670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.607319, y: -24.388752, z: -36.328503}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -581,9 +581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
-  xSize: 10
-  ySize: 20
-  zSize: 10
+  xSize: 1
+  ySize: 2
+  zSize: 1
   shaderType: Universal Render Pipeline/Lit
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

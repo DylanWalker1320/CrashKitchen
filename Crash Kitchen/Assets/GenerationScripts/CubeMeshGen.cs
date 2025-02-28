@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CubeMeshGen : MonoBehaviour
 {
-    [SerializeField] private Mesh mesh;
+    private Mesh mesh;
     private Vector3[] vertices;
     private int[] triangles;
 
