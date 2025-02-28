@@ -18,7 +18,7 @@ public class MeshGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        CreateShape();
+        CreateTerrain();
         UpdateMesh();
     }
 
@@ -38,7 +38,7 @@ public class MeshGenerator : MonoBehaviour
         mesh.Optimize();
     }
 
-    void CreateShape()
+    void CreateTerrain()
     {
         // Verts
         vertices = new Vector3[(xSize +1) * (zSize +1)];
