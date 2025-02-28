@@ -19,7 +19,7 @@ public class CubeMeshGen : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         ApplyRandomMaterial();
 
-        CreateCube(xSize, ySize, zSize);
+        CreateCube();
         UpdateMesh();
     }
 
@@ -53,18 +53,18 @@ public class CubeMeshGen : MonoBehaviour
         GetComponent<Renderer>().material = randMat;
     }
 
-    void CreateCube(float width, float height, float depth) {
+    void CreateCube() {
         //Cubes have 8 vertices
         vertices = new Vector3[8];
 
         vertices[0] = new Vector3(0, 0, 0);
-        vertices[1] = new Vector3(width, 0, 0);
-        vertices[2] = new Vector3(0, height, 0);
-        vertices[3] = new Vector3(width, height, 0);
-        vertices[4] = new Vector3(0, 0, depth);
-        vertices[5] = new Vector3(width, 0, depth);
-        vertices[6] = new Vector3(0, height, depth);
-        vertices[7] = new Vector3(width, height, depth);
+        vertices[1] = new Vector3(xSize, 0, 0);
+        vertices[2] = new Vector3(0, ySize, 0);
+        vertices[3] = new Vector3(xSize, ySize, 0);
+        vertices[4] = new Vector3(0, 0, zSize);
+        vertices[5] = new Vector3(xSize, 0, zSize);
+        vertices[6] = new Vector3(0, ySize, zSize);
+        vertices[7] = new Vector3(xSize, ySize, zSize);
 
         //Tri is 3 verts, 2 tri for quad, 6 quad for cube
         //Tri verts have to be counterclockwise for automatic normals
