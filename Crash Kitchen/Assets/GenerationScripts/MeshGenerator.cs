@@ -3,15 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGenerator : MonoBehaviour
 {
-    Mesh mesh;
-    Vector3[] vertices;
-    int[] triangles;
+    [SerializeField] private Mesh mesh;
+    private Vector3[] vertices;
+    private int[] triangles;
 
-    public int xSize = 20;
-    public int zSize = 20;
-    public float noiseScale = 2f;
-    public float noiseReduction = 0.3f;
-    [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
+    [SerializeField] private int xSize = 20;
+    [SerializeField] private int zSize = 20;
+    [SerializeField] private float noiseScale = 2f;
+    [SerializeField] private float noiseReduction = 0.3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +19,6 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
 
         CreateShape();
-        ApplyRandomMaterial();
         UpdateMesh();
     }
 
@@ -38,23 +36,6 @@ public class MeshGenerator : MonoBehaviour
 
         mesh.RecalculateNormals();
         mesh.Optimize();
-    }
-
-    void ApplyRandomMaterial()
-    {
-        Shader s = Shader.Find(shaderType);
-        if (!s)
-        {
-            print("FUCKING HELL");
-        }
-        Material randMat = new Material(s);
-        randMat.name = $"{nameof(gameObject)}Material";
-        randMat.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-
-        randMat.EnableKeyword("_EMISSION");
-        randMat.SetColor("_EmissionColor", randMat.color);
-
-        GetComponent<Renderer>().material = randMat;
     }
 
     void CreateShape()
