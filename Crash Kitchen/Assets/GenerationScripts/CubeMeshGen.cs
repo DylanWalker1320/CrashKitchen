@@ -6,28 +6,34 @@ public class CubeMeshGen : MonoBehaviour
     private Vector3[] vertices;
     private int[] triangles;
 
-    [SerializeField] private float xSize = 1.0f;
-    [SerializeField] private float ySize = 1.0f;
-    [SerializeField] private float zSize = 1.0f;
+    //[SerializeField] private float xSize = 1.0f;
+    //[SerializeField] private float ySize = 1.0f;
+    //[SerializeField] private float zSize = 1.0f;
 
-    [SerializeField, Range(1.0f, 100.0f)] private float maxSize = 50.0f;
+    [SerializeField, Range(1.0f, 10.0f)] private float maxWidth = 5.0f;
+    [SerializeField, Range(1.0f, 100.0f)] private float maxHeight = 10.0f;
+    [SerializeField, Range(1.0f, 10.0f)] private float maxDepth = 5.0f;
+
+    public int randSeed = 1;
+
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //If we need seeds to test or whatever
+        //Random.InitState(randSeed);
+
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        ApplyRandomMaterial();
 
-        CreateCube();
-        UpdateMesh();
+        RandomCubeGen();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateMesh();
     }
 
     void UpdateMesh()
@@ -54,18 +60,25 @@ public class CubeMeshGen : MonoBehaviour
         GetComponent<Renderer>().material = randMat;
     }
 
-    void CreateCube() {
+    void RandomCubeGen()
+    {
+        CreateCube(Random.Range(1.0f, maxWidth), Random.Range(1.0f, maxHeight), Random.Range(1.0f, maxDepth));
+        ApplyRandomMaterial();
+    }
+
+    void CreateCube(float w, float h, float d) {
+        //width w, height h, depth d
         //Cubes have 8 vertices
         vertices = new Vector3[8];
 
         vertices[0] = new Vector3(0, 0, 0);
-        vertices[1] = new Vector3(xSize, 0, 0);
-        vertices[2] = new Vector3(0, ySize, 0);
-        vertices[3] = new Vector3(xSize, ySize, 0);
-        vertices[4] = new Vector3(0, 0, zSize);
-        vertices[5] = new Vector3(xSize, 0, zSize);
-        vertices[6] = new Vector3(0, ySize, zSize);
-        vertices[7] = new Vector3(xSize, ySize, zSize);
+        vertices[1] = new Vector3(w, 0, 0);
+        vertices[2] = new Vector3(0, h, 0);
+        vertices[3] = new Vector3(w, h, 0);
+        vertices[4] = new Vector3(0, 0, d);
+        vertices[5] = new Vector3(w, 0, d);
+        vertices[6] = new Vector3(0, h, d);
+        vertices[7] = new Vector3(w, h, d);
 
         //Tri is 3 verts, 2 tri for quad, 6 quad for cube
         //Tri verts have to be counterclockwise for automatic normals
