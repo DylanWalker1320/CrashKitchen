@@ -11,6 +11,7 @@ public class MeshGenerator : MonoBehaviour
     public int zSize = 20;
     public float noiseScale = 2f;
     public float noiseReduction = 0.3f;
+    [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +20,41 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
 
         CreateShape();
+        ApplyRandomMaterial();
         UpdateMesh();
+    }
+
+    private void Update()
+    {
+
+    }
+
+    void UpdateMesh()
+    {
+        mesh.Clear();
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+
+        mesh.RecalculateNormals();
+        mesh.Optimize();
+    }
+
+    void ApplyRandomMaterial()
+    {
+        Shader s = Shader.Find(shaderType);
+        if (!s)
+        {
+            print("FUCKING HELL");
+        }
+        Material randMat = new Material(s);
+        randMat.name = $"{nameof(gameObject)}Material";
+        randMat.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        randMat.EnableKeyword("_EMISSION");
+        randMat.SetColor("_EmissionColor", randMat.color);
+
+        GetComponent<Renderer>().material = randMat;
     }
 
     void CreateShape()
@@ -31,7 +66,7 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * noiseReduction, z * noiseReduction) * noiseScale;
+                float y = Mathf.PerlinNoise((x + Random.value) * noiseReduction, (z + Random.value) * noiseReduction) * noiseScale;
                 vertices[i] = new Vector3(x, y, z);
                 i++;
             }
@@ -54,14 +89,5 @@ public class MeshGenerator : MonoBehaviour
             }
             vert++;
         }
-    }
-
-    void UpdateMesh() {
-        mesh.Clear();
-
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-
-        mesh.RecalculateNormals();
     }
 }
