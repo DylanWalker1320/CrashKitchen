@@ -3,10 +3,6 @@ using UnityEditor;
 
 public abstract class Generator : MonoBehaviour
 {
-    private Mesh mesh;
-    private Vector3[] vertices;
-    private int[] triangles;
-
     public void Generate()
     {
         CreateMesh();

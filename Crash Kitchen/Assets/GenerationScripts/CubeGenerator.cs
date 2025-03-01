@@ -1,38 +1,24 @@
 using UnityEngine;
 
-public class CubeMeshGen : Generator
+public class CubeGenerator : Generator
 {
     private Mesh mesh;
     private Vector3[] vertices;
     private int[] triangles;
 
-    //[SerializeField] private float xSize = 1.0f;
-    //[SerializeField] private float ySize = 1.0f;
-    //[SerializeField] private float zSize = 1.0f;
-
     [SerializeField, Range(1.0f, 10.0f)] private float maxWidth = 5.0f;
     [SerializeField, Range(1.0f, 100.0f)] private float maxHeight = 10.0f;
     [SerializeField, Range(1.0f, 10.0f)] private float maxDepth = 5.0f;
-
-    public int randSeed = 1;
 
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void CreateMesh()
     {
-        //If we need seeds to test or whatever
-        //Random.InitState(randSeed);
-
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
         RandomCubeGen();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         UpdateMesh();
     }
 

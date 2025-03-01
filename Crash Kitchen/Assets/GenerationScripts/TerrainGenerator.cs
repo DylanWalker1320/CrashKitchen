@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-public class MeshGenerator : Generator
+public class TerrainGenerator : Generator
 {
     private Mesh mesh;
     private Vector3[] vertices;
