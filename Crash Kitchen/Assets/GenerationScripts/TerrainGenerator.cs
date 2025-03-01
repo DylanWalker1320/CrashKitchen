@@ -43,10 +43,10 @@ public class TerrainGenerator : Generator
         mesh.Optimize();
     }
 
-    void CreateTerrain()
+    public Vector3[] CreateTerrain()
     {
-        // Verts
-        vertices = new Vector3[(xSize +1) * (zSize +1)];
+        // Verts (1 additional for the vertex grid format)
+        vertices = new Vector3[(xSize +1) * (zSize +1) +1];
 
         for (int i = 0, z = 0; z <= zSize * spacing; z += spacing)
         {
@@ -56,6 +56,8 @@ public class TerrainGenerator : Generator
                 vertices[i] = new Vector3(x, y, z);
             }
         }
+        // Last vertex encodes information of the grid size. 0 means nothing
+        vertices[vertices.Length - 1] = new Vector3(xSize, zSize, 0);
 
         // Primitive Triangles (each grid square has 2 triangles, 6 points)
         triangles = new int[xSize * zSize * 6];
@@ -74,5 +76,6 @@ public class TerrainGenerator : Generator
             }
             vert++;
         }
+        return vertices;
     }
 }
