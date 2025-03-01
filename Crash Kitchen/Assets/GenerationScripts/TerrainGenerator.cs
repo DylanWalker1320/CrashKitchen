@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 [RequireComponent(typeof(MeshFilter))]
 public class TerrainGenerator : Generator
@@ -7,11 +8,20 @@ public class TerrainGenerator : Generator
     private Vector3[] vertices;
     private int[] triangles;
 
+    [Tooltip("Number of streets along the x-axis (#vericies on x-axis)")]
     [SerializeField] private int xSize = 10;
+
+    [Tooltip("Number of streets along the y-axis (#vericies on y-axis)")]
     [SerializeField] private int zSize = 10;
+
+    [Tooltip("Distance from one street to next parallel street")]
     [SerializeField] private int spacing = 1;
+
+    [Tooltip("[0-1] Scale of Perlin Noise")]
+    [SerializeField, Range(0f, 1f)] private float perlinNoiseScale = 0.07f;
+
+    [Tooltip("Factor to multiply the height of each vertex")]
     [SerializeField] private float yAmplification = 4f;
-    [SerializeField] private float perlinNoiseScale = 0.07f;
 
     public override void CreateMesh()
     {

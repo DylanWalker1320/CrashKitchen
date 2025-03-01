@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 public class CubeGenerator : Generator
 {
@@ -10,9 +11,9 @@ public class CubeGenerator : Generator
     [SerializeField, Range(1.0f, 100.0f)] private float maxHeight = 10.0f;
     [SerializeField, Range(1.0f, 10.0f)] private float maxDepth = 5.0f;
 
+    [Tooltip("Name of the material, make sure it is listed under -Allways Included Shaders- in Project Settings/Graphics/Shader Settings")]
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void CreateMesh()
     {
         mesh = new Mesh();
