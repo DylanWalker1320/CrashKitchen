@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CubeMeshGen : MonoBehaviour
+public class CubeMeshGen : Generator
 {
     private Mesh mesh;
     private Vector3[] vertices;
@@ -19,7 +19,7 @@ public class CubeMeshGen : MonoBehaviour
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void CreateMesh()
     {
         //If we need seeds to test or whatever
         //Random.InitState(randSeed);

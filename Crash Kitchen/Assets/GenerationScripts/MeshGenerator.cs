@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-public class MeshGenerator : MonoBehaviour
+public class MeshGenerator : Generator
 {
     private Mesh mesh;
     private Vector3[] vertices;
@@ -13,19 +13,13 @@ public class MeshGenerator : MonoBehaviour
     [SerializeField] private float yAmplification = 4f;
     [SerializeField] private float perlinNoiseScale = 0.07f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void CreateMesh()
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
         CreateTerrain();
         UpdateMesh();
-    }
-
-    private void Update()
-    {
-
     }
 
     void UpdateMesh()
