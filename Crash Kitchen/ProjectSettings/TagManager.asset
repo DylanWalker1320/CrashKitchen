@@ -22,9 +22,9 @@ TagManager:
   - Player
   - Mirror
   - Interactable
-  - Object
-  - TruckColliders
   - Wheels
+  - TruckColliders
+  - 
   - 
   - 
   - 
