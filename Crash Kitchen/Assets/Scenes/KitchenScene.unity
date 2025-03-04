@@ -482,6 +482,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799483727161232748, guid: 9148972bfe45aea44a6040f1ae4f6479, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ff17aa9c0357114fb5a909d83655311, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1661,6 +1665,7 @@ MonoBehaviour:
   - {fileID: 740190390}
   - {fileID: 423240496}
   - {fileID: 1240595713}
+  - {fileID: 564340012}
   m_CheckDuration: 2
   m_ObjectRoot: {fileID: 0}
 --- !u!4 &957438977
@@ -2461,7 +2466,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 94d4ea25308eca24994179b78581476a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3020da68fb69c724d9ff64e47fcbe466, type: 2}
+      objectReference: {fileID: 2100000, guid: 7ec4d8ecada1b134c83be5d69ed747e4, type: 2}
     - target: {fileID: 919132149155446097, guid: 94d4ea25308eca24994179b78581476a, type: 3}
       propertyPath: m_Name
       value: FumeHood
@@ -2569,6 +2574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4BurnerStove
       objectReference: {fileID: 0}
+    - target: {fileID: 1189677676044089327, guid: 2cd178c3a92155d418e215be6c47aea9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ff17aa9c0357114fb5a909d83655311, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
