@@ -1,0 +1,12 @@
+{
+    "recipes": [
+        {
+            "name": "Hamburger",
+            "ingredients": ["Bun", "Bun", "Lettuce", "Cooked Patty"]
+        },
+        {
+            "name": "Steak",
+            "ingredients": ["Steak"]
+        }
+    ]
+}
