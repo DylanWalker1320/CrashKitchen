@@ -24,7 +24,7 @@ TagManager:
   - Interactable
   - Wheels
   - TruckColliders
-  - 
+  - TruckBoundary
   - 
   - 
   - 
