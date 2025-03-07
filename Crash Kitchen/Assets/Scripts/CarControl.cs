@@ -49,6 +49,8 @@ public class CarControl : NetworkBehaviour
     // FixedUpdate is called at a fixed time interval 
     void FixedUpdate()
     {
+        if (!IsOwner) return;
+        
         // Get player input for acceleration
         float vInput = driveAction.action.ReadValue<float>(); // Read trigger input (0 to 1)
         float hInput = knob.value * 2 - 1; // Read knob input (0 to 1) scaled to (-1 to 1)

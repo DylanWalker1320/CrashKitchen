@@ -14694,7 +14694,7 @@ GameObject:
   - component: {fileID: 79015308}
   - component: {fileID: 79015307}
   m_Layer: 11
-  m_Name: Cube (4)
+  m_Name: Front Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111762,7 +111762,7 @@ GameObject:
   - component: {fileID: 590423029}
   - component: {fileID: 590423028}
   m_Layer: 11
-  m_Name: Cube (3)
+  m_Name: Back Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229878,6 +229878,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1136070083836573907, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1640345316251337511, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -230120,15 +230124,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4635493685791839011, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -510.44
+      value: -476.45
       objectReference: {fileID: 0}
     - target: {fileID: 4635493685791839011, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.58
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 4635493685791839011, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.7
+      value: 51.73
       objectReference: {fileID: 0}
     - target: {fileID: 4635493685791839011, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_LocalRotation.w
@@ -230169,6 +230173,22 @@ PrefabInstance:
     - target: {fileID: 5541978647901740896, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839724916712588037, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: SyncScaleX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839724916712588037, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: SyncScaleY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839724916712588037, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: SyncScaleZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839724916712588037, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: NetworkTransformExpanded
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5927066025235686125, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Layer
@@ -230353,8 +230373,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1682620723089472761, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       insertIndex: -1
       addedObject: {fileID: 602197192}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1662845861939394253, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1163704193}
   m_SourcePrefab: {fileID: 100100000, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+--- !u!1 &1163704192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1662845861939394253, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+  m_PrefabInstance: {fileID: 1163704191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1163704193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163704192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!1001 &1163985149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234597,6 +234642,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 192553439592863266, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000056719535
+      objectReference: {fileID: 0}
     - target: {fileID: 435892261865434785, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -234648,6 +234697,10 @@ PrefabInstance:
     - target: {fileID: 972123118642327056, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 972123118642327056, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 972123118642327059, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -234852,6 +234905,14 @@ PrefabInstance:
     - target: {fileID: 4912954253055627150, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 3072
       objectReference: {fileID: 0}
     - target: {fileID: 6154120059210616762, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -356554,7 +356615,7 @@ GameObject:
   - component: {fileID: 1809325972}
   - component: {fileID: 1809325971}
   m_Layer: 11
-  m_Name: Cube (1)
+  m_Name: Right Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366103,7 +366164,7 @@ GameObject:
   - component: {fileID: 1858633986}
   - component: {fileID: 1858633985}
   m_Layer: 11
-  m_Name: Cube
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391783,7 +391844,7 @@ GameObject:
   - component: {fileID: 1995272443}
   - component: {fileID: 1995272442}
   m_Layer: 11
-  m_Name: Cube (2)
+  m_Name: Left Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
