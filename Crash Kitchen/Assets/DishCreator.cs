@@ -8,7 +8,7 @@ public class DishCreator : MonoBehaviour
 {
     public string dishName;
     public List<string> ingredients;
-    public GameObject[] hiddenIngredients;
+    public GameObject[] hiddenIngredients; // NOTE: Use ingredient prefabs, lock them into the same position as the outlined masked ingredients, and turn them off. Add them into this array in the inspector.
     [SerializeField] RecipeDatabase recipes;
     [SerializeField] bool recipeFound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,10 +17,9 @@ public class DishCreator : MonoBehaviour
         recipes = FindAnyObjectByType<RecipeDatabase>();
     }
 
-
     void LookForInitialIngredients()
     {
-        Debug.Log(recipes.myRecipeList.recipes.Length);
+        // Looks for the recipe's ingredients in the recipe database
         for(int i = 0; i < recipes.myRecipeList.recipes.Length; i++)
         {
             if(dishName == recipes.myRecipeList.recipes[i].name)
@@ -34,11 +33,11 @@ public class DishCreator : MonoBehaviour
 
     bool LookForIngredient(string ingredientToCheck)
     {
+        // Validates collided ingredient is within the recipe
         foreach(string ingredient in ingredients)
         {
             if(ingredient == ingredientToCheck)
             {
-                Debug.Log("Found Ingredient");
                 return true;
             }
         }
@@ -47,6 +46,7 @@ public class DishCreator : MonoBehaviour
 
     void CheckForCompletion()
     {
+        // Checks for completion and instantiates the dish
         foreach(GameObject ingredient in hiddenIngredients)
         {
             if(ingredient.activeSelf == false)
@@ -62,6 +62,7 @@ public class DishCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Looks for initial ingredients if not found, doesn't work in start
         if(!recipeFound)
         {
             LookForInitialIngredients();
@@ -70,8 +71,10 @@ public class DishCreator : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // Checks for collided ingredient
         if(LookForIngredient(other.gameObject.transform.parent.name))
         {
+            // Iterates through each hidden Ingredient ("Turned ON" ingredients currently turned off), if they're off and the collided ingredient is found, it turns the hidden ingredient on
             foreach(GameObject ingredient in hiddenIngredients)
             {
                 if(ingredient.name == "Turned " + other.gameObject.transform.parent.name && ingredient.activeSelf == false)
