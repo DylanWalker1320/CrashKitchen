@@ -10,10 +10,6 @@ public class Dish : Food
 
     private void Start()
     {
-        if (transform.childCount > 0)
-        {
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.yellow);
-        }
     }
     private void Update()
     {

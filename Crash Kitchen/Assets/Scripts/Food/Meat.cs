@@ -11,6 +11,14 @@ public class Meat : Ingredient
     void Start()
     {
         foodName = this.name;
+        if(!isCooked)
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(1f, 0.75f, 0.79f));
+        }
+        else
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+        }
     }
 
     void Update()
