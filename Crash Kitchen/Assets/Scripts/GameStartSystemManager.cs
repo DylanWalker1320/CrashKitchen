@@ -37,21 +37,22 @@ public class GameStartSystemManager : NetworkBehaviour
 
     void Update()
     {
-        // If Y position should be locked and we have a CharacterController
-        if (lockYPosition && characterController != null)
+        // Add this code to enforce Y position locking
+        if (IsOwner && lockYPosition && characterController != null)
         {
             // Get current position
-            Vector3 currentPos = transform.position;
+            Vector3 currentPosition = transform.position;
             
-            // If Y position has changed, move back to fixed Y
-            if (currentPos.y != fixedYPosition)
+            // If Y position has changed, reset it
+            if (currentPosition.y != fixedYPosition)
             {
-                // Create a position with the fixed Y
-                Vector3 correctedPos = new Vector3(currentPos.x, fixedYPosition, currentPos.z);
+                // Create a new position with the fixed Y value
+                Vector3 fixedPosition = new Vector3(currentPosition.x, fixedYPosition, currentPosition.z);
                 
-                // Move the character to the corrected position
+                // Move the character controller to the fixed position
+                // We use a zero vector because we just want to reset position, not add movement
                 characterController.enabled = false;
-                transform.position = correctedPos;
+                transform.position = fixedPosition;
                 characterController.enabled = true;
             }
         }
@@ -59,9 +60,10 @@ public class GameStartSystemManager : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IsOwner)
+        if (!IsOwner){
             return;
-        
+        }
+
         if (other == driverCollider)
         {
             isDriverOn = true;
