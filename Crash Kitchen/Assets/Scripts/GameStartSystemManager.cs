@@ -109,17 +109,11 @@ public class GameStartSystemManager : NetworkBehaviour
         {
             isDriverOn = false;
             Debug.Log("Player exited DriverStartPlatform");
-            
-            // Unlock the Y position
-            lockYPosition = false;
         }
         else if (other == cookCollider)
         {
             isCookOn = false;
             Debug.Log("Player exited CookStartPlatform");
-            
-            // Unlock the Y position
-            lockYPosition = false;
         }
     }
 }
