@@ -278,9 +278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Patty
-  cookPercent: 100
+  cookPercent: 0
   cookRate: 20
-  isCooked: 1
+  isCooked: 0
   isCooking: 0
 --- !u!1 &5907459363536799363 stripped
 GameObject:

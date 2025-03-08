@@ -589,6 +589,10 @@ PrefabInstance:
       propertyPath: foodName
       value: Cooked Patty
       objectReference: {fileID: 0}
+    - target: {fileID: 7119413510939403278, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
+      propertyPath: isCooked
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 288463880515014823, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
     - {fileID: 181664340027159402, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
