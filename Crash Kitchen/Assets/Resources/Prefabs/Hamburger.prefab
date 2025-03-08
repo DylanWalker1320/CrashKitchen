@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4206280334050464266}
   - component: {fileID: 3256771075835343140}
   - component: {fileID: 1647055678835105530}
-  - component: {fileID: 7515837158877197743}
   - component: {fileID: 485342691963478264}
   m_Layer: 0
   m_Name: Hamburger
@@ -228,21 +227,6 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 3
   m_ScaleMultiplier: 0.25
---- !u!114 &7515837158877197743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4524255182468506287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e446b3b37cf6674f98929f0529dea1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodName: Hamburger
-  quality: 0
-  isBagged: 0
 --- !u!65 &485342691963478264
 BoxCollider:
   m_ObjectHideFlags: 0
