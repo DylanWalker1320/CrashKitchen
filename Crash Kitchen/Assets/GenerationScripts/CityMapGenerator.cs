@@ -57,8 +57,8 @@ public class CityMapGenerator : Generator
             //Buildings generate inside, streets as a border
             lowerLeft.x += streetWidth;
             lowerLeft.z += streetWidth;
-            upperRight.x -= streetWidth;
-            upperRight.z -= streetWidth;
+            upperRight.x += streetWidth;
+            upperRight.z += streetWidth;
 
             GenerateBlock(lowerLeft, upperRight);
         }
@@ -68,16 +68,19 @@ public class CityMapGenerator : Generator
     {
         //width and depth of all the buildings in the block
         float building_w = (ur.x - ll.x) / buildingsPerSide;
-        float building_d = (ur.z - ll.z) / buildingsPerSide;
-
+        float building_d = (ll.z - ur.z) / buildingsPerSide;
+        print(building_d + " ll.z: " + ll.z + " ur.z: " + ur.z + " numBuildings: " + buildingsPerSide);
         for (int w = 0; w < buildingsPerSide; w++)
         {
             for (int d = 0; d < buildingsPerSide; d++)
             {
                 //Look at my old code to see how rooms placed.
-                cubeGenerator.GenerateCubeMesh(new Vector3(ll.x + building_w, ll.y, ll.z + building_d));
+                //cubeGenerator.GenerateCubeMesh(new Vector3(building_w, 20, building_d), new Vector3(ll.x + building_w * w, ll.y, ll.z + building_d * d));
             }
         }
+        cubeGenerator.GenerateCubeMesh(new Vector3(building_w, 20, building_d), Vector3.left);
+        CubeGenerator a = new CubeGenerator();
+        a.GenerateCubeMesh(new Vector3(building_w, 20, building_d), Vector3.right);
     }
 
 }

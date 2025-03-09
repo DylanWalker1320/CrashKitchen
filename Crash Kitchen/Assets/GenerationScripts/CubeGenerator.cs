@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 public class CubeGenerator : Generator
 {
@@ -25,10 +24,13 @@ public class CubeGenerator : Generator
         ClearMesh();
     }
 
-    public void GenerateCubeMesh(Vector3 pos)
+    public void GenerateCubeMesh(Vector3 size, Vector3 pos)
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        width = size.x;
+        maxHeight = size.y;
+        depth = size.z;
 
         RandomCubeGen(pos);
         UpdateMesh();

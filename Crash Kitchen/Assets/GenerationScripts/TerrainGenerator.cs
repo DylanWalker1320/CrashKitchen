@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 [RequireComponent(typeof(MeshFilter))]
 public class TerrainGenerator : Generator
