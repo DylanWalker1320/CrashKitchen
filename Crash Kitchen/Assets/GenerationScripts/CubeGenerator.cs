@@ -22,12 +22,25 @@ public class CubeGenerator : Generator
 
         RandomCubeGen();
         UpdateMesh();
+        ClearMesh();
+    }
+
+    public void CreateMesh(Vector3 pos)
+    {
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        RandomCubeGen(pos);
+        UpdateMesh();
+    }
+
+    public void ClearMesh()
+    {
+        mesh.Clear();
     }
 
     void UpdateMesh()
     {
-        mesh.Clear();
-
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
@@ -48,13 +61,13 @@ public class CubeGenerator : Generator
         GetComponent<Renderer>().material = randMat;
     }
 
-    void RandomCubeGen()
+    public void RandomCubeGen()
     {
         CreateCube(width, Random.Range(1.0f, maxHeight), depth, origin);
         ApplyRandomMaterial();
     }
 
-    void RandomCubeGen(Vector3 pos)
+    public void RandomCubeGen(Vector3 pos)
     {
         CreateCube(width, Random.Range(1.0f, maxHeight), depth, pos);
         ApplyRandomMaterial();

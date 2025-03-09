@@ -30,12 +30,26 @@ public class TerrainGenerator : Generator
 
         CreateTerrain();
         UpdateMesh();
+        ClearMesh();
+    }
+
+    public Vector3[] GenerateTerrainMesh()
+    {
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        CreateTerrain();
+        UpdateMesh();
+        return vertices;
+    }
+
+    public void ClearMesh()
+    {
+        mesh.Clear();
     }
 
     void UpdateMesh()
     {
-        mesh.Clear();
-
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
@@ -43,7 +57,7 @@ public class TerrainGenerator : Generator
         mesh.Optimize();
     }
 
-    public Vector3[] CreateTerrain()
+    public void CreateTerrain()
     {
         // Verts (1 additional for the vertex grid format)
         vertices = new Vector3[(xSize +1) * (zSize +1) +1];
@@ -76,6 +90,5 @@ public class TerrainGenerator : Generator
             }
             vert++;
         }
-        return vertices;
     }
 }

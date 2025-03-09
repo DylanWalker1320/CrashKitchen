@@ -10,21 +10,23 @@ public class CityMapGenerator : Generator
     private Vector3[] vertices;
     private List<int[]> blocks;
     private int xSize;
-    private int zSize;
-    private float streetWidth;
-    private float buildingsPerSide;
+    [SerializeField] private float streetWidth;
+    [SerializeField] private int buildingsPerSide;
 
     public override void CreateMesh()
     {
+        terrainGenerator.ClearMesh();
+        cubeGenerator.ClearMesh();
         CreateBlocks();
+        CreateCity();
     }
 
     private void GetVertices()
     {
-        vertices = terrainGenerator.CreateTerrain();
+        vertices = terrainGenerator.GenerateTerrainMesh();
         xSize = (int) vertices[vertices.Length - 1].x;
         //zSize is encoded in y component. z component is empty
-        zSize = (int)vertices[vertices.Length - 1].y;
+        //zSize = (int)vertices[vertices.Length - 1].y;
     }
 
     private List<int[]> CreateBlocks()
@@ -32,7 +34,8 @@ public class CityMapGenerator : Generator
         GetVertices();
         //Add current vert, vert+1, vert+row, vert+row+1
         //go until size-row (secondlast row)
-        for (int i = 0; i < vertices.Length; i++)
+        blocks = new List<int[]>();
+        for (int i = 0; i < (vertices.Length-1)-xSize; i++)
         {
             //Counter-clockwise
             blocks.Add(new int[] {i, i + xSize , i + xSize + 1 , i + 1 });
@@ -56,13 +59,24 @@ public class CityMapGenerator : Generator
             lowerLeft.z += streetWidth;
             upperRight.x -= streetWidth;
             upperRight.z -= streetWidth;
+
+            GenerateBlock(lowerLeft, upperRight);
         }
     }
 
-    private void GenerateBlock(float ll, float ur)
+    private void GenerateBlock(Vector3 ll, Vector3 ur)
     {
-        //will need a double for loop
+        //width and depth of all the buildings in the block
+        float building_w = (ur.x - ll.x) / buildingsPerSide;
+        float building_d = (ur.z - ll.z) / buildingsPerSide;
 
+        for (int w = 0; w < buildingsPerSide; w++)
+        {
+            for (int d = 0; d < buildingsPerSide; d++)
+            {
+                cubeGenerator.CreateMesh(new Vector3(ll.x + building_w, ll.y, ll.z + building_d));
+            }
+        }
     }
 
 }
