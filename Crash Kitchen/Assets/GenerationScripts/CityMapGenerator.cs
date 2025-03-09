@@ -7,14 +7,13 @@ public class CityMapGenerator : Generator
     //Modify it to look more like a city
     [SerializeField] private TerrainGenerator terrainGenerator;
     private Vector3[] vertices;
-    private List<int[]> streets;
+    private List<int[]> blocks;
     private int xSize;
     private int zSize;
 
     public override void CreateMesh()
     {
-        GetVertices();
-        CreateStreets();
+        CreateBlocks();
     }
 
     private void GetVertices()
@@ -25,22 +24,30 @@ public class CityMapGenerator : Generator
         zSize = (int)vertices[vertices.Length - 1].y;
     }
 
-    private void CreateStreets()
+    private List<int[]> CreateBlocks()
     {
-        //Connect every vertex horizonatally as grid first
+        GetVertices();
+        //Add current vert, vert+1, vert+row, vert+row+1
+        //go until size-row (secondlast row)
         for (int i = 0; i < vertices.Length; i++)
         {
-            //Makes sure vertex at end of 'row' doesn't connect to start of next row
-            if ((i+1) % zSize != 0)
-            {
-                int[] line = { i, i + 1 };
-                streets.Add(line);
-            }
+            //Counter-clockwise
+            blocks.Add(new int[] {i, i + xSize , i + xSize + 1 , i + 1 });
         }
+        return blocks;
+    }
 
-        foreach (int[] e in streets)
+    private void PlaceBuildings()
+    {
+        //for every block (array in List)
+        //basically gotta fetch the coordinates
+        Vector3 lowerLeft;
+        Vector3 upperRight;
+        foreach (var verts in blocks)
         {
-            print("/n" + e.ToString());
+            lowerLeft = vertices[verts[0]];
+            upperRight = vertices[verts[2]];
+
         }
     }
 }

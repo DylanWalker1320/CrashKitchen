@@ -7,9 +7,10 @@ public class CubeGenerator : Generator
     private Vector3[] vertices;
     private int[] triangles;
 
-    [SerializeField, Range(1.0f, 10.0f)] private float maxWidth = 5.0f;
+    [SerializeField, Range(1.0f, 10.0f)] private float width = 5.0f;
     [SerializeField, Range(1.0f, 100.0f)] private float maxHeight = 10.0f;
-    [SerializeField, Range(1.0f, 10.0f)] private float maxDepth = 5.0f;
+    [SerializeField, Range(1.0f, 10.0f)] private float depth = 5.0f;
+    public Vector3 origin = new Vector3(0, 0, 0);
 
     [Tooltip("Name of the material, make sure it is listed under -Allways Included Shaders- in Project Settings/Graphics/Shader Settings")]
     [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
@@ -49,7 +50,7 @@ public class CubeGenerator : Generator
 
     void RandomCubeGen()
     {
-        CreateCube(Random.Range(1.0f, maxWidth), Random.Range(1.0f, maxHeight), Random.Range(1.0f, maxDepth));
+        CreateCube(width, Random.Range(1.0f, maxHeight), depth);
         ApplyRandomMaterial();
     }
 
@@ -58,14 +59,14 @@ public class CubeGenerator : Generator
         //Cubes have 8 vertices
         vertices = new Vector3[8];
 
-        vertices[0] = new Vector3(0, 0, 0);
-        vertices[1] = new Vector3(w, 0, 0);
-        vertices[2] = new Vector3(0, h, 0);
-        vertices[3] = new Vector3(w, h, 0);
-        vertices[4] = new Vector3(0, 0, d);
-        vertices[5] = new Vector3(w, 0, d);
-        vertices[6] = new Vector3(0, h, d);
-        vertices[7] = new Vector3(w, h, d);
+        vertices[0] = origin;
+        vertices[1] = new Vector3(origin.x + w, origin.y, origin.z);
+        vertices[2] = new Vector3(origin.x, origin.y + h, origin.z);
+        vertices[3] = new Vector3(origin.x + w, origin.y + h, origin.z);
+        vertices[4] = new Vector3(origin.x, origin.y, origin.z + d);
+        vertices[5] = new Vector3(origin.x + w, origin.y, origin.z + d);
+        vertices[6] = new Vector3(origin.x, origin.y + h, origin.z + d);
+        vertices[7] = new Vector3(origin.x + w, origin.y + h, origin.z + d);
 
         //Tri is 3 verts, 2 tri for quad, 6 quad for cube
         //Tri verts have to be counterclockwise for automatic normals
