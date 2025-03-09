@@ -50,23 +50,29 @@ public class CubeGenerator : Generator
 
     void RandomCubeGen()
     {
-        CreateCube(width, Random.Range(1.0f, maxHeight), depth);
+        CreateCube(width, Random.Range(1.0f, maxHeight), depth, origin);
         ApplyRandomMaterial();
     }
 
-    void CreateCube(float w, float h, float d) {
+    void RandomCubeGen(Vector3 pos)
+    {
+        CreateCube(width, Random.Range(1.0f, maxHeight), depth, pos);
+        ApplyRandomMaterial();
+    }
+
+    void CreateCube(float w, float h, float d, Vector3 pos) {
         //width w, height h, depth d
         //Cubes have 8 vertices
         vertices = new Vector3[8];
 
         vertices[0] = origin;
-        vertices[1] = new Vector3(origin.x + w, origin.y, origin.z);
-        vertices[2] = new Vector3(origin.x, origin.y + h, origin.z);
-        vertices[3] = new Vector3(origin.x + w, origin.y + h, origin.z);
-        vertices[4] = new Vector3(origin.x, origin.y, origin.z + d);
-        vertices[5] = new Vector3(origin.x + w, origin.y, origin.z + d);
-        vertices[6] = new Vector3(origin.x, origin.y + h, origin.z + d);
-        vertices[7] = new Vector3(origin.x + w, origin.y + h, origin.z + d);
+        vertices[1] = new Vector3(pos.x + w, pos.y, pos.z);
+        vertices[2] = new Vector3(pos.x, pos.y + h, pos.z);
+        vertices[3] = new Vector3(pos.x + w, pos.y + h, pos.z);
+        vertices[4] = new Vector3(pos.x, pos.y, pos.z + d);
+        vertices[5] = new Vector3(pos.x + w, pos.y, pos.z + d);
+        vertices[6] = new Vector3(pos.x, pos.y + h, pos.z + d);
+        vertices[7] = new Vector3(pos.x + w, pos.y + h, pos.z + d);
 
         //Tri is 3 verts, 2 tri for quad, 6 quad for cube
         //Tri verts have to be counterclockwise for automatic normals

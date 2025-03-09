@@ -6,10 +6,13 @@ public class CityMapGenerator : Generator
     //Fed in vertex list from Terrain Generator
     //Modify it to look more like a city
     [SerializeField] private TerrainGenerator terrainGenerator;
+    [SerializeField] private CubeGenerator cubeGenerator;
     private Vector3[] vertices;
     private List<int[]> blocks;
     private int xSize;
     private int zSize;
+    private float streetWidth;
+    private float buildingsPerSide;
 
     public override void CreateMesh()
     {
@@ -37,7 +40,7 @@ public class CityMapGenerator : Generator
         return blocks;
     }
 
-    private void PlaceBuildings()
+    private void CreateCity()
     {
         //for every block (array in List)
         //basically gotta fetch the coordinates
@@ -48,7 +51,19 @@ public class CityMapGenerator : Generator
             lowerLeft = vertices[verts[0]];
             upperRight = vertices[verts[2]];
 
+            //Buildings generate inside, streets as a border
+            lowerLeft.x += streetWidth;
+            lowerLeft.z += streetWidth;
+            upperRight.x -= streetWidth;
+            upperRight.z -= streetWidth;
         }
     }
+
+    private void GenerateBlock(float ll, float ur)
+    {
+        //will need a double for loop
+
+    }
+
 }
 
