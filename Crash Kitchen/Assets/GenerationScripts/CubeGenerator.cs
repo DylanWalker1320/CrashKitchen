@@ -25,7 +25,7 @@ public class CubeGenerator : Generator
         ClearMesh();
     }
 
-    public void CreateMesh(Vector3 pos)
+    public void GenerateCubeMesh(Vector3 pos)
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -36,7 +36,10 @@ public class CubeGenerator : Generator
 
     public void ClearMesh()
     {
-        mesh.Clear();
+        if (mesh)
+        {
+            mesh.Clear();
+        }
     }
 
     void UpdateMesh()
@@ -78,7 +81,7 @@ public class CubeGenerator : Generator
         //Cubes have 8 vertices
         vertices = new Vector3[8];
 
-        vertices[0] = origin;
+        vertices[0] = pos;
         vertices[1] = new Vector3(pos.x + w, pos.y, pos.z);
         vertices[2] = new Vector3(pos.x, pos.y + h, pos.z);
         vertices[3] = new Vector3(pos.x + w, pos.y + h, pos.z);

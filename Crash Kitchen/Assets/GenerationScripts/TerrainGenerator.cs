@@ -45,7 +45,10 @@ public class TerrainGenerator : Generator
 
     public void ClearMesh()
     {
-        mesh.Clear();
+        if (mesh)
+        {
+            mesh.Clear();
+        }
     }
 
     void UpdateMesh()

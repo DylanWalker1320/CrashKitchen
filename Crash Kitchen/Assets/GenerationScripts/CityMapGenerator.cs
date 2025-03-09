@@ -74,7 +74,8 @@ public class CityMapGenerator : Generator
         {
             for (int d = 0; d < buildingsPerSide; d++)
             {
-                cubeGenerator.CreateMesh(new Vector3(ll.x + building_w, ll.y, ll.z + building_d));
+                //Look at my old code to see how rooms placed.
+                cubeGenerator.GenerateCubeMesh(new Vector3(ll.x + building_w, ll.y, ll.z + building_d));
             }
         }
     }
