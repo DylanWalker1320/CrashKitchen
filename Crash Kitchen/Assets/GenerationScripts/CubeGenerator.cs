@@ -76,6 +76,8 @@ public class CubeGenerator : Generator
     {
         CreateCube(width, Random.Range(1.0f, maxHeight), depth, pos);
         ApplyRandomMaterial();
+        //What I need to do is return the verticies, triangles, and materials
+        //Have the city map generator render it
     }
 
     void CreateCube(float w, float h, float d, Vector3 pos) {
