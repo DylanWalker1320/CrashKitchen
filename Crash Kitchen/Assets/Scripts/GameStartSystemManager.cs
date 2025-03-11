@@ -38,24 +38,24 @@ public class GameStartSystemManager : NetworkBehaviour
     void Update()
     {
         // Add this code to enforce Y position locking
-        if (IsOwner && lockYPosition && characterController != null)
-        {
-            // Get current position
-            Vector3 currentPosition = transform.position;
+        // if (IsOwner && lockYPosition && characterController != null)
+        // {
+        //     // Get current position
+        //     Vector3 currentPosition = transform.position;
             
-            // If Y position has changed, reset it
-            if (currentPosition.y != fixedYPosition)
-            {
-                // Create a new position with the fixed Y value
-                Vector3 fixedPosition = new Vector3(currentPosition.x, fixedYPosition, currentPosition.z);
+        //     // If Y position has changed, reset it
+        //     if (currentPosition.y != fixedYPosition)
+        //     {
+        //         // Create a new position with the fixed Y value
+        //         Vector3 fixedPosition = new Vector3(currentPosition.x, fixedYPosition, currentPosition.z);
                 
-                // Move the character controller to the fixed position
-                // We use a zero vector because we just want to reset position, not add movement
-                characterController.enabled = false;
-                transform.position = fixedPosition;
-                characterController.enabled = true;
-            }
-        }
+        //         // Move the character controller to the fixed position
+        //         // We use a zero vector because we just want to reset position, not add movement
+        //         characterController.enabled = false;
+        //         transform.position = fixedPosition;
+        //         characterController.enabled = true;
+        //     }
+        // }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,12 +74,12 @@ public class GameStartSystemManager : NetworkBehaviour
             transform.localPosition = new Vector3(0f, 0.8f, -3.9f);
             transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             
-            // Lock the Y position
-            if (characterController != null)
-            {
-                fixedYPosition = transform.position.y;
-                lockYPosition = true;
-            }
+            // // Lock the Y position
+            // if (characterController != null)
+            // {
+            //     fixedYPosition = transform.position.y;
+            //     lockYPosition = true;
+            // }
         }
         else if (other == cookCollider)
         {
@@ -91,12 +91,12 @@ public class GameStartSystemManager : NetworkBehaviour
             transform.localPosition = new Vector3(0f, 0.8f, 0f);
             transform.localRotation = Quaternion.Euler(0f, 270f, 0f);
             
-            // Lock the Y position
-            if (characterController != null)
-            {
-                fixedYPosition = transform.position.y;
-                lockYPosition = true;
-            }
+            // // Lock the Y position
+            // if (characterController != null)
+            // {
+            //     fixedYPosition = transform.position.y;
+            //     lockYPosition = true;
+            // }
         }
     }
 
