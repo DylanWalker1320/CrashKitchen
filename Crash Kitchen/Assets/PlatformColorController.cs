@@ -6,6 +6,10 @@ public class PlatformColorController : NetworkBehaviour
     // Color to change to when player stands on platform
     [SerializeField] private Color activatedColor = Color.blue;
     
+    // Default colors based on platform type
+    [SerializeField] private Color driverPlatformColor = new Color(0.5f, 0.5f, 0.5f); // #808080 (gray)
+    [SerializeField] private Color cookPlatformColor = new Color(0.31f, 0.77f, 0.25f); // #4FC43F (green)
+    
     // Reference to the renderer component
     private Renderer platformRenderer;
     
@@ -14,6 +18,9 @@ public class PlatformColorController : NetworkBehaviour
     
     // Network variable to track if the platform is activated
     private NetworkVariable<bool> isActivated = new NetworkVariable<bool>(false);
+    
+    // Cache the default color based on platform type
+    private Color defaultColor;
     
     void Awake()
     {
@@ -25,6 +32,26 @@ public class PlatformColorController : NetworkBehaviour
             // Create a unique instance of the material to avoid shared material issues
             platformMaterial = new Material(platformRenderer.material);
             platformRenderer.material = platformMaterial;
+            
+            // Determine the default color based on the platform tag
+            if (CompareTag("DriverPlatform"))
+            {
+                defaultColor = driverPlatformColor;
+                Debug.Log($"Platform {gameObject.name} identified as Driver Platform");
+            }
+            else if (CompareTag("CookPlatform"))
+            {
+                defaultColor = cookPlatformColor;
+                Debug.Log($"Platform {gameObject.name} identified as Cook Platform");
+            }
+            else
+            {
+                defaultColor = Color.white; // Fallback for untagged platforms
+                Debug.LogWarning($"Platform {gameObject.name} has no recognized tag, using white as default");
+            }
+            
+            // Set initial color
+            platformMaterial.color = defaultColor;
             
             Debug.Log($"Platform {gameObject.name} initialized with material: {platformMaterial.name}");
         }
@@ -61,7 +88,7 @@ public class PlatformColorController : NetworkBehaviour
         // Update the platform color based on the activation state
         if (platformRenderer != null && platformMaterial != null)
         {
-            Color targetColor = newValue ? activatedColor : Color.white; // Using white as default
+            Color targetColor = newValue ? activatedColor : defaultColor;
             platformMaterial.color = targetColor;
             Debug.Log($"Platform {gameObject.name} color changed to {targetColor}, activated: {newValue}");
         }
@@ -110,7 +137,7 @@ public class PlatformColorController : NetworkBehaviour
             // Local color change for immediate visual feedback
             if (platformRenderer != null && platformMaterial != null)
             {
-                platformMaterial.color = Color.white; // Using white as default
+                platformMaterial.color = defaultColor; // Using platform-specific default color
             }
             
             // Update the network variable

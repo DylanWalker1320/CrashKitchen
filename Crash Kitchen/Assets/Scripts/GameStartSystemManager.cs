@@ -132,17 +132,16 @@ public class GameStartSystemManager : NetworkBehaviour
 {
     [SerializeField] private GameObject Truck;
     
-    // References to the platforms
-    [SerializeField] private GameObject driverPlatform;
-    [SerializeField] private GameObject cookPlatform;
-    
     // Network variables to track player states
     private NetworkVariable<bool> isDriverReady = new NetworkVariable<bool>(false);
     private NetworkVariable<bool> isCookReady = new NetworkVariable<bool>(false);
     
-    // Track local player state
-    private bool isLocalPlayerOnDriverPlatform = false;
-    private bool isLocalPlayerOnCookPlatform = false;
+    // Track which client is on which platform
+    private NetworkVariable<ulong> driverClientId = new NetworkVariable<ulong>(ulong.MaxValue);
+    private NetworkVariable<ulong> cookClientId = new NetworkVariable<ulong>(ulong.MaxValue);
+    
+    // Track if teleportation has happened
+    private NetworkVariable<bool> hasTeleported = new NetworkVariable<bool>(false);
     
     // Reference to the CharacterController
     private CharacterController characterController;
@@ -150,33 +149,16 @@ public class GameStartSystemManager : NetworkBehaviour
     // Store the initial Y position when teleported
     private float fixedYPosition = 0f;
     private bool lockYPosition = false;
-    
-    // Track which role this player has
-    private bool isDriver = false;
-    private bool isCook = false;
 
     void Start()
     {
         if (Truck == null)
         {
             Truck = GameObject.FindGameObjectWithTag("Truck");
-        }
-        
-        if (driverPlatform == null)
-        {
-            driverPlatform = GameObject.FindGameObjectWithTag("DriverPlatform");
-        }
-        
-        if (cookPlatform == null)
-        {
-            cookPlatform = GameObject.FindGameObjectWithTag("CookPlatform");
-        }
-        
-        // Make sure platforms have the PlatformColorController component
-        if (IsServer)
-        {
-            EnsurePlatformController(driverPlatform);
-            EnsurePlatformController(cookPlatform);
+            if (Truck == null)
+            {
+                Debug.LogError("Cannot find Truck object with tag 'Truck'");
+            }
         }
         
         // Get the CharacterController
@@ -184,23 +166,19 @@ public class GameStartSystemManager : NetworkBehaviour
         
         Debug.Log($"GameStartSystemManager Start for Player {OwnerClientId}");
     }
-    
-    private void EnsurePlatformController(GameObject platform)
-    {
-        if (platform != null && !platform.GetComponent<PlatformColorController>())
-        {
-            platform.AddComponent<PlatformColorController>();
-            Debug.Log($"Added PlatformColorController to {platform.name}");
-        }
-    }
 
     void Update()
     {
-        // Check if both players are ready
-        if (IsServer && isDriverReady.Value && isCookReady.Value)
+        // Check if both players are ready and teleportation hasn't occurred yet
+        if (IsServer && isDriverReady.Value && isCookReady.Value && !hasTeleported.Value)
         {
+            Debug.Log("Both players are ready. Initiating teleportation...");
+            
+            // Mark that teleportation has occurred to prevent multiple teleports
+            hasTeleported.Value = true;
+            
             // Both players are ready, teleport all players
-            TeleportPlayersServerRpc();
+            TeleportPlayersClientRpc();
         }
         
         // Enforce Y position locking for this client
@@ -231,18 +209,16 @@ public class GameStartSystemManager : NetworkBehaviour
         if (other.CompareTag("DriverPlatform"))
         {
             Debug.Log($"Player {OwnerClientId} entered DriverStartPlatform");
-            isLocalPlayerOnDriverPlatform = true;
             
             // Communicate to the server this player is on the driver platform
-            UpdatePlayerReadyStatusServerRpc(true, false);
+            UpdateDriverPlatformStatusServerRpc(true);
         }
         else if (other.CompareTag("CookPlatform"))
         {
             Debug.Log($"Player {OwnerClientId} entered CookStartPlatform");
-            isLocalPlayerOnCookPlatform = true;
             
             // Communicate to the server this player is on the cook platform
-            UpdatePlayerReadyStatusServerRpc(false, true);
+            UpdateCookPlatformStatusServerRpc(true);
         }
     }
 
@@ -251,90 +227,57 @@ public class GameStartSystemManager : NetworkBehaviour
         // Only process for the local player
         if (!IsOwner) return;
         
+        // Only handle exits if teleportation hasn't occurred yet
+        if (hasTeleported.Value) return;
+        
         if (other.CompareTag("DriverPlatform"))
         {
             Debug.Log($"Player {OwnerClientId} exited DriverStartPlatform");
-            isLocalPlayerOnDriverPlatform = false;
             
             // Tell the server this player is no longer on the driver platform
-            UpdatePlayerReadyStatusServerRpc(false, false);
+            UpdateDriverPlatformStatusServerRpc(false);
         }
         else if (other.CompareTag("CookPlatform"))
         {
             Debug.Log($"Player {OwnerClientId} exited CookStartPlatform");
-            isLocalPlayerOnCookPlatform = false;
             
             // Tell the server this player is no longer on the cook platform
-            UpdatePlayerReadyStatusServerRpc(false, false);
+            UpdateCookPlatformStatusServerRpc(false);
         }
     }
     
     [ServerRpc(RequireOwnership = false)]
-    private void UpdatePlayerReadyStatusServerRpc(bool isDriverPlatform, bool isCookPlatform)
+    private void UpdateDriverPlatformStatusServerRpc(bool isOnPlatform)
     {
-        // This is called on the server to update player states
-        if (isDriverPlatform && !isDriverReady.Value)
+        if (isOnPlatform)
         {
-            // This player is the driver
             isDriverReady.Value = true;
-            
-            // Track which client is the driver (for teleporting later)
-            AssignRoleToPlayerClientRpc(true, false, new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new ulong[] { OwnerClientId }
-                }
-            });
+            driverClientId.Value = OwnerClientId;
+            Debug.Log($"Server registered Player {OwnerClientId} as Driver. Driver ready: {isDriverReady.Value}, Cook ready: {isCookReady.Value}");
         }
-        else if (isCookPlatform && !isCookReady.Value)
+        else if (driverClientId.Value == OwnerClientId) // Only reset if this client was the driver
         {
-            // This player is the cook
+            isDriverReady.Value = false;
+            driverClientId.Value = ulong.MaxValue;
+            Debug.Log($"Server unregistered Player {OwnerClientId} as Driver. Driver ready: {isDriverReady.Value}, Cook ready: {isCookReady.Value}");
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateCookPlatformStatusServerRpc(bool isOnPlatform)
+    {
+        if (isOnPlatform)
+        {
             isCookReady.Value = true;
-            
-            // Track which client is the cook (for teleporting later)
-            AssignRoleToPlayerClientRpc(false, true, new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new ulong[] { OwnerClientId }
-                }
-            });
+            cookClientId.Value = OwnerClientId;
+            Debug.Log($"Server registered Player {OwnerClientId} as Cook. Driver ready: {isDriverReady.Value}, Cook ready: {isCookReady.Value}");
         }
-        else if (!isDriverPlatform && !isCookPlatform)
+        else if (cookClientId.Value == OwnerClientId) // Only reset if this client was the cook
         {
-            // Reset status if player leaves either platform
-            if (isDriver)
-            {
-                isDriverReady.Value = false;
-            }
-            else if (isCook)
-            {
-                isCookReady.Value = false;
-            }
+            isCookReady.Value = false;
+            cookClientId.Value = ulong.MaxValue;
+            Debug.Log($"Server unregistered Player {OwnerClientId} as Cook. Driver ready: {isDriverReady.Value}, Cook ready: {isCookReady.Value}");
         }
-        
-        Debug.Log($"Updated status: Driver: {isDriverReady.Value}, Cook: {isCookReady.Value}");
-    }
-    
-    [ClientRpc]
-    private void AssignRoleToPlayerClientRpc(bool isDriverRole, bool isCookRole, ClientRpcParams clientRpcParams = default)
-    {
-        isDriver = isDriverRole;
-        isCook = isCookRole;
-        
-        Debug.Log($"Role assigned to player {OwnerClientId}: Driver={isDriver}, Cook={isCook}");
-    }
-    
-    [ServerRpc]
-    private void TeleportPlayersServerRpc()
-    {
-        // Tell all clients to teleport based on their roles
-        TeleportPlayersClientRpc();
-        
-        // Reset the ready flags to prevent multiple teleports
-        isDriverReady.Value = false;
-        isCookReady.Value = false;
     }
     
     [ClientRpc]
@@ -345,18 +288,25 @@ public class GameStartSystemManager : NetworkBehaviour
         // Set this player as a child of the truck
         transform.SetParent(Truck.transform);
         
-        // Teleport based on role
-        if (isDriver)
+        // Teleport based on client ID
+        if (OwnerClientId == driverClientId.Value)
         {
             Debug.Log($"Teleporting player {OwnerClientId} to driver position");
             transform.localPosition = new Vector3(0f, 0.8f, -3.9f);
             transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
         }
-        else if (isCook)
+        else if (OwnerClientId == cookClientId.Value)
         {
             Debug.Log($"Teleporting player {OwnerClientId} to cook position");
             transform.localPosition = new Vector3(0f, 0.8f, 0f);
             transform.localRotation = Quaternion.Euler(0f, 270f, 0f);
+        }
+        else
+        {
+            Debug.LogWarning($"Player {OwnerClientId} has no assigned role but is being teleported");
+            // Fallback teleport position
+            transform.localPosition = new Vector3(0f, 0.8f, 2f);
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         }
         
         // Lock the Y position
@@ -364,6 +314,32 @@ public class GameStartSystemManager : NetworkBehaviour
         {
             fixedYPosition = transform.position.y;
             lockYPosition = true;
+            Debug.Log($"Y position locked for player {OwnerClientId} at {fixedYPosition}");
         }
+    }
+    
+    // Method to reset the game state (can be called from another script or event)
+    public void ResetGameState()
+    {
+        if (IsServer)
+        {
+            isDriverReady.Value = false;
+            isCookReady.Value = false;
+            driverClientId.Value = ulong.MaxValue;
+            cookClientId.Value = ulong.MaxValue;
+            hasTeleported.Value = false;
+            Debug.Log("Game state has been reset");
+        }
+        else
+        {
+            // Client request to server to reset
+            ResetGameStateServerRpc();
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void ResetGameStateServerRpc()
+    {
+        ResetGameState();
     }
 }
