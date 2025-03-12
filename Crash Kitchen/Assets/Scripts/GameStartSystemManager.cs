@@ -150,6 +150,10 @@ public class GameStartSystemManager : NetworkBehaviour
     private float fixedYPosition = 0f;
     private bool lockYPosition = false;
 
+    // Debug keystroke (F1 key)
+    [SerializeField] private KeyCode debugKey = KeyCode.F1;
+
+
     void Start()
     {
         if (Truck == null)
@@ -169,6 +173,12 @@ public class GameStartSystemManager : NetworkBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(debugKey))
+        {
+            LogDebugInfo();
+        }
+
         // Check if both players are ready and teleportation hasn't occurred yet
         if (IsServer && isDriverReady.Value && isCookReady.Value && !hasTeleported.Value)
         {
@@ -201,8 +211,47 @@ public class GameStartSystemManager : NetworkBehaviour
         }
     }
 
+    private void LogDebugInfo()
+    {
+        Debug.Log("========== GAME START SYSTEM DEBUG INFO ==========");
+        Debug.Log($"NETWORK: IsOwner={IsOwner}, IsServer={IsServer}, OwnerClientId={OwnerClientId}");
+        Debug.Log($"STATE: isDriverReady={isDriverReady.Value}, isCookReady={isCookReady.Value}, hasTeleported={hasTeleported.Value}");
+        Debug.Log($"ASSIGNMENTS: driverClientId={driverClientId.Value}, cookClientId={cookClientId.Value}");
+        // Debug.Log($"POSITIONING: lockYPosition={lockYPosition}, fixedYPosition={fixedYPosition}");
+        // Debug.Log($"CURRENT POSITION: {transform.position}, Parent: {(transform.parent ? transform.parent.name : "None")}");
+        // Debug.Log($"REFERENCES: Truck={Truck != null}, characterController={characterController != null}");
+        
+        // Check if Truck has NetworkObject
+        if (Truck != null)
+        {
+            NetworkObject truckNetObj = Truck.GetComponent<NetworkObject>();
+            Debug.Log($"TRUCK NETWORK: HasNetworkObject={truckNetObj != null}, " + (truckNetObj != null ? $"IsSpawned={truckNetObj.IsSpawned}" : ""));
+        }
+        
+        // Check if platforms exist with proper tags
+        GameObject driverPlatform = GameObject.FindGameObjectWithTag("DriverPlatform");
+        GameObject cookPlatform = GameObject.FindGameObjectWithTag("CookPlatform");
+        Debug.Log($"PLATFORMS: DriverPlatform={driverPlatform != null}, CookPlatform={cookPlatform != null}");
+        
+        if (driverPlatform != null)
+        {
+            Collider col = driverPlatform.GetComponent<Collider>();
+            Debug.Log($"DRIVER PLATFORM: HasCollider={col != null}, " + (col != null ? $"IsTrigger={col.isTrigger}" : ""));
+        }
+        
+        if (cookPlatform != null)
+        {
+            Collider col = cookPlatform.GetComponent<Collider>();
+            Debug.Log($"COOK PLATFORM: HasCollider={col != null}, " + (col != null ? $"IsTrigger={col.isTrigger}" : ""));
+        }
+        
+        Debug.Log("================================================");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Trigger detected: Player {OwnerClientId} entered {other.gameObject.name} with tag {other.tag}");
+
         // Only process for the local player
         if (!IsOwner) return;
         
