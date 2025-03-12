@@ -234213,6 +234213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   activatedColor: {r: 0.27450982, g: 0.5058824, b: 0.9882353, a: 1}
+  driverPlatformColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  cookPlatformColor: {r: 0.31, g: 0.77, b: 0.25, a: 1}
 --- !u!1001 &1181905449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -361433,6 +361435,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   activatedColor: {r: 0.27317193, g: 0.50312775, b: 0.98490566, a: 1}
+  driverPlatformColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  cookPlatformColor: {r: 0.31, g: 0.77, b: 0.25, a: 1}
 --- !u!1001 &1832182663
 PrefabInstance:
   m_ObjectHideFlags: 0
