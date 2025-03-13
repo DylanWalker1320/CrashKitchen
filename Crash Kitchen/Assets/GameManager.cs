@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static bool isDriverPlatformEnabled = false;
     public static bool isCookPlatformEnabled = false;
