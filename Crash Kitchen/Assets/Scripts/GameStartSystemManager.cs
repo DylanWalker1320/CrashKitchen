@@ -133,6 +133,11 @@ public class GameStartSystemManager : NetworkBehaviour
     [SerializeField] private GameObject Truck;
     
     // Network variables to track player states
+    private NetworkVariable<int> testValue = new NetworkVariable<int>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+    );
     private NetworkVariable<bool> isDriverReady = new NetworkVariable<bool>(false);
     private NetworkVariable<bool> isCookReady = new NetworkVariable<bool>(false);
     
@@ -173,6 +178,14 @@ public class GameStartSystemManager : NetworkBehaviour
 
     void Update()
     {
+        Debug.Log(OwnerClientId + "; " + testValue.Value);
+
+        if(!IsOwner) return;
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            testValue.Value++;
+        }
 
         if (Input.GetKeyDown(debugKey))
         {
