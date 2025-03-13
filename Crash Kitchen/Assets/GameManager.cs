@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("GameManager Start()");
         if (instance == null)
         {
             instance = this;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        Debug.Log($"Driver: {isDriverPlatformEnabled}, Cook: {isCookPlatformEnabled}");
         if (isDriverPlatformEnabled && isCookPlatformEnabled)
         {
             StartGame();

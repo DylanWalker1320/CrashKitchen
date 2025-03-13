@@ -361512,7 +361512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformType: 0
+  platformType: 1
 --- !u!1001 &1832182663
 PrefabInstance:
   m_ObjectHideFlags: 0
