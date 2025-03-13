@@ -234078,6 +234078,7 @@ GameObject:
   - component: {fileID: 1181792426}
   - component: {fileID: 1181792429}
   - component: {fileID: 1181792430}
+  - component: {fileID: 1181792431}
   m_Layer: 0
   m_Name: DriverStartPlatform
   m_TagString: DriverPlatform
@@ -234215,6 +234216,18 @@ MonoBehaviour:
   activatedColor: {r: 0.27450982, g: 0.5058824, b: 0.9882353, a: 1}
   driverPlatformColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   cookPlatformColor: {r: 0.31, g: 0.77, b: 0.25, a: 1}
+--- !u!114 &1181792431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181792424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1181905449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234959,6 +234972,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912954253055627150, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436621593391573747, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
@@ -316176,6 +316193,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4759366375745648, guid: 107e21d49b4ce0043a91771c91ae6c8c, type: 3}
   m_PrefabInstance: {fileID: 1613344511}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1613579127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613579128}
+  - component: {fileID: 1613579129}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1613579128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613579127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -465.3568, y: 2.6287527, z: 51.5907}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1613579129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613579127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4924a135cf69e4586168e29c2c4a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  driverPlatform: {fileID: 0}
+  cookPlatform: {fileID: 0}
 --- !u!1001 &1613995693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426575,3 +426638,4 @@ SceneRoots:
   - {fileID: 1810536143}
   - {fileID: 1921040118}
   - {fileID: 1184537548}
+  - {fileID: 1613579128}

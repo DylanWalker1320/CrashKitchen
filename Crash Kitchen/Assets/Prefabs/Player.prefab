@@ -9866,13 +9866,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972123118642327056}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a60f87c60eaa33b428c2e8409804e815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   Truck: {fileID: 0}
+  debugKey: 282
 --- !u!1 &973881729459421195
 GameObject:
   m_ObjectHideFlags: 0
