@@ -13,8 +13,10 @@ public class PlatformTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Platform type touched!: {platformType}, Player: {other.name}");
         if (other.tag == "Player")
         {
+            Debug.Log("Player entered platform trigger type: " + platformType);
             if (platformType == PlatformType.Driver)
             {
                 GameManager.isDriverPlatformEnabled = true;
@@ -30,8 +32,10 @@ public class PlatformTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        Debug.Log($"Platform type exited!: {platformType}, Player: {other.name}");
         if (other.tag == "Player")
         {
+            Debug.Log("Player exited platform trigger type " + platformType);
             if (platformType == PlatformType.Driver)
             {
                 GameManager.isDriverPlatformEnabled = false;
