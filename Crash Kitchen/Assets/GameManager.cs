@@ -78,8 +78,8 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"Teleporting {player2.name} to cook position");
 
         // Convert to world space positions before sending them to the clients
-        Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, -0.5f, -3.9f);
-        Vector3 player2WorldPos = truck.transform.position + new Vector3(0f, -0.5f, 0f);
+        Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, 0.5f, -3.9f);
+        Vector3 player2WorldPos = truck.transform.position + new Vector3(0f, 0.5f, 0f);
 
         // 1️⃣ Teleport players using world space positions
         SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, Quaternion.Euler(0f, 180f, 0f));
