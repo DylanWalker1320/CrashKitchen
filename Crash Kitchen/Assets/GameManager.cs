@@ -58,6 +58,7 @@ public class GameManager : NetworkBehaviour
         StartGameServerRpc();
 
         onGameStart.Invoke(); // This will trigger the functions in the inspector. Including freeze y position
+        FreezeAllPlayersYPosition();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -87,6 +88,14 @@ public class GameManager : NetworkBehaviour
 
         // 2️⃣ Wait a frame, then parent to truck
         StartCoroutine(ParentPlayersToTruckWithDelay(player1, player2));
+    }
+
+    private void FreezeAllPlayersYPosition()
+    {
+        foreach (var obj in FindObjectsByType<PlayerYLevelFreeze>(FindObjectsSortMode.None))
+        {
+            obj.Freeze();
+        }
     }
 
     private IEnumerator ParentPlayersToTruckWithDelay(GameObject player1, GameObject player2)

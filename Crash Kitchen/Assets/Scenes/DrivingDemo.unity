@@ -234972,12 +234972,16 @@ PrefabInstance:
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 1024
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856641864044821737, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5856641864044821737, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: lockYPosition
