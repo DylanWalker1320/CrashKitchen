@@ -361378,8 +361378,8 @@ GameObject:
   - component: {fileID: 1831921365}
   - component: {fileID: 1831921364}
   - component: {fileID: 1831921363}
-  - component: {fileID: 1831921368}
   - component: {fileID: 1831921369}
+  - component: {fileID: 1831921368}
   m_Layer: 0
   m_Name: CookStartPlatform
   m_TagString: CookPlatform

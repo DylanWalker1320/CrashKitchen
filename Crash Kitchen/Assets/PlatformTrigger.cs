@@ -3,7 +3,7 @@ using Unity.Netcode;
 
 public class PlatformTrigger : NetworkBehaviour
 {
-    public GameManager gameManager;
+    private GameManager gameManager;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class PlatformTrigger : NetworkBehaviour
 
         if (IsServer)
         {
-            AssignPlayer(netObj.NetworkObjectId);
+            gameManager.SetPlayerServerRpc(netObj.NetworkObjectId, platformType == PlatformType.Driver);
         }
         else
         {
@@ -40,25 +40,6 @@ public class PlatformTrigger : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void AssignPlayerServerRpc(ulong playerId, bool isDriver)
     {
-        AssignPlayer(playerId);
-    }
-
-    private void AssignPlayer(ulong playerId)
-    {
-        if (platformType == PlatformType.Driver)
-        {
-            gameManager.player1Id.Value = playerId;
-            gameManager.isDriverPlatformEnabled = true;
-        }
-        else if (platformType == PlatformType.Cook)
-        {
-            gameManager.player2Id.Value = playerId;
-            gameManager.isCookPlatformEnabled = true;
-        }
-
-        if (gameManager.isDriverPlatformEnabled && gameManager.isCookPlatformEnabled)
-        {
-            gameManager.StartCoroutine(gameManager.StartGameWithDelay());
-        }
+        gameManager.SetPlayerServerRpc(playerId, isDriver);
     }
 }

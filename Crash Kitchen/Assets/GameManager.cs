@@ -10,9 +10,6 @@ public class GameManager : NetworkBehaviour
     public NetworkVariable<ulong> player1Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    public bool isDriverPlatformEnabled;
-    public bool isCookPlatformEnabled;
-
     private void Awake()
     {
         if (instance == null)
@@ -36,7 +33,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // This runs for 5 seconds.
+    /// <summary>
+    /// Delays game start until both players are assigned.
+    /// </summary>
     public IEnumerator StartGameWithDelay()
     {
         float timeout = 5f;
@@ -55,10 +54,12 @@ public class GameManager : NetworkBehaviour
             yield break;
         }
 
-        StartGame();
+        Debug.Log("Both players are assigned. Starting game...");
+        StartGameServerRpc();
     }
 
-    private void StartGame()
+    [ServerRpc(RequireOwnership = false)]
+    private void StartGameServerRpc()
     {
         if (!IsServer) return;
 
@@ -77,10 +78,13 @@ public class GameManager : NetworkBehaviour
         player1.transform.SetParent(truck.transform, true);
         player2.transform.SetParent(truck.transform, true);
 
-        SetPlayerTransformServerRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, -3.9f), Quaternion.Euler(0f, 180f, 0f));
-        SetPlayerTransformServerRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, 0f), Quaternion.Euler(0f, 270f, 0f));
+        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, -3.9f), Quaternion.Euler(0f, 180f, 0f));
+        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, 0f), Quaternion.Euler(0f, 270f, 0f));
     }
 
+    /// <summary>
+    /// Retrieves the player GameObject using NetworkObjectId.
+    /// </summary>
     private GameObject GetPlayerById(ulong networkId)
     {
         foreach (var obj in FindObjectsByType<NetworkObject>(FindObjectsSortMode.None))
@@ -93,9 +97,14 @@ public class GameManager : NetworkBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Assigns players to their roles (driver/cook) on the server.
+    /// </summary>
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerServerRpc(ulong networkId, bool isDriver)
     {
+        if (!IsServer) return;
+
         if (isDriver)
         {
             player1Id.Value = networkId;
@@ -104,10 +113,18 @@ public class GameManager : NetworkBehaviour
         {
             player2Id.Value = networkId;
         }
+
+        if (player1Id.Value != 0 && player2Id.Value != 0)
+        {
+            StartCoroutine(StartGameWithDelay());
+        }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerTransformServerRpc(ulong playerId, Vector3 position, Quaternion rotation)
+    /// <summary>
+    /// Synchronizes player teleportation across all clients.
+    /// </summary>
+    [ClientRpc]
+    private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
         GameObject player = GetPlayerById(playerId);
         if (player != null)
