@@ -223455,17 +223455,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4278621369827266, guid: f48ca42bbf7370343a33a9e87b1d9fdb, type: 3}
   m_PrefabInstance: {fileID: 1125950648}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1126108157 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5856641864044821737, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
-  m_PrefabInstance: {fileID: 1184537548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3061ed532f6b2c408839bafde8f2932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1126543621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316249,19 +316238,7 @@ MonoBehaviour:
     m_InternalValue: 0
   onGameStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1126108157}
-        m_TargetAssemblyTypeName: PlayerYLevelFreeze, Assembly-CSharp
-        m_MethodName: Freeze
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
