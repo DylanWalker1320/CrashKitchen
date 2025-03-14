@@ -234076,8 +234076,6 @@ GameObject:
   - component: {fileID: 1181792428}
   - component: {fileID: 1181792427}
   - component: {fileID: 1181792426}
-  - component: {fileID: 1181792429}
-  - component: {fileID: 1181792430}
   - component: {fileID: 1181792431}
   m_Layer: 0
   m_Name: DriverStartPlatform
@@ -234175,47 +234173,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181792424}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1181792429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181792424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1756504527
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &1181792430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181792424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b26b102e8884fa4ea0a1c2b5ae303af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  activatedColor: {r: 0.27450982, g: 0.5058824, b: 0.9882353, a: 1}
-  driverPlatformColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  cookPlatformColor: {r: 0.31, g: 0.77, b: 0.25, a: 1}
 --- !u!114 &1181792431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361387,8 +361344,6 @@ GameObject:
   - component: {fileID: 1831921365}
   - component: {fileID: 1831921364}
   - component: {fileID: 1831921363}
-  - component: {fileID: 1831921366}
-  - component: {fileID: 1831921367}
   - component: {fileID: 1831921368}
   m_Layer: 0
   m_Name: CookStartPlatform
@@ -361486,47 +361441,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831921361}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1831921366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831921361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2071690556
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &1831921367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831921361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b26b102e8884fa4ea0a1c2b5ae303af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  activatedColor: {r: 0.27317193, g: 0.50312775, b: 0.98490566, a: 1}
-  driverPlatformColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  cookPlatformColor: {r: 0.31, g: 0.77, b: 0.25, a: 1}
 --- !u!114 &1831921368
 MonoBehaviour:
   m_ObjectHideFlags: 0
