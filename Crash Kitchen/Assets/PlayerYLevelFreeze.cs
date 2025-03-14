@@ -10,6 +10,7 @@ public class PlayerYLevelFreeze : NetworkBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        fixedYPosition = transform.position.y;
     }
 
     void Update()
