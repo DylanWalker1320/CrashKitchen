@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
+using UnityEngine.Events;
 
 public class GameManager : NetworkBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : NetworkBehaviour
 
     public NetworkVariable<ulong> player1Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+    public UnityEvent onGameStart;
 
     private void Awake()
     {
@@ -56,6 +59,8 @@ public class GameManager : NetworkBehaviour
 
         Debug.Log("Both players are assigned. Starting game...");
         StartGameServerRpc();
+
+        onGameStart.Invoke();
     }
 
     [ServerRpc(RequireOwnership = false)]

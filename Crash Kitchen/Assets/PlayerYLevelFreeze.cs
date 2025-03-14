@@ -13,6 +13,16 @@ public class PlayerYLevelFreeze : NetworkBehaviour
         fixedYPosition = transform.position.y;
     }
 
+    public void Freeze(){
+        Debug.Log("Freezing Y position");
+        lockYPosition = true;
+    }
+
+    public void Unfreeze(){
+        Debug.Log("Unfreezing Y position");
+        lockYPosition = false;
+    }
+
     void Update()
     {
         if (IsOwner && lockYPosition)
