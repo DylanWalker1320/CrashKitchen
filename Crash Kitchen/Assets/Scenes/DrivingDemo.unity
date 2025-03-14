@@ -234187,7 +234187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  gameManager: {fileID: 0}
   platformType: 0
 --- !u!114 &1181792432
 MonoBehaviour:
@@ -234975,6 +234974,10 @@ PrefabInstance:
     - target: {fileID: 5536580608198159527, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856641864044821737, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: lockYPosition
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6154120059210616762, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -316229,8 +316232,6 @@ MonoBehaviour:
     m_InternalValue: 0
   player2Id:
     m_InternalValue: 0
-  isDriverPlatformEnabled: 0
-  isCookPlatformEnabled: 0
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361489,7 +361490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  gameManager: {fileID: 0}
   platformType: 1
 --- !u!114 &1831921369
 MonoBehaviour:

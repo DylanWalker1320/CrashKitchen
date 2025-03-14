@@ -9664,6 +9664,7 @@ GameObject:
   - component: {fileID: 4978228846240820282}
   - component: {fileID: 8439019681857279846}
   - component: {fileID: 5436621593391573747}
+  - component: {fileID: 5856641864044821737}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -9872,8 +9873,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  Truck: {fileID: 0}
-  debugKey: 282
+--- !u!114 &5856641864044821737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972123118642327056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3061ed532f6b2c408839bafde8f2932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lockYPosition: 0
+  characterController: {fileID: 0}
 --- !u!1 &973881729459421195
 GameObject:
   m_ObjectHideFlags: 0
@@ -18253,7 +18267,7 @@ MonoBehaviour:
   m_MoveSpeed: 2.5
   m_EnableStrafe: 1
   m_EnableFly: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_ForwardSource: {fileID: 1921570573356545871}
   m_LeftHandMoveInput:
     m_InputSourceMode: 2
