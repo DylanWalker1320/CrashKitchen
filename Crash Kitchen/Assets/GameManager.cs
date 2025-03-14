@@ -12,6 +12,7 @@ public class GameManager : NetworkBehaviour
     public NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public UnityEvent onGameStart;
+    private bool playersTeleported = false;
 
     private void Awake()
     {
@@ -36,36 +37,15 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public IEnumerator StartGameWithDelay()
+    public void StartGame()
     {
-        float timeout = 5f;
-        float elapsedTime = 0f;
-
-        while ((player1Id.Value == 0 || player2Id.Value == 0) && elapsedTime < timeout)
-        {
-            Debug.Log("Waiting for players to be assigned...");
-            yield return new WaitForSeconds(0.5f);
-            elapsedTime += 0.5f;
-        }
-
-        if (player1Id.Value == 0 || player2Id.Value == 0)
-        {
-            Debug.LogError("Players could not be assigned in time!");
-            yield break;
-        }
-
         Debug.Log("Both players are assigned. Starting game...");
         StartGameServerRpc();
-
-        onGameStart.Invoke(); // This will trigger the functions in the inspector. Including freeze y position
-        FreezeAllPlayersYPosition();
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void StartGameServerRpc()
     {
-        if (!IsServer) return;
-
         GameObject player1 = GetPlayerById(player1Id.Value);
         GameObject player2 = GetPlayerById(player2Id.Value);
 
@@ -82,26 +62,31 @@ public class GameManager : NetworkBehaviour
         Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, 0.25f, -3.9f);
         Vector3 player2WorldPos = truck.transform.position + new Vector3(0f, 0.25f, 0f);
 
-        // 1️⃣ Teleport players using world space positions
+        // Teleport players using world space positions
         SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, Quaternion.Euler(0f, 180f, 0f));
         SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, Quaternion.Euler(0f, 270f, 0f));
 
-        // 2️⃣ Wait a frame, then parent to truck
-        StartCoroutine(ParentPlayersToTruckWithDelay(player1, player2));
+        // Parent to truck
+        Debug.Log("Parenting players to truck");
+        ParentPlayersToTruck(player1, player2);
+
+        // Freeze Y position
+        Debug.Log("Freezing Y position for players");
+        FreezeAllPlayersYPosition();
+        onGameStart.Invoke();
     }
 
     private void FreezeAllPlayersYPosition()
     {
         foreach (var obj in FindObjectsByType<PlayerYLevelFreeze>(FindObjectsSortMode.None))
         {
+            Debug.Log($"Freezing Y position for {obj.gameObject.name}");
             obj.Freeze();
         }
     }
 
-    private IEnumerator ParentPlayersToTruckWithDelay(GameObject player1, GameObject player2)
+    private void ParentPlayersToTruck(GameObject player1, GameObject player2)
     {
-        yield return new WaitForEndOfFrame(); // Ensures teleportation applies first
-
         if (player1 != null) player1.transform.SetParent(truck.transform, true);
         if (player2 != null) player2.transform.SetParent(truck.transform, true);
     }
@@ -134,18 +119,24 @@ public class GameManager : NetworkBehaviour
 
         if (player1Id.Value != 0 && player2Id.Value != 0)
         {
-            StartCoroutine(StartGameWithDelay());
+            StartGame();
         }
     }
 
     [ClientRpc]
     private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
+        Debug.Log($"Setting transform for player with ID: {playerId}");
         GameObject player = GetPlayerById(playerId);
         if (player != null)
         {
             player.transform.position = position;  // Use world position instead of local
             player.transform.rotation = rotation;
         }
+        Debug.Log($"Player {player.name} has been teleported to {position}");
+    }
+
+    public void Print() {
+        Debug.Log("Invoked");
     }
 }
