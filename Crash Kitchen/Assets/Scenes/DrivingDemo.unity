@@ -234185,6 +234185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  gameManager: {fileID: 0}
   platformType: 0
 --- !u!1001 &1181905449
 PrefabInstance:
@@ -316160,8 +316162,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1613579128}
-  - component: {fileID: 1613579129}
   - component: {fileID: 1613579130}
+  - component: {fileID: 1613579129}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -316196,6 +316198,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4924a135cf69e4586168e29c2c4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  player1Id:
+    m_InternalValue: 0
+  player2Id:
+    m_InternalValue: 0
+  isDriverPlatformEnabled: 0
+  isCookPlatformEnabled: 0
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361452,6 +361461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  gameManager: {fileID: 0}
   platformType: 1
 --- !u!1001 &1832182663
 PrefabInstance:

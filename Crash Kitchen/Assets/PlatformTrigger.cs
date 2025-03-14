@@ -1,13 +1,13 @@
 using UnityEngine;
 using Unity.Netcode;
 
-public class PlatformTrigger : MonoBehaviour
+public class PlatformTrigger : NetworkBehaviour
 {
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     void Start()
     {
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     public enum PlatformType
@@ -20,69 +20,45 @@ public class PlatformTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Platform type touched!: {platformType}, Player: {other.name}");
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log($"Player entered platform trigger type: {platformType}");
+        if (!other.CompareTag("Player")) return;
 
-            if (platformType == PlatformType.Driver)
-            {
-                if (gameManager.IsServer)
-                {
-                    gameManager.isDriverPlatformEnabled.Value = true;
-                    GameManager.player1 = other.gameObject;
-                }
-                else
-                {
-                    gameManager.SetDriverPlatformEnabled(true);
-                }
-            }
-            else if (platformType == PlatformType.Cook)
-            {
-                if (gameManager.IsServer)
-                {
-                    gameManager.isCookPlatformEnabled.Value = true;
-                    GameManager.player2 = other.gameObject;
-                }
-                else
-                {
-                    gameManager.SetCookPlatformEnabled(true);
-                }
-            }
+        NetworkObject netObj = other.GetComponent<NetworkObject>();
+        if (netObj == null || !netObj.IsSpawned) return;
+
+        Debug.Log($"Platform type touched!: {platformType}, Player: {other.name}");
+
+        if (IsServer)
+        {
+            AssignPlayer(netObj.NetworkObjectId);
+        }
+        else
+        {
+            AssignPlayerServerRpc(netObj.NetworkObjectId, platformType == PlatformType.Driver);
         }
     }
 
-    void OnTriggerExit(Collider other)
+    [ServerRpc(RequireOwnership = false)]
+    private void AssignPlayerServerRpc(ulong playerId, bool isDriver)
     {
-        Debug.Log($"Platform type exited!: {platformType}, Player: {other.name}");
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log($"Player exited platform trigger type: {platformType}");
+        AssignPlayer(playerId);
+    }
 
-            if (platformType == PlatformType.Driver)
-            {
-                if (gameManager.IsServer)
-                {
-                    gameManager.isDriverPlatformEnabled.Value = false;
-                    GameManager.player1 = null;
-                }
-                else
-                {
-                    gameManager.SetDriverPlatformEnabled(false);
-                }
-            }
-            else if (platformType == PlatformType.Cook)
-            {
-                if (gameManager.IsServer)
-                {
-                    gameManager.isCookPlatformEnabled.Value = false;
-                    GameManager.player2 = null;
-                }
-                else
-                {
-                    gameManager.SetCookPlatformEnabled(false);
-                }
-            }
+    private void AssignPlayer(ulong playerId)
+    {
+        if (platformType == PlatformType.Driver)
+        {
+            gameManager.player1Id.Value = playerId;
+            gameManager.isDriverPlatformEnabled = true;
+        }
+        else if (platformType == PlatformType.Cook)
+        {
+            gameManager.player2Id.Value = playerId;
+            gameManager.isCookPlatformEnabled = true;
+        }
+
+        if (gameManager.isDriverPlatformEnabled && gameManager.isCookPlatformEnabled)
+        {
+            gameManager.StartCoroutine(gameManager.StartGameWithDelay());
         }
     }
 }
