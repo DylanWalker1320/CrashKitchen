@@ -36,9 +36,6 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    /// <summary>
-    /// Delays game start until both players are assigned.
-    /// </summary>
     public IEnumerator StartGameWithDelay()
     {
         float timeout = 5f;
@@ -80,16 +77,26 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"Teleporting {player1.name} to driver position");
         Debug.Log($"Teleporting {player2.name} to cook position");
 
-        player1.transform.SetParent(truck.transform, true);
-        player2.transform.SetParent(truck.transform, true);
+        // Convert to world space positions before sending them to the clients
+        Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, 0.8f, -3.9f);
+        Vector3 player2WorldPos = truck.transform.position + new Vector3(0f, 0.8f, 0f);
 
-        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, -3.9f), Quaternion.Euler(0f, 180f, 0f));
-        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, new Vector3(0f, 0.8f, 0f), Quaternion.Euler(0f, 270f, 0f));
+        // 1️⃣ Teleport players using world space positions
+        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, Quaternion.Euler(0f, 180f, 0f));
+        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, Quaternion.Euler(0f, 270f, 0f));
+
+        // 2️⃣ Wait a frame, then parent to truck
+        StartCoroutine(ParentPlayersToTruckWithDelay(player1, player2));
     }
 
-    /// <summary>
-    /// Retrieves the player GameObject using NetworkObjectId.
-    /// </summary>
+    private IEnumerator ParentPlayersToTruckWithDelay(GameObject player1, GameObject player2)
+    {
+        yield return new WaitForEndOfFrame(); // Ensures teleportation applies first
+
+        if (player1 != null) player1.transform.SetParent(truck.transform, true);
+        if (player2 != null) player2.transform.SetParent(truck.transform, true);
+    }
+
     private GameObject GetPlayerById(ulong networkId)
     {
         foreach (var obj in FindObjectsByType<NetworkObject>(FindObjectsSortMode.None))
@@ -102,9 +109,6 @@ public class GameManager : NetworkBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Assigns players to their roles (driver/cook) on the server.
-    /// </summary>
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerServerRpc(ulong networkId, bool isDriver)
     {
@@ -125,17 +129,14 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    /// <summary>
-    /// Synchronizes player teleportation across all clients.
-    /// </summary>
     [ClientRpc]
     private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
         GameObject player = GetPlayerById(playerId);
         if (player != null)
         {
-            player.transform.localPosition = position;
-            player.transform.localRotation = rotation;
+            player.transform.position = position;  // Use world position instead of local
+            player.transform.rotation = rotation;
         }
     }
 }
