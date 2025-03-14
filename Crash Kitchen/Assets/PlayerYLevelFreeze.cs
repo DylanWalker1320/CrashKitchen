@@ -3,7 +3,7 @@ using Unity.Netcode;
 
 public class PlayerYLevelFreeze : NetworkBehaviour
 {
-    public bool lockYPosition = false;
+    private bool lockYPosition = false;
     private CharacterController characterController;
     private float fixedYPosition = 0f;
     
