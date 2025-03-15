@@ -25,9 +25,9 @@ TagManager:
   - Interactable
   - Wheels
   - TruckColliders
-  - 
-  - 
-  - 
+  - TruckBoundary
+  - KitchenObjects
+  - LooseObjects
   - 
   - 
   - 
