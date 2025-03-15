@@ -9681,7 +9681,7 @@ Transform:
   m_GameObject: {fileID: 972123118642327056}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -463.53, y: 0.94, z: 62.03}
+  m_LocalPosition: {x: -463.53, y: 1, z: 62.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9730,8 +9730,8 @@ CharacterController:
   m_Height: 1.36144
   m_Radius: 0.1
   m_SlopeLimit: 45
-  m_StepOffset: 0.5
-  m_SkinWidth: 0.08
+  m_StepOffset: 0
+  m_SkinWidth: 0.2
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.76072, z: 0}
 --- !u!114 &4672045073386975666
@@ -9847,7 +9847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2924112603
+  GlobalObjectIdHash: 4008814652
   InScenePlacedSourceGlobalObjectIdHash: 2924112603
   DeferredDespawnTick: 0
   Ownership: 1
@@ -43533,7 +43533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0, y: 0.000056719535}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &4858158890575382623
@@ -64550,7 +64550,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 770926162146453768}
   m_HandleRect: {fileID: 4912954253055627150}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
