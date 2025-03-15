@@ -12,6 +12,7 @@ TagManager:
   - DriverPlatform
   - CookPlatform
   - Truck
+  - Cooker
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Interactable
   - Wheels
   - TruckColliders
-  - TruckBoundary
+  - 
   - 
   - 
   - 
