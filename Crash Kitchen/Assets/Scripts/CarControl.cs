@@ -38,9 +38,6 @@ public class CarControl : NetworkBehaviour
 
         if (!knob) knob = GetComponentInChildren<XRKnob>();
         if (!lever) lever = GetComponentInChildren<XRLever>();
-
-        // Set the knob's value to default
-        knob.value = 0;
     }
 
     // FixedUpdate is called at a fixed time interval 

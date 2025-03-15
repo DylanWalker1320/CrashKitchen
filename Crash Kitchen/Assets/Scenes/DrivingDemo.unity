@@ -230804,6 +230804,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5541978647901740896, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541978647901740896, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -230867,6 +230871,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6591640996909947826, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7252025237873701082, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -230907,6 +230915,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8320294453335888121, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8896257484053094222, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -230939,7 +230951,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5541978647901740896, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2800967555825525563, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
     m_AddedGameObjects:
