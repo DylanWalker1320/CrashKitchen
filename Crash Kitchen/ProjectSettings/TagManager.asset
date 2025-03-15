@@ -9,6 +9,8 @@ TagManager:
   - Projectile
   - Target
   - Anchor
+  - Cooker
+  - Water
   layers:
   - Default
   - TransparentFX
