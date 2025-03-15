@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 4205450521683093345}
   m_Layer: 9
   m_Name: Truck
-  m_TagString: Untagged
+  m_TagString: Truck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3791bd394a4837241a8b485068751530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   motorTorque: 2000
   brakeTorque: 2000
   maxSpeed: 20

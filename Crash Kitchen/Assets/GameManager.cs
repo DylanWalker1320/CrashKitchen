@@ -79,17 +79,7 @@ public class GameManager : NetworkBehaviour
 
         // Freeze Y position
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
-        //FreezeAllPlayersYPosition();
         onGameStart.Invoke();
-    }
-
-    private void FreezeAllPlayersYPosition()
-    {
-        foreach (var obj in FindObjectsByType<PlayerYLevelFreeze>(FindObjectsSortMode.None))
-        {
-            if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y position for {obj.gameObject.name}</color>");
-            obj.Freeze();
-        }
     }
 
     private void ParentPlayersToTruck(GameObject player1, GameObject player2)
