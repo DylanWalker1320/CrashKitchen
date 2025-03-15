@@ -35,10 +35,13 @@ public class GameManager : NetworkBehaviour
         if (!IsServer) return;
 
         truck = GameObject.FindGameObjectWithTag("Truck");
+        
         if (truck == null)
         {
             if (debugMode) Debug.LogError($"<color={debugErrorHex}>Truck not found!</color>");
         }
+        
+        truck.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
     }
 
     public void StartGame()

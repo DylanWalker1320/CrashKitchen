@@ -3,7 +3,6 @@ using UnityEngine.XR.Content.Interaction;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
-
 public class CarControl : NetworkBehaviour
 {
     [Header("Car Properties")]
@@ -21,6 +20,9 @@ public class CarControl : NetworkBehaviour
     private WheelControl[] wheels;
     private Rigidbody rigidBody;
 
+    private float vInput;
+    private float hInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +36,8 @@ public class CarControl : NetworkBehaviour
         // Get all wheel components attached to the car
         wheels = GetComponentsInChildren<WheelControl>();
 
-        if (!knob) {
-            knob = GetComponentInChildren<XRKnob>();
-        }
-
-        if (!lever) {
-            lever = GetComponentInChildren<XRLever>();
-        }
+        if (!knob) knob = GetComponentInChildren<XRKnob>();
+        if (!lever) lever = GetComponentInChildren<XRLever>();
 
         // Set the knob's value to default
         knob.value = 0;
@@ -49,14 +46,33 @@ public class CarControl : NetworkBehaviour
     // FixedUpdate is called at a fixed time interval 
     void FixedUpdate()
     {
-        if (!IsOwner) return;
-        
-        // Get player input for acceleration
-        float vInput = driveAction.action.ReadValue<float>(); // Read trigger input (0 to 1)
-        float hInput = knob.value * 2 - 1; // Read knob input (0 to 1) scaled to (-1 to 1)
+        if (IsOwner)
+        {
+            // Read player input (client-side)
+            vInput = driveAction.action.ReadValue<float>();
+            hInput = knob.value * 2 - 1;
 
+            // Send input to the server
+            SendCarInputServerRpc(vInput, hInput);
+        }
+
+        if (!IsServer) return;
+
+        // Apply movement
+        ApplyCarPhysics(vInput, hInput);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendCarInputServerRpc(float vInput, float hInput)
+    {
+        // Apply input immediately on the server
+        ApplyCarPhysics(vInput, hInput);
+    }
+
+    private void ApplyCarPhysics(float vInput, float hInput)
+    {
         // Calculate current speed along the car's forward axis
-        float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
+        float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
 
         // Reduce motor torque and steering at high speeds for better handling
