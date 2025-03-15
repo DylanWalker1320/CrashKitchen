@@ -9,6 +9,9 @@ TagManager:
   - Projectile
   - Target
   - Anchor
+  - DriverPlatform
+  - CookPlatform
+  - Truck
   layers:
   - Default
   - TransparentFX
@@ -16,12 +19,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - Mirror
   - Interactable
-  - Object
-  - 
-  - 
+  - Wheels
+  - TruckColliders
+  - TruckBoundary
   - 
   - 
   - 
