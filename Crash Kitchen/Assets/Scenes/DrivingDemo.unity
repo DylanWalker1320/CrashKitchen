@@ -14696,7 +14696,7 @@ GameObject:
   - component: {fileID: 79015311}
   - component: {fileID: 79015310}
   - component: {fileID: 79015312}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Front Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14735,7 +14735,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -112011,7 +112011,7 @@ GameObject:
   - component: {fileID: 590423031}
   - component: {fileID: 590423032}
   - component: {fileID: 590423033}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Back Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112050,7 +112050,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -230873,7 +230873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6591640996909947826, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7252025237873701082, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Layer
@@ -357720,7 +357720,7 @@ GameObject:
   - component: {fileID: 1809325974}
   - component: {fileID: 1809325975}
   - component: {fileID: 1809325976}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Right Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357759,7 +357759,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -393158,7 +393158,7 @@ GameObject:
   - component: {fileID: 1995272445}
   - component: {fileID: 1995272446}
   - component: {fileID: 1995272447}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Left Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393197,7 +393197,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
