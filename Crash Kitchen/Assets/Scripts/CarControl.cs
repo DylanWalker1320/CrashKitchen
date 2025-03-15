@@ -48,19 +48,19 @@ public class CarControl : NetworkBehaviour
     {
         if (IsOwner)
         {
-            // Read player input (client-side)
             vInput = driveAction.action.ReadValue<float>();
             hInput = knob.value * 2 - 1;
 
-            // Send input to the server
             SendCarInputServerRpc(vInput, hInput);
         }
 
-        if (!IsServer) return;
-
-        // Apply movement
-        ApplyCarPhysics(vInput, hInput);
+        // Only apply physics if we are the server AND NOT a client at the same time
+        if (IsServer && !IsOwner)
+        {
+            ApplyCarPhysics(vInput, hInput);
+        }
     }
+
 
     [ServerRpc(RequireOwnership = false)]
     private void SendCarInputServerRpc(float vInput, float hInput)
@@ -72,7 +72,7 @@ public class CarControl : NetworkBehaviour
     private void ApplyCarPhysics(float vInput, float hInput)
     {
         // Calculate current speed along the car's forward axis
-        float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
+        float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
 
         // Reduce motor torque and steering at high speeds for better handling

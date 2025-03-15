@@ -229855,6 +229855,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 729131058808686099, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
+      propertyPath: Ownership
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 729131058808686099, guid: a079aa34492d9c74984bc8c6bdead964, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -316256,6 +316260,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   debugMode: 1
+  debugErrorHex: '#FF0000'
+  debugLogHex: '#FFaa55'
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
