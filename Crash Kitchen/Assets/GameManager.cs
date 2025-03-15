@@ -7,16 +7,13 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
     public static GameObject truck;
-
     public NetworkVariable<ulong> player1Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
     public UnityEvent onGameStart;
-    private bool playersTeleported = false;
-
     public bool debugMode = false;
-    public string debugErrorHex = "#FF0000";
-    public string debugLogHex = "#FFaa55";
+    private string debugErrorHex = "#FF0000";
+    private string debugLogHex = "#FFaa55";
+    public GameObject originalPlayer;
 
     private void Awake()
     {
@@ -46,8 +43,17 @@ public class GameManager : NetworkBehaviour
 
     public void StartGame()
     {
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Starting game...</color>");
-        StartGameServerRpc();
+        if (!originalPlayer)
+        {
+            if (debugMode) Debug.LogError($"<color={debugErrorHex}>Original player not found!</color>");
+        } else {
+            if (debugMode) Debug.Log($"<color={debugLogHex}>Starting game...</color>");
+            StartGameServerRpc();
+
+            // Kill original player
+            if (debugMode) Debug.Log($"<color={debugLogHex}>Killing original player</color>");
+            Destroy(originalPlayer);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -77,7 +83,7 @@ public class GameManager : NetworkBehaviour
         if (debugMode) Debug.Log($"<color={debugLogHex}>Parenting players to truck</color>");
         ParentPlayersToTruck(player1, player2);
 
-        // Freeze Y position
+        // Freeze Y positions
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
         //FreezeAllPlayersYPosition();
         onGameStart.Invoke();
@@ -94,8 +100,8 @@ public class GameManager : NetworkBehaviour
 
     private void ParentPlayersToTruck(GameObject player1, GameObject player2)
     {
-        if (player1 != null) player1.transform.SetParent(truck.transform, true);
-        if (player2 != null) player2.transform.SetParent(truck.transform, true);
+        player1.transform.parent = truck.transform;
+        player2.transform.parent = truck.transform;
     }
 
     private GameObject GetPlayerById(ulong networkId)

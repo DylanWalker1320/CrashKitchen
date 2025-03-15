@@ -235104,6 +235104,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+--- !u!1 &1184537549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 972123118642327056, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+  m_PrefabInstance: {fileID: 1184537548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1184836122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316260,8 +316265,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   debugMode: 1
-  debugErrorHex: '#FF0000'
-  debugLogHex: '#FFaa55'
+  originalPlayer: {fileID: 1184537549}
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
