@@ -14,6 +14,8 @@ public class GameManager : NetworkBehaviour
     public UnityEvent onGameStart;
     private bool playersTeleported = false;
 
+    public bool debugMode = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,13 +35,13 @@ public class GameManager : NetworkBehaviour
         truck = GameObject.FindGameObjectWithTag("Truck");
         if (truck == null)
         {
-            Debug.LogError("Cannot find Truck object with tag 'Truck'");
+            if (debugMode) Debug.LogError("Cannot find Truck object with tag 'Truck'");
         }
     }
 
     public void StartGame()
     {
-        Debug.Log("Both players are assigned. Starting game...");
+        if (debugMode) Debug.Log("Both players are assigned. Starting game...");
         StartGameServerRpc();
     }
 
@@ -51,12 +53,12 @@ public class GameManager : NetworkBehaviour
 
         if (player1 == null || player2 == null)
         {
-            Debug.LogError("One or both players could not be found!");
+            if (debugMode) Debug.LogError("One or both players could not be found!");
             return;
         }
 
-        Debug.Log($"Teleporting {player1.name} to driver position");
-        Debug.Log($"Teleporting {player2.name} to cook position");
+        if (debugMode) Debug.Log($"Teleporting {player1.name} to driver position");
+        if (debugMode) Debug.Log($"Teleporting {player2.name} to cook position");
 
         // Convert to world space positions before sending them to the clients
         Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, 0.25f, -3.9f);
@@ -67,12 +69,12 @@ public class GameManager : NetworkBehaviour
         SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, Quaternion.Euler(0f, 270f, 0f));
 
         // Parent to truck
-        Debug.Log("Parenting players to truck");
+        if (debugMode) Debug.Log("Parenting players to truck");
         ParentPlayersToTruck(player1, player2);
 
         // Freeze Y position
-        Debug.Log("Freezing Y position for players");
-        FreezeAllPlayersYPosition();
+        if (debugMode) Debug.Log("Freezing Y position for players");
+        //FreezeAllPlayersYPosition();
         onGameStart.Invoke();
     }
 
@@ -80,7 +82,7 @@ public class GameManager : NetworkBehaviour
     {
         foreach (var obj in FindObjectsByType<PlayerYLevelFreeze>(FindObjectsSortMode.None))
         {
-            Debug.Log($"Freezing Y position for {obj.gameObject.name}");
+            if (debugMode) Debug.Log($"Freezing Y position for {obj.gameObject.name}");
             obj.Freeze();
         }
     }
@@ -126,17 +128,17 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
-        Debug.Log($"Setting transform for player with ID: {playerId}");
+        if (debugMode) Debug.Log($"Setting transform for player with ID: {playerId}");
         GameObject player = GetPlayerById(playerId);
         if (player != null)
         {
             player.transform.position = position;  // Use world position instead of local
             player.transform.rotation = rotation;
         }
-        Debug.Log($"Player {player.name} has been teleported to {position}");
+        if (debugMode) Debug.Log($"Player {player.name} has been teleported to {position}");
     }
 
     public void Print() {
-        Debug.Log("Invoked");
+        if (debugMode) Debug.Log("Invoked");
     }
 }

@@ -6,6 +6,7 @@ public class PlayerYLevelFreeze : NetworkBehaviour
     private bool lockYPosition = false;
     private CharacterController characterController;
     private float fixedYPosition = 0f;
+    private bool debugMode = true;
     
     void Start()
     {
@@ -14,12 +15,12 @@ public class PlayerYLevelFreeze : NetworkBehaviour
     }
 
     public void Freeze(){
-        Debug.Log("Freezing Y position");
+        if (debugMode) Debug.Log("Freezing Y position");
         lockYPosition = true;
     }
 
     public void Unfreeze(){
-        Debug.Log("Unfreezing Y position");
+        if (debugMode) Debug.Log("Unfreezing Y position");
         lockYPosition = false;
     }
 
