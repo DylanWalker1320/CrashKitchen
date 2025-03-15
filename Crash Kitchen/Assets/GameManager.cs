@@ -8,15 +8,15 @@ public class GameManager : NetworkBehaviour
     public static GameManager instance;
     public static GameObject truck;
 
-    public NetworkVariable<ulong> player1Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    public NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<ulong> player1Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public UnityEvent onGameStart;
     private bool playersTeleported = false;
 
     public bool debugMode = false;
-    public string debugErrorHex = "#FF0000";
-    public string debugLogHex = "#FFaa55";
+    private string debugErrorHex = "#FF0000";
+    private string debugLogHex = "#FFaa55";
 
     private void Awake()
     {
@@ -141,9 +141,5 @@ public class GameManager : NetworkBehaviour
             player.transform.rotation = rotation;
         }
         if (debugMode) Debug.Log($"<color={debugLogHex}>Transform set for player {playerId}</color>");
-    }
-
-    public void Print() {
-        if (debugMode) Debug.Log("Invoked");
     }
 }
