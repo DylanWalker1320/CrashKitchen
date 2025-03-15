@@ -79,6 +79,8 @@ public class CarControl : NetworkBehaviour
         // Get the direction of the car (forward = -1, reverse = 1)
         float direction = lever.value ? -1 : 1;
 
+        Debug.Log($"<color=#FF00BB>[Car Control]</color> vInput: {vInput}, hInput: {hInput}, speedFactor: {speedFactor}, direction: {direction}");
+
         foreach (var wheel in wheels)
         {
             // Apply steering to wheels that support steering
