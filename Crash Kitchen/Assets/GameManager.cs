@@ -11,8 +11,6 @@ public class GameManager : NetworkBehaviour
     public bool debugMode;
     public UnityEvent OnGameStart;
     private string debugLogPrefix = "<color=#FF4400>[GameManager]</color> ";
-    public GameObject driver;
-    public GameObject cook;
     private GameObject truck;
 
     public enum RoleType
@@ -44,17 +42,13 @@ public class GameManager : NetworkBehaviour
             Log("Assigning player as driver");
             TeleportPlayer(player, driverTeleportPoint);
             ParentPlayerToTruck(player);
-            driver = player;
         }
         else if (role == RoleType.Cook)
         {
             Log("Assigning player as cook");
             TeleportPlayer(player, cookTeleportPoint);
             ParentPlayerToTruck(player);
-            cook = player;
         }
-
-        CheckStartGame();
     }
 
     public void TeleportPlayer(GameObject player, Transform teleportPoint)
@@ -70,15 +64,6 @@ public class GameManager : NetworkBehaviour
                 destinationRotation = teleportPoint.rotation,
                 matchOrientation = MatchOrientation.TargetUp
             });
-        }
-    }
-    
-    private void CheckStartGame()
-    {
-        if (driver != null && cook != null)
-        {
-            Log("Both players are ready, starting game");
-            OnGameStart.Invoke();
         }
     }
 
