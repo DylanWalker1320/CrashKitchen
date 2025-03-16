@@ -64,28 +64,34 @@ public class GameManager : NetworkBehaviour
 
         // Parent to truck
         if (debugMode) Debug.Log($"<color={debugLogHex}>Parenting players to truck</color>");
-        ParentPlayersToTruck(player1, player2);
+        
 
         // Define local positions
         Vector3 player1WorldPos = new Vector3(0f, 0.25f, -10f);
         Vector3 player2WorldPos = new Vector3(0f, 0.25f, 0f);
 
+        ParentPlayersToTruck(player1, player2, player1WorldPos, player2WorldPos);
+
         // Define relative rotations (-z is forward)
         Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
 
         // Teleport players using local positions
-        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, playerRotation);
-        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, playerRotation);
+        //SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, playerRotation);
+        //SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, playerRotation);
 
         // Freeze Y position
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
         onGameStart.Invoke();
     }
 
-    private void ParentPlayersToTruck(GameObject player1, GameObject player2)
+    private void ParentPlayersToTruck(GameObject player1, GameObject player2, Vector3 player1WorldPos, Vector3 player2WorldPos)
     {
         if (player1 != null) player1.transform.SetParent(truck.transform, true);
         if (player2 != null) player2.transform.SetParent(truck.transform, true);
+
+        // Reset local position
+        player1.transform.localPosition = player1WorldPos;
+        player2.transform.localPosition = player2WorldPos;
     }
 
     private GameObject GetPlayerById(ulong networkId)
