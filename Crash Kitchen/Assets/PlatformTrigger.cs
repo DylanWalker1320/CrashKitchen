@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public PlatformType platformType;
+    public GameManager.RoleType platformType;
     private GameManager gmInstance;
 
     void Start() {
@@ -16,15 +16,7 @@ public class PlatformTrigger : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Transform teleportPosition = platformType == PlatformType.Driver ? gmInstance.driverTeleportPoint : gmInstance.cookTeleportPoint;
-
-            gmInstance.TeleportPlayer(other.gameObject, teleportPosition);
+            gmInstance.AssignPlayerToTruck(other.gameObject, platformType);
         }
-    }
-
-    public enum PlatformType
-    {
-        Driver,
-        Cook
     }
 }
