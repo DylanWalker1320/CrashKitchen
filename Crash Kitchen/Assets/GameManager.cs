@@ -147,7 +147,7 @@ public class GameManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ParentPlayerToTruckServerRpc(NetworkObjectReference playerRef)
+    private void  ParentPlayerToTruckServerRpc(NetworkObjectReference playerRef)
     {
         if (!playerRef.TryGet(out NetworkObject playerNetObj))
             return;
