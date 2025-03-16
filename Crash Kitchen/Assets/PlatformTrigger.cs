@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlatformTrigger : MonoBehaviour
+public class PlatformTrigger : NetworkBehaviour
 {
     public GameManager.RoleType platformType;
     private GameManager gmInstance;

@@ -152,15 +152,6 @@ public class GameManager : NetworkBehaviour
             OnGameStart.Invoke();
         }
     }
-    
-    private void CheckStartGame()
-    {
-        if (driver != null && cook != null)
-        {
-            Log("Both players are ready, starting game");
-            OnGameStart.Invoke();
-        }
-    }
 
     private void ParentPlayerToTruck(GameObject player)
     {
