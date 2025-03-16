@@ -62,20 +62,20 @@ public class GameManager : NetworkBehaviour
             return;
         }
 
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Teleporting {player1.name} to driver position</color>");
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Teleporting {player2.name} to cook position</color>");
-
-        // Convert to world space positions before sending them to the clients
-        Vector3 player1WorldPos = truck.transform.position + new Vector3(0f, 0.25f, -3.9f);
-        Vector3 player2WorldPos = truck.transform.position + new Vector3(0f, 0.25f, 0f);
-
-        // Teleport players using world space positions
-        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, Quaternion.Euler(0f, 180f, 0f));
-        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, Quaternion.Euler(0f, 270f, 0f));
-
         // Parent to truck
         if (debugMode) Debug.Log($"<color={debugLogHex}>Parenting players to truck</color>");
         ParentPlayersToTruck(player1, player2);
+
+        // Define local positions
+        Vector3 player1WorldPos = new Vector3(0f, 0.25f, -10f);
+        Vector3 player2WorldPos = new Vector3(0f, 0.25f, 0f);
+
+        // Define relative rotations (-z is forward)
+        Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
+
+        // Teleport players using local positions
+        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, );
+        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, );
 
         // Freeze Y position
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
@@ -123,13 +123,12 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Setting transform for player {playerId}</color>");
+        if (debugMode) Debug.Log($"<color={debugLogHex}>Teleporting player {playerId} to {position}</color>");
         GameObject player = GetPlayerById(playerId);
         if (player != null)
         {
             player.transform.position = position;  // Use world position instead of local
             player.transform.rotation = rotation;
         }
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Transform set for player {playerId}</color>");
     }
 }
