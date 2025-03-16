@@ -11,8 +11,6 @@ public class GameManager : NetworkBehaviour
     public bool debugMode;
     public UnityEvent OnGameStart;
     private string debugLogPrefix = "<color=#FF4400>[GameManager]</color> ";
-    public NetworkObject driver;
-    public NetworkObject cook;
     private GameObject truck;
 
     public enum RoleType
@@ -37,117 +35,35 @@ public class GameManager : NetworkBehaviour
         truck = GameObject.FindWithTag("Truck");
     }
 
-    // This method is called from PlatformTrigger
-    public void AssignPlayerToTruck(NetworkObject playerNetObj, RoleType role)
+    public void AssignPlayerToTruck(GameObject player, RoleType role)
     {
-        // Only the server should process this logic
-        if (IsServer)
+        if (role == RoleType.Driver)
         {
-            ulong clientId = playerNetObj.OwnerClientId;
-            
-            if (role == RoleType.Driver)
-            {
-                Log("Assigning player as driver");
-                TeleportPlayerServerRpc(clientId, driverTeleportPoint.position, driverTeleportPoint.rotation);
-                ParentPlayerToTruckServerRpc(playerNetObj.NetworkObjectId);
-                driver = playerNetObj;
-            }
-            else if (role == RoleType.Cook)
-            {
-                Log("Assigning player as cook");
-                TeleportPlayerServerRpc(clientId, cookTeleportPoint.position, cookTeleportPoint.rotation);
-                ParentPlayerToTruckServerRpc(playerNetObj.NetworkObjectId);
-                cook = playerNetObj;
-            }
-
-            CheckStartGame();
+            Log("Assigning player as driver");
+            TeleportPlayer(player, driverTeleportPoint);
+            ParentPlayerToTruck(player);
         }
         else if (role == RoleType.Cook)
         {
-            // If called on client, forward to server
-            AssignPlayerToTruckServerRpc(playerNetObj.NetworkObjectId, role);
+            Log("Assigning player as cook");
+            TeleportPlayer(player, cookTeleportPoint);
+            ParentPlayerToTruck(player);
         }
-    }
-    
-    [ServerRpc(RequireOwnership = false)]
-    public void AssignPlayerToTruckServerRpc(ulong networkObjectId, RoleType role)
-    {
-        NetworkObject playerNetObj = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId];
-        AssignPlayerToTruck(playerNetObj, role);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void TeleportPlayerServerRpc(ulong clientId, Vector3 position, Quaternion rotation)
+    public void TeleportPlayer(GameObject player, Transform teleportPoint)
     {
-        // Tell the specific client to teleport
-        TeleportPlayerClientRpc(position, rotation, new ClientRpcParams
+        TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
+
+        if (teleporter != null)
         {
-            Send = new ClientRpcSendParams
+            Log("Teleporting player to " + teleportPoint.position);
+            teleporter.QueueTeleportRequest(new TeleportRequest()
             {
-                TargetClientIds = new ulong[] { clientId }
-            }
-        });
-    }
-    
-    [ClientRpc]
-    private void TeleportPlayerClientRpc(Vector3 position, Quaternion rotation, ClientRpcParams clientRpcParams = default)
-    {
-        // This runs on the client that needs to teleport
-        if (NetworkManager.Singleton.LocalClientId == clientRpcParams.Send.TargetClientIds[0])
-        {
-            GameObject player = NetworkManager.Singleton.LocalClient.PlayerObject.gameObject;
-            
-            TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
-            if (teleporter != null)
-            {
-                Log("Teleporting player to " + position);
-                teleporter.QueueTeleportRequest(new TeleportRequest()
-                {
-                    destinationPosition = position,
-                    destinationRotation = rotation,
-                    matchOrientation = MatchOrientation.TargetUp
-                });
-            }
-            else
-            {
-                Log($"No TeleportationProvider found, forcing position update.");
-                player.transform.position = position;
-                player.transform.rotation = rotation;
-            }
-        }
-    }
-    
-    [ServerRpc(RequireOwnership = false)]
-    private void ParentPlayerToTruckServerRpc(ulong networkObjectId)
-    {
-        // Get the NetworkObject with the given ID
-        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject playerNetObj))
-        {
-            // Parent the player to the truck on the server
-            Log($"Parenting player to truck: {playerNetObj.name}");
-            
-            // Tell all clients about this parent change (including the server)
-            ParentPlayerToTruckClientRpc(networkObjectId);
-        }
-    }
-    
-    [ClientRpc]
-    private void ParentPlayerToTruckClientRpc(ulong networkObjectId)
-    {
-        // Get the NetworkObject with the given ID
-        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject playerNetObj))
-        {
-            // Apply parenting on all clients
-            playerNetObj.transform.parent = truck.transform;
-        }
-    }
-    
-    private void CheckStartGame()
-    {
-        if (driver != null && cook != null)
-        {
-            Log("Both players are ready, starting game");
-            OnGameStart.Invoke();
+                destinationPosition = teleportPoint.position,
+                destinationRotation = teleportPoint.rotation,
+                matchOrientation = MatchOrientation.TargetUp
+            });
         }
     }
 
