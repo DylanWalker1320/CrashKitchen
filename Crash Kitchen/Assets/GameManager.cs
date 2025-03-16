@@ -135,16 +135,20 @@ public class GameManager : NetworkBehaviour
             
         GameObject player = playerNetObj.gameObject;
         
-        TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
-        if (teleporter != null)
+        // Only teleport the player if this client owns it
+        if (playerNetObj.IsOwner)
         {
-            Log("Teleporting player to " + position);
-            teleporter.QueueTeleportRequest(new TeleportRequest()
+            TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
+            if (teleporter != null)
             {
-                destinationPosition = position,
-                destinationRotation = rotation,
-                matchOrientation = MatchOrientation.TargetUp
-            });
+                Log("Teleporting player to " + position);
+                teleporter.QueueTeleportRequest(new TeleportRequest()
+                {
+                    destinationPosition = position,
+                    destinationRotation = rotation,
+                    matchOrientation = MatchOrientation.TargetUp
+                });
+            }
         }
     }
     
