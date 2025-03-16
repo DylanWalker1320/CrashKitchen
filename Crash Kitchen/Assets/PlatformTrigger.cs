@@ -13,12 +13,27 @@ public class PlatformTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        gmInstance.Log("Player entered platform trigger");
-
-        if (other.CompareTag("Player") && !touched)
+        if (!IsServer) return; // Only process this on the server
+        
+        // Make sure it's a player and has a NetworkObject
+        if (other.CompareTag("Player"))
         {
-            touched = true;
-            gmInstance.AssignPlayerToTruck(other.gameObject, platformType);
+            NetworkObject playerNetObj = other.GetComponentInParent<NetworkObject>();
+            
+            if (playerNetObj != null)
+            {
+                gmInstance.Log("Player entered platform trigger");
+                gmInstance.AssignPlayerToTruck(playerNetObj, platformType);
+                
+                // Remove the platform when triggered
+                DestroyPlatformClientRpc();
+            }
         }
+    }
+
+    [ClientRpc]
+    private void DestroyPlatformClientRpc()
+    {
+        Destroy(gameObject);
     }
 }

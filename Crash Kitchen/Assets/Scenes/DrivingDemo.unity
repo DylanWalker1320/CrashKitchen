@@ -234209,6 +234209,10 @@ PrefabInstance:
       value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: Ownership
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -315579,7 +315583,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 3181905678
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
-  Ownership: 8
+  Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -427778,7 +427782,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 2009104821
   InScenePlacedSourceGlobalObjectIdHash: 1341473750
   DeferredDespawnTick: 0
-  Ownership: 8
+  Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
