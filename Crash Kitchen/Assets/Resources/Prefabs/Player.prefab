@@ -9847,7 +9847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4008814652
+  GlobalObjectIdHash: 2924112603
   InScenePlacedSourceGlobalObjectIdHash: 2924112603
   DeferredDespawnTick: 0
   Ownership: 1
@@ -19765,7 +19765,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3959
+    m_Bits: 16247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
