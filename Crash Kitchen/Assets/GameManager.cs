@@ -67,16 +67,22 @@ public class GameManager : NetworkBehaviour
         ParentPlayersToTruck(player1, player2);
 
         // Define local positions
-        Vector3 player1LocalPos = new Vector3(0f, 0.25f, -10f);
+        Vector3 player1LocalPos = new Vector3(0f, 0.25f, -5f);
         Vector3 player2LocalPos = new Vector3(0f, 0.25f, 0f);
 
         // Define relative rotations (-z is forward)
         Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
 
-        // Teleport players using local positions
-        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1LocalPos, playerRotation);
-        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2LocalPos, playerRotation);
+        // Set positions directly on server first
+        player1.transform.localPosition = player1LocalPos;
+        player1.transform.localRotation = playerRotation;
+        player2.transform.localPosition = player2LocalPos;
+        player2.transform.localRotation = playerRotation;
 
+        // Then synchronize to clients
+        SetPlayerTransformClientRpc(player1Id.Value, player1LocalPos, playerRotation);
+        SetPlayerTransformClientRpc(player2Id.Value, player2LocalPos, playerRotation);
+        
         // Freeze Y position
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
         onGameStart.Invoke();
@@ -127,8 +133,13 @@ public class GameManager : NetworkBehaviour
         GameObject player = GetPlayerById(playerId);
         if (player != null)
         {
-            player.transform.localPosition = position;  // Use local position instead of world
-            player.transform.localRotation = rotation;
+            // Double-check that we have the right player
+            NetworkObject netObj = player.GetComponent<NetworkObject>();
+            if (netObj && netObj.NetworkObjectId == playerId)
+            {
+                player.transform.localPosition = position;
+                player.transform.localRotation = rotation;
+            }
         }
     }
 }
