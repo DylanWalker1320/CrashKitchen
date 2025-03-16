@@ -41,7 +41,7 @@ public class GameManager : NetworkBehaviour
             if (debugMode) Debug.LogError($"<color={debugErrorHex}>Truck not found!</color>");
         }
         
-        truck.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
+        // truck.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
     }
 
     public void StartGame()
@@ -60,6 +60,8 @@ public class GameManager : NetworkBehaviour
         {
             if (debugMode) Debug.LogError($"<color={debugErrorHex}>Players not found!</color>");
             return;
+        } else {
+            if (debugMode) Debug.Log($"<color={debugLogHex}>Players found!... they are {player1.name} and {player2.name}</color>");
         }
 
         // Parent to truck
@@ -79,8 +81,9 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator DelayedPositionSet(GameObject player1, GameObject player2, Vector3 pos1, Vector3 pos2, Quaternion rotation)
     {
-        // Wait for a frame to ensure parenting is complete
-        yield return null;
+        // Wait for 5 seconds before setting positions
+        yield return new WaitForSeconds(5f);
+        if (debugMode) Debug.Log($"<color={debugLogHex}>Setting player positions</color>");
 
         // Set positions directly on server first
         player1.transform.localPosition = pos1;
@@ -138,17 +141,22 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerTransformClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Teleporting player {playerId} to {position}</color>");
         GameObject player = GetPlayerById(playerId);
+        
         if (player != null)
         {
             // Double-check that we have the right player
             NetworkObject netObj = player.GetComponent<NetworkObject>();
             if (netObj && netObj.NetworkObjectId == playerId)
             {
+                if (debugMode) Debug.Log($"<color={debugLogHex}>Teleporting player {player.name} to {position}</color>");
                 player.transform.localPosition = position;
                 player.transform.localRotation = rotation;
             }
+        }
+        else
+        {
+            if (debugMode) Debug.LogError($"<color={debugErrorHex}>Failed to find player with ID {playerId} for teleport</color>");
         }
     }
 }
