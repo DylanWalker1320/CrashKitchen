@@ -84,8 +84,17 @@ public class GameManager : NetworkBehaviour
             
         GameObject player = playerNetObj.gameObject;
         
+        // Check if roles are already assigned to prevent duplicate assignments
         if (role == RoleType.Driver)
         {
+            // Check if driver role is already taken by another player
+            if (networkDriver.Value.TryGet(out NetworkObject existingDriver) && 
+                existingDriver.NetworkObjectId != playerNetObj.NetworkObjectId)
+            {
+                Log($"Driver role is already taken by player {existingDriver.NetworkObjectId}");
+                return;
+            }
+            
             Log("Assigning player as driver");
             TeleportPlayerServerRpc(playerRef, driverTeleportPoint.position, driverTeleportPoint.rotation);
             ParentPlayerToTruckServerRpc(playerRef);
@@ -93,6 +102,14 @@ public class GameManager : NetworkBehaviour
         }
         else if (role == RoleType.Cook)
         {
+            // Check if cook role is already taken by another player
+            if (networkCook.Value.TryGet(out NetworkObject existingCook) && 
+                existingCook.NetworkObjectId != playerNetObj.NetworkObjectId)
+            {
+                Log($"Cook role is already taken by player {existingCook.NetworkObjectId}");
+                return;
+            }
+            
             Log("Assigning player as cook");
             TeleportPlayerServerRpc(playerRef, cookTeleportPoint.position, cookTeleportPoint.rotation);
             ParentPlayerToTruckServerRpc(playerRef);
