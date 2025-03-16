@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 5603847471803308642}
   m_Layer: 0
   m_Name: XRI_Network_Player_Avatar
-  m_TagString: Player
+  m_TagString: ShadowPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,7 +519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  lockYPosition: 1
 --- !u!1 &5908336471056132768
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,7 +110,10 @@ public class GameManager : NetworkBehaviour
     {
         foreach (var obj in FindObjectsByType<NetworkObject>(FindObjectsSortMode.None))
         {
-            if (obj.NetworkObjectId == networkId)
+            if (obj.CompareTag("ShadowPlayer")) continue; // Ignore shadow players
+            
+            if ((obj.NetworkObjectId == networkId && obj.IsSpawned) || 
+                (obj.CompareTag("Player") && obj.GetComponentInChildren<Camera>() != null))
             {
                 return obj.gameObject;
             }
