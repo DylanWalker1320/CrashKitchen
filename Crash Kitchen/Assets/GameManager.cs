@@ -66,25 +66,34 @@ public class GameManager : NetworkBehaviour
         if (debugMode) Debug.Log($"<color={debugLogHex}>Parenting players to truck</color>");
         ParentPlayersToTruck(player1, player2);
 
-        // Define local positions
+        // Define local positions with more distinct separation
         Vector3 player1LocalPos = new Vector3(0f, 0.25f, -5f);
         Vector3 player2LocalPos = new Vector3(0f, 0.25f, 0f);
 
         // Define relative rotations (-z is forward)
         Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
 
+        // Ensure positions are set after parenting is complete
+        StartCoroutine(DelayedPositionSet(player1, player2, player1LocalPos, player2LocalPos, playerRotation));
+    }
+
+    private IEnumerator DelayedPositionSet(GameObject player1, GameObject player2, Vector3 pos1, Vector3 pos2, Quaternion rotation)
+    {
+        // Wait for a frame to ensure parenting is complete
+        yield return null;
+
         // Set positions directly on server first
-        player1.transform.localPosition = player1LocalPos;
-        player1.transform.localRotation = playerRotation;
-        player2.transform.localPosition = player2LocalPos;
-        player2.transform.localRotation = playerRotation;
+        player1.transform.localPosition = pos1;
+        player1.transform.localRotation = rotation;
+        player2.transform.localPosition = pos2;
+        player2.transform.localRotation = rotation;
 
         // Then synchronize to clients
-        SetPlayerTransformClientRpc(player1Id.Value, player1LocalPos, playerRotation);
-        SetPlayerTransformClientRpc(player2Id.Value, player2LocalPos, playerRotation);
+        SetPlayerTransformClientRpc(player1Id.Value, pos1, rotation);
+        SetPlayerTransformClientRpc(player2Id.Value, pos2, rotation);
         
-        // Freeze Y position
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
+        // Invoke game start event
+        if (debugMode) Debug.Log($"<color={debugLogHex}>Invoking the start event</color>");
         onGameStart.Invoke();
     }
 
