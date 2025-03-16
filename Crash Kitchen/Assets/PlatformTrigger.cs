@@ -1,45 +1,30 @@
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
-public class PlatformTrigger : NetworkBehaviour
+public class PlatformTrigger : MonoBehaviour
 {
-    private GameManager gameManager;
+    public PlatformType platformType;
+    private GameManager gmInstance;
 
-    void Start()
+    void Start() {
+        gmInstance = GameManager.Instance;
+    }
+
+    void OnTriggerEnter(Collider other)
     {
-        gameManager = FindFirstObjectByType<GameManager>();
+        gmInstance.Log("Player entered platform trigger");
+
+        if (other.CompareTag("Player"))
+        {
+            Transform teleportPosition = platformType == PlatformType.Driver ? gmInstance.driverTeleportPoint : gmInstance.cookTeleportPoint;
+
+            gmInstance.TeleportPlayer(other.gameObject, teleportPosition);
+        }
     }
 
     public enum PlatformType
     {
         Driver,
         Cook
-    }
-
-    public PlatformType platformType;
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        NetworkObject netObj = other.GetComponent<NetworkObject>();
-        if (netObj == null || !netObj.IsSpawned) return;
-
-        Debug.Log($"Platform type touched!: {platformType}, Player: {other.name}");
-
-        if (IsServer)
-        {
-            gameManager.SetPlayerServerRpc(netObj.NetworkObjectId, platformType == PlatformType.Driver);
-        }
-        else
-        {
-            AssignPlayerServerRpc(netObj.NetworkObjectId, platformType == PlatformType.Driver);
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void AssignPlayerServerRpc(ulong playerId, bool isDriver)
-    {
-        gameManager.SetPlayerServerRpc(playerId, isDriver);
     }
 }
