@@ -233216,8 +233216,8 @@ GameObject:
   - component: {fileID: 1181792428}
   - component: {fileID: 1181792427}
   - component: {fileID: 1181792426}
-  - component: {fileID: 1181792431}
   - component: {fileID: 1181792432}
+  - component: {fileID: 1181792431}
   m_Layer: 0
   m_Name: DriverStartPlatform
   m_TagString: DriverPlatform
@@ -233326,6 +233326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platformType: 0
 --- !u!114 &1181792432
 MonoBehaviour:
@@ -233342,7 +233343,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 1995895473
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
-  Ownership: 1
+  Ownership: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -234165,7 +234166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: AllowOwnerToParent
@@ -315531,8 +315532,6 @@ MonoBehaviour:
           m_StringArgument: Invoked!
           m_BoolArgument: 0
         m_CallState: 2
-  driver: {fileID: 0}
-  cook: {fileID: 0}
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315548,7 +315547,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 3181905678
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
-  Ownership: 8
+  Ownership: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -360591,6 +360590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platformType: 1
 --- !u!114 &1831921369
 MonoBehaviour:
@@ -360607,7 +360607,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 2984792979
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
-  Ownership: 1
+  Ownership: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -427747,7 +427747,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 2009104821
   InScenePlacedSourceGlobalObjectIdHash: 1341473750
   DeferredDespawnTick: 0
-  Ownership: 8
+  Ownership: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0

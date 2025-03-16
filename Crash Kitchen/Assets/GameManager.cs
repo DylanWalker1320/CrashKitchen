@@ -10,9 +10,10 @@ public class GameManager : NetworkBehaviour
     public Transform cookTeleportPoint;
     public bool debugMode;
     public UnityEvent OnGameStart;
+
     private string debugLogPrefix = "<color=#FF4400>[GameManager]</color> ";
-    public GameObject driver;
-    public GameObject cook;
+    private NetworkVariable<ulong> driverId = new NetworkVariable<ulong>(ulong.MaxValue, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<ulong> cookId = new NetworkVariable<ulong>(ulong.MaxValue, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private GameObject truck;
 
     public enum RoleType
@@ -24,75 +25,68 @@ public class GameManager : NetworkBehaviour
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
-    void Start() {
+    private void Start()
+    {
         truck = GameObject.FindWithTag("Truck");
     }
 
     public void AssignPlayerToTruck(GameObject player, RoleType role)
     {
+        if (!IsServer) return; // Ensure only the server assigns roles
+
+        ulong playerId = player.GetComponent<NetworkObject>().OwnerClientId;
+        Transform targetPoint = role == RoleType.Driver ? driverTeleportPoint : cookTeleportPoint;
+
         if (role == RoleType.Driver)
         {
-            Log("Assigning player as driver");
-            TeleportPlayer(player, driverTeleportPoint);
-            ParentPlayerToTruck(player);
-            driver = player;
+            driverId.Value = playerId;
         }
-        else if (role == RoleType.Cook)
+        else
         {
-            Log("Assigning player as cook");
-            TeleportPlayer(player, cookTeleportPoint);
-            ParentPlayerToTruck(player);
-            cook = player;
+            cookId.Value = playerId;
         }
 
-        CheckStartGame();
-    }
+        Log($"Assigning player {playerId} as {role}");
+        TeleportPlayerClientRpc(playerId, targetPoint.position, targetPoint.rotation);
 
-    public void TeleportPlayer(GameObject player, Transform teleportPoint)
-    {
-        TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
-
-        if (teleporter != null)
+        if (driverId.Value != ulong.MaxValue && cookId.Value != ulong.MaxValue)
         {
-            Log("Teleporting player to " + teleportPoint.position);
-            teleporter.QueueTeleportRequest(new TeleportRequest()
-            {
-                destinationPosition = teleportPoint.position,
-                destinationRotation = teleportPoint.rotation,
-                matchOrientation = MatchOrientation.TargetUp
-            });
-        }
-    }
-    
-    private void CheckStartGame()
-    {
-        if (driver != null && cook != null)
-        {
-            Log("Both players are ready, starting game");
+            Log("Both players assigned. Starting game...");
             OnGameStart.Invoke();
         }
     }
 
-    private void ParentPlayerToTruck(GameObject player)
+    [ClientRpc]
+    private void TeleportPlayerClientRpc(ulong playerId, Vector3 position, Quaternion rotation)
     {
-        Log($"Parenting player to truck: {player.name}");
-        player.transform.parent = truck.transform;
+        if (NetworkManager.Singleton.LocalClientId == playerId)
+        {
+            GameObject player = NetworkManager.Singleton.ConnectedClients[playerId].PlayerObject.gameObject;
+            TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
+
+            if (teleporter != null)
+            {
+                Log($"Teleporting {player.name} to {position}");
+                teleporter.QueueTeleportRequest(new TeleportRequest
+                {
+                    destinationPosition = position,
+                    destinationRotation = rotation,
+                    matchOrientation = MatchOrientation.TargetUp
+                });
+            }
+
+            // Parent to truck only after teleport
+            player.transform.parent = truck.transform;
+        }
     }
 
     public void Log(string message)
     {
-        if (debugMode)
-        {
-            Debug.Log(debugLogPrefix + message);
-        }
+        if (debugMode) Debug.Log(debugLogPrefix + message);
     }
 }
