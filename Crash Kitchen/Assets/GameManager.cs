@@ -67,8 +67,6 @@ public class GameManager : NetworkBehaviour
             // If called on client, forward to server
             AssignPlayerToTruckServerRpc(playerNetObj.NetworkObjectId, role);
         }
-
-        CheckStartGame();
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -141,15 +139,6 @@ public class GameManager : NetworkBehaviour
         {
             // Apply parenting on all clients
             playerNetObj.transform.parent = truck.transform;
-        }
-    }
-    
-    private void CheckStartGame()
-    {
-        if (driver != null && cook != null)
-        {
-            Log("Both players are ready, starting game");
-            OnGameStart.Invoke();
         }
     }
     
