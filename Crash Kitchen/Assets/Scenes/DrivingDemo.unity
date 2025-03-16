@@ -233216,8 +233216,8 @@ GameObject:
   - component: {fileID: 1181792428}
   - component: {fileID: 1181792427}
   - component: {fileID: 1181792426}
-  - component: {fileID: 1181792431}
   - component: {fileID: 1181792432}
+  - component: {fileID: 1181792431}
   m_Layer: 0
   m_Name: DriverStartPlatform
   m_TagString: DriverPlatform
@@ -233326,6 +233326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platformType: 0
 --- !u!114 &1181792432
 MonoBehaviour:
@@ -360595,6 +360596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2f1daa91ebae545865aae0cdcd8033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platformType: 1
 --- !u!114 &1831921369
 MonoBehaviour:
