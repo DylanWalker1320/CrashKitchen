@@ -11,8 +11,15 @@ public class GameManager : NetworkBehaviour
     public bool debugMode;
     public UnityEvent OnGameStart;
     private string debugLogPrefix = "<color=#FF4400>[GameManager]</color> ";
+    
+    // Use NetworkVariable to synchronize the player references
+    public NetworkVariable<NetworkObjectReference> networkDriver = new NetworkVariable<NetworkObjectReference>();
+    public NetworkVariable<NetworkObjectReference> networkCook = new NetworkVariable<NetworkObjectReference>();
+    
+    // Keep local references for convenience
     public GameObject driver;
     public GameObject cook;
+    
     private GameObject truck;
 
     public enum RoleType
@@ -35,39 +42,90 @@ public class GameManager : NetworkBehaviour
 
     void Start() {
         truck = GameObject.FindWithTag("Truck");
+        
+        // Subscribe to NetworkVariable changes
+        networkDriver.OnValueChanged += OnDriverChanged;
+        networkCook.OnValueChanged += OnCookChanged;
+    }
+    
+    private void OnDriverChanged(NetworkObjectReference previousValue, NetworkObjectReference newValue)
+    {
+        if (newValue.TryGet(out NetworkObject networkObject))
+        {
+            driver = networkObject.gameObject;
+            Log("Driver reference updated on client");
+        }
+        CheckStartGame();
+    }
+    
+    private void OnCookChanged(NetworkObjectReference previousValue, NetworkObjectReference newValue)
+    {
+        if (newValue.TryGet(out NetworkObject networkObject))
+        {
+            cook = networkObject.gameObject;
+            Log("Cook reference updated on client");
+        }
+        CheckStartGame();
     }
 
     public void AssignPlayerToTruck(GameObject player, RoleType role)
     {
+        // Call the server RPC to handle assignment
+        AssignPlayerToTruckServerRpc(player.GetComponent<NetworkObject>(), (int)role);
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void AssignPlayerToTruckServerRpc(NetworkObjectReference playerRef, int roleInt)
+    {
+        RoleType role = (RoleType)roleInt;
+        
+        if (!playerRef.TryGet(out NetworkObject playerNetObj))
+            return;
+            
+        GameObject player = playerNetObj.gameObject;
+        
         if (role == RoleType.Driver)
         {
             Log("Assigning player as driver");
-            TeleportPlayer(player, driverTeleportPoint);
-            ParentPlayerToTruck(player);
-            driver = player;
+            TeleportPlayerServerRpc(playerRef, driverTeleportPoint.position, driverTeleportPoint.rotation);
+            ParentPlayerToTruckServerRpc(playerRef);
+            networkDriver.Value = playerRef;
         }
         else if (role == RoleType.Cook)
         {
             Log("Assigning player as cook");
-            TeleportPlayer(player, cookTeleportPoint);
-            ParentPlayerToTruck(player);
-            cook = player;
+            TeleportPlayerServerRpc(playerRef, cookTeleportPoint.position, cookTeleportPoint.rotation);
+            ParentPlayerToTruckServerRpc(playerRef);
+            networkCook.Value = playerRef;
         }
-
-        CheckStartGame();
     }
 
-    public void TeleportPlayer(GameObject player, Transform teleportPoint)
+    [ServerRpc(RequireOwnership = false)]
+    private void TeleportPlayerServerRpc(NetworkObjectReference playerRef, Vector3 position, Quaternion rotation)
     {
+        if (!playerRef.TryGet(out NetworkObject playerNetObj))
+            return;
+            
+        GameObject player = playerNetObj.gameObject;
+        TeleportPlayerClientRpc(playerRef, position, rotation);
+    }
+    
+    [ClientRpc]
+    private void TeleportPlayerClientRpc(NetworkObjectReference playerRef, Vector3 position, Quaternion rotation)
+    {
+        if (!playerRef.TryGet(out NetworkObject playerNetObj))
+            return;
+            
+        GameObject player = playerNetObj.gameObject;
+        
         TeleportationProvider teleporter = player.GetComponentInChildren<TeleportationProvider>();
-
         if (teleporter != null)
         {
-            Log("Teleporting player to " + teleportPoint.position);
+            Log("Teleporting player to " + position);
             teleporter.QueueTeleportRequest(new TeleportRequest()
             {
-                destinationPosition = teleportPoint.position,
-                destinationRotation = teleportPoint.rotation,
+                destinationPosition = position,
+                destinationRotation = rotation,
                 matchOrientation = MatchOrientation.TargetUp
             });
         }
@@ -75,15 +133,27 @@ public class GameManager : NetworkBehaviour
     
     private void CheckStartGame()
     {
-        if (driver != null && cook != null)
+        if (driver != null && cook != null && IsServer)
         {
             Log("Both players are ready, starting game");
-            OnGameStart.Invoke();
+            StartGameClientRpc();
         }
     }
-
-    private void ParentPlayerToTruck(GameObject player)
+    
+    [ClientRpc]
+    private void StartGameClientRpc()
     {
+        OnGameStart.Invoke();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ParentPlayerToTruckServerRpc(NetworkObjectReference playerRef)
+    {
+        if (!playerRef.TryGet(out NetworkObject playerNetObj))
+            return;
+            
+        GameObject player = playerNetObj.gameObject;
+        
         Log($"Parenting player to truck: {player.name}");
         player.transform.parent = truck.transform;
     }
