@@ -234138,8 +234138,20 @@ PrefabInstance:
       value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: AllowOwnerToParent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4008814652
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: SynchronizeTransform
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8965139176306015266, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -315474,7 +315486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4924a135cf69e4586168e29c2c4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   driverTeleportPoint: {fileID: 11329971}
   cookTeleportPoint: {fileID: 2133555834}
   debugMode: 1
@@ -315502,7 +315513,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613579127}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 

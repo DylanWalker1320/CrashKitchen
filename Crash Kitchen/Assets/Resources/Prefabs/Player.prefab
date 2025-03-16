@@ -9852,14 +9852,14 @@ MonoBehaviour:
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
+  AllowOwnerToParent: 1
 --- !u!114 &5436621593391573747
 MonoBehaviour:
   m_ObjectHideFlags: 0

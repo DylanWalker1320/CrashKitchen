@@ -17,6 +17,8 @@ public class PlatformTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gmInstance.AssignPlayerToTruck(other.gameObject, platformType);
+
+            Destroy(gameObject);
         }
     }
 }

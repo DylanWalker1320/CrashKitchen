@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 using UnityEngine.Events;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Transform driverTeleportPoint;
