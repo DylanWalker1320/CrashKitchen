@@ -74,8 +74,8 @@ public class GameManager : NetworkBehaviour
         Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
 
         // Teleport players using local positions
-        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, );
-        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, );
+        SetPlayerTransformClientRpc(player1.GetComponent<NetworkObject>().NetworkObjectId, player1WorldPos, playerRotation);
+        SetPlayerTransformClientRpc(player2.GetComponent<NetworkObject>().NetworkObjectId, player2WorldPos, playerRotation);
 
         // Freeze Y position
         if (debugMode) Debug.Log($"<color={debugLogHex}>Freezing Y positions</color>");
