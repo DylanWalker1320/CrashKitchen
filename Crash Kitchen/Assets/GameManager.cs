@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameManager : NetworkBehaviour
 {
@@ -12,7 +13,6 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<ulong> player2Id = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public UnityEvent onGameStart;
-    private bool playersTeleported = false;
 
     public bool debugMode = false;
     private string debugErrorHex = "#FF0000";
@@ -76,15 +76,11 @@ public class GameManager : NetworkBehaviour
         Quaternion playerRotation = Quaternion.Euler(0f, 180f, 0f); // Rotate 180 degrees about Y axis
 
         // Ensure positions are set after parenting is complete
-        StartCoroutine(DelayedPositionSet(player1, player2, player1LocalPos, player2LocalPos, playerRotation));
+        DelayedPositionSet(player1, player2, player1LocalPos, player2LocalPos, playerRotation);
     }
 
-    private IEnumerator DelayedPositionSet(GameObject player1, GameObject player2, Vector3 pos1, Vector3 pos2, Quaternion rotation)
+    private void DelayedPositionSet(GameObject player1, GameObject player2, Vector3 pos1, Vector3 pos2, Quaternion rotation)
     {
-        // Wait for 5 seconds before setting positions
-        yield return new WaitForSeconds(5f);
-        if (debugMode) Debug.Log($"<color={debugLogHex}>Setting player positions</color>");
-
         // Set positions directly on server first
         player1.transform.localPosition = pos1;
         player1.transform.localRotation = rotation;
@@ -161,5 +157,33 @@ public class GameManager : NetworkBehaviour
         {
             if (debugMode) Debug.LogError($"<color={debugErrorHex}>Failed to find player with ID {playerId} for teleport</color>");
         }
+    }
+
+    public void TeleportPlayertoDriver(ActivateEventArgs args) {
+        // Get the player that touched the button
+        GameObject player = args.interactorObject.transform.gameObject;
+
+        // Get the network object of the player
+        NetworkObject netObj = player.GetComponent<NetworkObject>();
+
+        // Move the player to the driver position
+        SetPlayerTransformClientRpc(netObj.NetworkObjectId, new Vector3(0f, 0.25f, -5f), Quaternion.Euler(0f, 180f, 0f));
+
+        // Set the player as the driver
+        SetPlayerServerRpc(netObj.NetworkObjectId, true);
+    }
+
+    public void TeleportPlayertoCook(ActivateEventArgs args) {
+        // Get the player that touched the button
+        GameObject player = args.interactorObject.transform.gameObject;
+
+        // Get the network object of the player
+        NetworkObject netObj = player.GetComponent<NetworkObject>();
+
+        // Move the player to the cook position
+        SetPlayerTransformClientRpc(netObj.NetworkObjectId, new Vector3(0f, 0.25f, 0f), Quaternion.Euler(0f, 180f, 0f));
+
+        // Set the player as the cook
+        SetPlayerServerRpc(netObj.NetworkObjectId, false);
     }
 }
