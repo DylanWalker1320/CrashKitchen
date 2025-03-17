@@ -9,11 +9,10 @@ TagManager:
   - Projectile
   - Target
   - Anchor
-  - DriverPlatform
-  - CookPlatform
   - Truck
   - Cooker
   - ShadowPlayer
+  - Resettable
   layers:
   - Default
   - TransparentFX

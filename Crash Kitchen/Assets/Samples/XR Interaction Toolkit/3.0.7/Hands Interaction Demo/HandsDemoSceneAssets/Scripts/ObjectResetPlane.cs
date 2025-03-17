@@ -29,6 +29,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         protected void Start()
         {
+            // Add all objects with tag "Resettable" to the list of objects to reset.
+            var resettableObjects = GameObject.FindGameObjectsWithTag("Resettable");
+            foreach (var resettableObject in resettableObjects)
+            {
+                m_ObjectsToReset.Add(resettableObject.transform);
+            }
+
             foreach (var currentTransform in m_ObjectsToReset)
             {
                 if (currentTransform != null)
