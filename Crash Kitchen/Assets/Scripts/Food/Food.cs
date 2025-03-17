@@ -1,0 +1,8 @@
+using UnityEngine;
+
+[SerializeField]
+public abstract class Food : MonoBehaviour
+{
+    // bool is Interactable
+    public string foodName;
+}

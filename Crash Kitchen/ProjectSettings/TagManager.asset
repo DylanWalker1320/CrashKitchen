@@ -9,6 +9,11 @@ TagManager:
   - Projectile
   - Target
   - Anchor
+  - Truck
+  - Cooker
+  - ShadowPlayer
+  - Resettable
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -16,14 +21,14 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - Mirror
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactable
+  - Wheels
+  - TruckColliders
+  - TruckBoundary
+  - KitchenObjects
+  - LooseObjects
   - 
   - 
   - 

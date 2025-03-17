@@ -1,0 +1,16 @@
+{
+    "recipes": [
+        {
+            "name": "Hamburger",
+            "ingredients": ["Bun", "Bun", "Lettuce", "Cooked Patty"]
+        },
+        {
+            "name": "Deluxe Hamburger",
+            "ingredients": ["Bun", "Cooked Patty", "Lettuce", "Lettuce","Lettuce","Lettuce","Lettuce", "Cooked Patty", "Bun"]
+        },
+        {
+            "name": "Steak",
+            "ingredients": ["Steak"]
+        }
+    ]
+}
