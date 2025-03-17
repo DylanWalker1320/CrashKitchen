@@ -45955,7 +45955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3772444556125876962, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_FarAttachMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3830773420212568123, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -46047,7 +46047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006476675719250215, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_FarAttachMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5262224052892105748, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
@@ -52385,7 +52385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Lettuce
+  foodName: 
+  isOutline: 0
+  cleanCounter: 0
 --- !u!114 &265354292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121363,9 +121365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Patty
+  foodName: 
   cookPercent: 0
-  cookRate: 20
+  cookRate: 0
   isCooked: 0
   isCooking: 0
 --- !u!114 &622291082
@@ -123702,7 +123704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66127f82a1c0d0c4db577247e98d36c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Bun
+  foodName: 
 --- !u!114 &634807697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170097,7 +170099,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Lettuce
+  foodName: 
+  isOutline: 0
+  cleanCounter: 0
 --- !u!114 &839863172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181206,7 +181210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66127f82a1c0d0c4db577247e98d36c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Bun
+  foodName: 
 --- !u!114 &891815350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231465,7 +231469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Lettuce
+  foodName: 
+  isOutline: 0
+  cleanCounter: 0
 --- !u!114 &1137511306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255227,9 +255233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Patty
+  foodName: 
   cookPercent: 0
-  cookRate: 20
+  cookRate: 0
   isCooked: 0
   isCooking: 0
 --- !u!114 &1270851680
@@ -316553,9 +316559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Patty
+  foodName: 
   cookPercent: 0
-  cookRate: 20
+  cookRate: 0
   isCooked: 0
   isCooking: 0
 --- !u!114 &1572349198
@@ -318610,7 +318616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66127f82a1c0d0c4db577247e98d36c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Bun
+  foodName: 
 --- !u!114 &1584620839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324802,22 +324808,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  debugMode: 1
+  debugMode: 0
   OnGameStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1613579129}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Log
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Invoked!
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371658,7 +371652,7 @@ Transform:
   m_GameObject: {fileID: 1833113710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -471, y: 0.7, z: 15.5}
+  m_LocalPosition: {x: -471, y: 2.5, z: 15.5}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
