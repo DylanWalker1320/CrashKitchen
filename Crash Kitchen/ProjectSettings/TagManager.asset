@@ -13,6 +13,7 @@ TagManager:
   - Cooker
   - ShadowPlayer
   - Resettable
+  - Water
   layers:
   - Default
   - TransparentFX
