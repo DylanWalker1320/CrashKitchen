@@ -45953,6 +45953,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -16.618
       objectReference: {fileID: 0}
+    - target: {fileID: 3772444556125876962, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_FarAttachMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3830773420212568123, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1177865991
@@ -46040,6 +46044,10 @@ PrefabInstance:
     - target: {fileID: 4977791080670180836, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006476675719250215, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_FarAttachMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262224052892105748, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
