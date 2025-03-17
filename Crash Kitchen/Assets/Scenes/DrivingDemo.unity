@@ -237820,7 +237820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 192553439592863266, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0005497756
+      value: 0.0018525089
       objectReference: {fileID: 0}
     - target: {fileID: 435892261865434785, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -237869,6 +237869,10 @@ PrefabInstance:
     - target: {fileID: 581106754976291393, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858081865097267665, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147491873
       objectReference: {fileID: 0}
     - target: {fileID: 972123118642327056, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_Name
@@ -237990,6 +237994,10 @@ PrefabInstance:
       propertyPath: m_MoveSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1920694148202597477, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_PhysicsLayerMask.m_Bits
+      value: 8193
+      objectReference: {fileID: 0}
     - target: {fileID: 2036731248826426393, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -238074,6 +238082,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2516385635681960577, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_PhysicsLayerMask.m_Bits
+      value: 8193
+      objectReference: {fileID: 0}
     - target: {fileID: 2958675452053339734, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -238090,6 +238102,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3458902954244136516, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 8481
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898648515693714462, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_PhysicsLayerMask.m_Bits
+      value: 8193
+      objectReference: {fileID: 0}
     - target: {fileID: 4912954253055627150, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -238101,6 +238121,10 @@ PrefabInstance:
     - target: {fileID: 4912954253055627150, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5841446141011837147, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 8481
       objectReference: {fileID: 0}
     - target: {fileID: 6154120059210616762, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_SizeDelta.x
@@ -238150,6 +238174,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7592134460228226623, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 8225
+      objectReference: {fileID: 0}
     - target: {fileID: 8341938157737781896, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -238181,6 +238209,10 @@ PrefabInstance:
     - target: {fileID: 8439019681857279846, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4008814652
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652408701635627915, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
+      propertyPath: m_PhysicsLayerMask.m_Bits
+      value: 8193
       objectReference: {fileID: 0}
     - target: {fileID: 8965139176306015266, guid: 5737268cd40d75d41bbb0c985ca226cd, type: 3}
       propertyPath: m_AnchorMax.y
