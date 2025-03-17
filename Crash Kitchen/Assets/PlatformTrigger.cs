@@ -5,7 +5,6 @@ public class PlatformTrigger : MonoBehaviour
 {
     public GameManager.RoleType platformType;
     private GameManager gmInstance;
-    private bool touched = false;
 
     void Start() {
         gmInstance = GameManager.Instance;
@@ -15,9 +14,8 @@ public class PlatformTrigger : MonoBehaviour
     {
         gmInstance.Log("Player entered platform trigger");
 
-        if (other.CompareTag("Player") && !touched)
+        if (other.CompareTag("Player"))
         {
-            touched = true;
             gmInstance.AssignPlayerToTruck(other.gameObject, platformType);
         }
     }
