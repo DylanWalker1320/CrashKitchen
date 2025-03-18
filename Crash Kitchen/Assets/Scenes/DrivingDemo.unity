@@ -52385,7 +52385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Lettuce
   isOutline: 0
   cleanCounter: 0
 --- !u!114 &265354292
@@ -121365,7 +121365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Patty
   cookPercent: 0
   cookRate: 0
   isCooked: 0
@@ -170099,7 +170099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Lettuce
   isOutline: 0
   cleanCounter: 0
 --- !u!114 &839863172
@@ -231469,7 +231469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e9ebeaee5e8c4b88fb8a3a903130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Lettuce
   isOutline: 0
   cleanCounter: 0
 --- !u!114 &1137511306
@@ -255233,7 +255233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Patty
   cookPercent: 0
   cookRate: 0
   isCooked: 0
@@ -316559,7 +316559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6e365cb8b75cf4585b1ce6ce2b32fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: 
+  foodName: Patty
   cookPercent: 0
   cookRate: 0
   isCooked: 0
