@@ -17,6 +17,8 @@ public class CityMapGenerator : Generator
     private int xSize;
     [SerializeField] private float streetWidth;
     [SerializeField] private int buildingsPerSide;
+    [Tooltip("Name of the material, make sure it is listed under -Allways Included Shaders- in Project Settings/Graphics/Shader Settings")]
+    [SerializeField] private string shaderType = "Universal Render Pipeline/Lit";
 
     public override void CreateMesh()
     {
@@ -27,19 +29,14 @@ public class CityMapGenerator : Generator
         cubeGenerator.ClearMesh();
         CreateBlocks();
         CreateCity();
-
+        fillOutPrims();
         mesh.vertices = verts_flat_array;
         mesh.triangles = tris_flat_array;
-        foreach (var item in verts_flat_array)
-        {
-            print(item.ToString());
-        }
+
         mesh.RecalculateNormals();
         mesh.Optimize();
-        if (mesh)
-        {
-            mesh.Clear();
-        }
+
+        ApplyRandomMaterial();
     }
 
     private void GetVertices()
@@ -70,6 +67,9 @@ public class CityMapGenerator : Generator
         //basically gotta fetch the coordinates
         Vector3 lowerLeft;
         Vector3 upperRight;
+        verts = new List<Vector3[]>();
+        tris = new List<int[]>();
+
         foreach (var verts in blocks)
         {
             lowerLeft = vertices[verts[0]];
@@ -90,8 +90,6 @@ public class CityMapGenerator : Generator
         //width and depth of all the buildings in the block
         float building_w = (ur.x - ll.x) / buildingsPerSide;
         float building_d = (ll.z - ur.z) / buildingsPerSide;
-        verts = new List<Vector3[]>();
-        tris = new List<int[]>();
         for (int w = 0; w < buildingsPerSide; w++)
         {
             for (int d = 0; d < buildingsPerSide; d++)
@@ -101,8 +99,36 @@ public class CityMapGenerator : Generator
                 tris.Add(b.Item2);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < verts_flat_array.Length; i++)
+        {
+            //Gizmos.DrawSphere(verts_flat_array[i], 0.1f);
+        }
+    }
+
+    void ApplyRandomMaterial()
+    {
+        Shader s = Shader.Find(shaderType);
+        Material randMat = new Material(s);
+        randMat.name = $"{gameObject.name}Material";
+        randMat.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        randMat.EnableKeyword("_EMISSION");
+        randMat.SetColor("_EmissionColor", randMat.color);
+
+        GetComponent<Renderer>().material = randMat;
+    }
+
+    private void fillOutPrims()
+    {
         // 8 verticies per cube mesh
-        verts_flat_array = new Vector3[verts.Count * 8];
+        verts_flat_array = new Vector3[verts.Count * 8 * blocks.Count];
+        // 36 triangle points per cube mesh (3 per triangle, 12 triangles)
+        tris_flat_array = new int[tris.Count * 36 * blocks.Count];
+
         int count = 0;
         for (int i = 0; i < verts.Count; i++)
         {
@@ -112,27 +138,15 @@ public class CityMapGenerator : Generator
                 count++;
             }
         }
-
-        // 36 triangle points per cube mesh (3 per triangle, 12 triangles)
-        tris_flat_array = new int[tris.Count * 36];
         count = 0;
         for (int i = 0; i < tris.Count; i++)
         {
             for (int j = 0; j < tris[i].Length; j++)
             {
-                tris_flat_array[count] = tris[i][j]+ i * 8;
+                tris_flat_array[count] = tris[i][j] + i * 8;
                 count++;
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        for (int i = 0; i < verts_flat_array.Length; i++)
-        {
-            Gizmos.DrawSphere(verts_flat_array[i], 0.1f);
-        }
-    }
-
+    } 
 }
 
