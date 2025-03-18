@@ -24,7 +24,7 @@ public class CubeGenerator : Generator
         ClearMesh();
     }
 
-    public void GenerateCubeMesh(Vector3 size, Vector3 pos)
+    public (Vector3[], int[]) GenerateCubeMesh(Vector3 size, Vector3 pos)
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -33,7 +33,8 @@ public class CubeGenerator : Generator
         depth = size.z;
 
         RandomCubeGen(pos);
-        UpdateMesh();
+        return (vertices, triangles);
+        //UpdateMesh();
     }
 
     public void ClearMesh()

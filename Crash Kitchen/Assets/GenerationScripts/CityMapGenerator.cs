@@ -7,18 +7,39 @@ public class CityMapGenerator : Generator
     //Modify it to look more like a city
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private CubeGenerator cubeGenerator;
+    private Mesh mesh;
     private Vector3[] vertices;
     private List<int[]> blocks;
+    private List<Vector3[]> verts;
+    private Vector3[] verts_flat_array;
+    private int[] tris_flat_array;
+    private List<int[]> tris;
     private int xSize;
     [SerializeField] private float streetWidth;
     [SerializeField] private int buildingsPerSide;
 
     public override void CreateMesh()
     {
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
         terrainGenerator.ClearMesh();
         cubeGenerator.ClearMesh();
         CreateBlocks();
         CreateCity();
+
+        mesh.vertices = verts_flat_array;
+        mesh.triangles = tris_flat_array;
+        foreach (var item in verts_flat_array)
+        {
+            print(item.ToString());
+        }
+        mesh.RecalculateNormals();
+        mesh.Optimize();
+        if (mesh)
+        {
+            mesh.Clear();
+        }
     }
 
     private void GetVertices()
@@ -69,14 +90,47 @@ public class CityMapGenerator : Generator
         //width and depth of all the buildings in the block
         float building_w = (ur.x - ll.x) / buildingsPerSide;
         float building_d = (ll.z - ur.z) / buildingsPerSide;
-        print(building_d + " ll.z: " + ll.z + " ur.z: " + ur.z + " numBuildings: " + buildingsPerSide);
+        verts = new List<Vector3[]>();
+        tris = new List<int[]>();
         for (int w = 0; w < buildingsPerSide; w++)
         {
             for (int d = 0; d < buildingsPerSide; d++)
             {
-                //Look at my old code to see how rooms placed.
-                cubeGenerator.GenerateCubeMesh(new Vector3(building_w, 20, building_d), new Vector3(ll.x + building_w * w, ll.y, ll.z + building_d * d));
+                (Vector3[], int[]) b = cubeGenerator.GenerateCubeMesh(new Vector3(building_w, 20, building_d), new Vector3(ll.x + building_w * w, 0.0f, ll.z + building_d * d));
+                verts.Add(b.Item1);
+                tris.Add(b.Item2);
             }
+        }
+        // 8 verticies per cube mesh
+        verts_flat_array = new Vector3[verts.Count * 8];
+        int count = 0;
+        for (int i = 0; i < verts.Count; i++)
+        {
+            for (int j = 0; j < verts[i].Length; j++)
+            {
+                verts_flat_array[count] = verts[i][j];
+                count++;
+            }
+        }
+
+        // 36 triangle points per cube mesh (3 per triangle, 12 triangles)
+        tris_flat_array = new int[tris.Count * 36];
+        count = 0;
+        for (int i = 0; i < tris.Count; i++)
+        {
+            for (int j = 0; j < tris[i].Length; j++)
+            {
+                tris_flat_array[count] = tris[i][j]+ i * 8;
+                count++;
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < verts_flat_array.Length; i++)
+        {
+            Gizmos.DrawSphere(verts_flat_array[i], 0.1f);
         }
     }
 
