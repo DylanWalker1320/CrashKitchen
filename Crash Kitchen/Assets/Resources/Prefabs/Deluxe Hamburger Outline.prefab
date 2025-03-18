@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: isOutline
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: cleanCounter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7324883956758394132, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.22534943
@@ -1013,6 +1017,10 @@ PrefabInstance:
       propertyPath: isOutline
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: cleanCounter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7324883956758394132, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.22534943
@@ -1135,6 +1143,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: isOutline
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: cleanCounter
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7324883956758394132, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
@@ -2002,6 +2014,10 @@ PrefabInstance:
       propertyPath: isOutline
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: cleanCounter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7324883956758394132, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.22534943
@@ -2354,6 +2370,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: isOutline
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: cleanCounter
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7324883956758394132, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}

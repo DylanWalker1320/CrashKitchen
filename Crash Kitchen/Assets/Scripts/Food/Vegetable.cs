@@ -7,7 +7,7 @@ public class Vegetable : Ingredient
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(isOutline)
+        if(isOutline || cleanCounter == 1)
         {
             gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.green);
         }
@@ -30,7 +30,7 @@ public class Vegetable : Ingredient
         if(other.gameObject.tag == "Water")
         {
             cleanCounter++;
-            if(cleanCounter == 3)
+            if(cleanCounter == 1)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.green);
                 name = foodName;
