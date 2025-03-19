@@ -105,7 +105,7 @@ public class CityMapGenerator : Generator
     {
         for (int i = 0; i < verts_flat_array.Length; i++)
         {
-            //Gizmos.DrawSphere(verts_flat_array[i], 0.1f);
+            Gizmos.DrawSphere(verts_flat_array[i], 0.1f);
         }
     }
 
@@ -125,9 +125,9 @@ public class CityMapGenerator : Generator
     private void fillOutPrims()
     {
         // 8 verticies per cube mesh
-        verts_flat_array = new Vector3[verts.Count * 8 * blocks.Count];
+        verts_flat_array = new Vector3[verts.Count * 8];
         // 36 triangle points per cube mesh (3 per triangle, 12 triangles)
-        tris_flat_array = new int[tris.Count * 36 * blocks.Count];
+        tris_flat_array = new int[tris.Count * 36];
 
         int count = 0;
         for (int i = 0; i < verts.Count; i++)
