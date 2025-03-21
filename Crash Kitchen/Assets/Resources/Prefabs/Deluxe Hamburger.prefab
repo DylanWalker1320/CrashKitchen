@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 259198639427003462}
   - component: {fileID: 5560544436629470204}
   - component: {fileID: 2242622876106272923}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Deluxe Hamburger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1396446195468572535, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4034281068713261683, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -324,6 +328,10 @@ PrefabInstance:
     - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Name
       value: Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4958188456721102324, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
@@ -390,6 +398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cooked Patty
       objectReference: {fileID: 0}
+    - target: {fileID: 3203828576797982298, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3408571273783317944, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.328
@@ -397,6 +409,10 @@ PrefabInstance:
     - target: {fileID: 3822487245791164427, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907459363536799363, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6578132531584225673, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_Enabled
@@ -431,6 +447,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 429239873527658871}
     m_Modifications:
+    - target: {fileID: 1396446195468572535, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: cleanCounter
       value: 1
@@ -479,6 +499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -500,6 +524,10 @@ PrefabInstance:
     - target: {fileID: 366749682022396173, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396446195468572535, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4034281068713261683, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Enabled
@@ -561,6 +589,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4958188456721102324, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
     - {fileID: 4034281068713261683, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
@@ -582,6 +614,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 429239873527658871}
     m_Modifications:
+    - target: {fileID: 1396446195468572535, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6289770976320919256, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: cleanCounter
       value: 1
@@ -630,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -656,9 +696,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4328036466268414055, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4728091161908926654, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
       propertyPath: m_Name
       value: Bun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728091161908926654, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4802641786285831004, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -793,6 +841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cooked Patty
       objectReference: {fileID: 0}
+    - target: {fileID: 3203828576797982298, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3408571273783317944, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.94
@@ -800,6 +852,10 @@ PrefabInstance:
     - target: {fileID: 3822487245791164427, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907459363536799363, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6578132531584225673, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
       propertyPath: m_Enabled
@@ -842,9 +898,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4328036466268414055, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4728091161908926654, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
       propertyPath: m_Name
       value: Bun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728091161908926654, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5392600343224680964, guid: 4e48cb7b7e45f8d4ea591c6b9597916e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -915,6 +979,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1396446195468572535, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4034281068713261683, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -974,6 +1042,10 @@ PrefabInstance:
     - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Name
       value: Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4958188456721102324, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
