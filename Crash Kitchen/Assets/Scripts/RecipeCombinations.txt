@@ -9,8 +9,12 @@
             "ingredients": ["Bun", "Cooked Patty", "Lettuce", "Lettuce","Lettuce","Lettuce","Lettuce", "Cooked Patty", "Bun"]
         },
         {
-            "name": "Steak",
-            "ingredients": ["Steak"]
+            "name": "Deluxe Steak",
+            "ingredients": ["Cooked Steak", "Cooked Steak", "Cooked Steak", "Cooked Steak", "Lettuce", "Lettuce", "Lettuce", "Lettuce"]
+        },
+        {
+            "name": "Mega Glizzy",
+            "ingredients": ["Hotdog Bun", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog"]
         }
     ]
 }
