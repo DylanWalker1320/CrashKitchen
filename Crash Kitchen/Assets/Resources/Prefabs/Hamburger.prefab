@@ -466,6 +466,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7914798258336531532, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.021
+      objectReference: {fileID: 0}
     - target: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
       propertyPath: m_Name
       value: Lettuce

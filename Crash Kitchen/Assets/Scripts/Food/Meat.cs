@@ -47,11 +47,25 @@ public class Meat : Ingredient
     {
         if (cookPercent > 50 & cookPercent < 100)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+            if(gameObject.name == "Steak")
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", Color.red);
+            }
+            else
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+            }
         }
         else if (cookPercent >= 100 && !isCooked)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+            if(gameObject.name == "Steak")
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+            }
+            else
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+            }
             isCooked = true;
             name = "Cooked " + this.name;
         }
