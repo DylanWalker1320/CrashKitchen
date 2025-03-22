@@ -7,16 +7,25 @@ public class Meat : Ingredient
     public int cookRate;
     public bool isCooked;
     public bool isCooking;
+    public MeatType meatType;
 
+    public enum MeatType
+    {
+        Steak,
+        Patty,
+        Hotdog
+        
+    }
     void Start()
     {
-        foodName = this.name;
+        foodName = meatType.ToString();
         if(!isCooked)
         {
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(1f, 0.75f, 0.79f));
         }
         else
         {
+            foodName = "Cooked " + meatType.ToString();
             this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
         }
     }
@@ -47,27 +56,35 @@ public class Meat : Ingredient
     {
         if (cookPercent > 50 & cookPercent < 100)
         {
-            if(gameObject.name == "Steak")
+            switch(meatType)
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", Color.red);
-            }
-            else
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+                case MeatType.Steak:
+                    this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", Color.red);
+                    break;
+                case MeatType.Patty:
+                    this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+                    break;
+                case MeatType.Hotdog:
+                    this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", Color.red);
+                    break;
             }
         }
         else if (cookPercent >= 100 && !isCooked)
         {
-            if(gameObject.name == "Steak")
+            switch(meatType)
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
-            }
-            else
-            {
+                case MeatType.Steak:
+                    this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                    break;
+                case MeatType.Patty:
                 this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                    break;
+                case MeatType.Hotdog:
+                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                    break;
             }
             isCooked = true;
-            name = "Cooked " + this.name;
+            name = "Cooked " + meatType.ToString(); // Important for DishCreator
         }
     }
 

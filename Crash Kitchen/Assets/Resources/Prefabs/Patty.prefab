@@ -282,6 +282,7 @@ MonoBehaviour:
   cookRate: 20
   isCooked: 0
   isCooking: 0
+  meatType: 1
 --- !u!1 &5907459363536799363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}

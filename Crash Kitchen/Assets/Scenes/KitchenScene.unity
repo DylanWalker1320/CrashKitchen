@@ -915,6 +915,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1738184603251557013, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: meatType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2024437961295417759, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -955,6 +959,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2965782460334779826, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: meatType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3011471987042084839, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -974,6 +982,10 @@ PrefabInstance:
     - target: {fileID: 3018825172264827087, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115362107645999821, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: meatType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3263232642407041085, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1046,6 +1058,10 @@ PrefabInstance:
     - target: {fileID: 4130675347561388305, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186865850886409380, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: meatType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4226992706942208520, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: isOutline
@@ -1547,6 +1563,10 @@ PrefabInstance:
     - target: {fileID: 330688970891009135, guid: bfac5deec39dd394992982adaaaad015, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809118117699724268, guid: bfac5deec39dd394992982adaaaad015, type: 3}
+      propertyPath: meatType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8901258420589916123, guid: bfac5deec39dd394992982adaaaad015, type: 3}
       propertyPath: m_Name
