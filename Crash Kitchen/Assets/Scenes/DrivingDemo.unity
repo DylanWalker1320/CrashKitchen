@@ -65238,7 +65238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 322179314}
   m_Layer: 0
-  m_Name: Incoming Order
+  m_Name: Incoming Order UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156192,6 +156192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderText: {fileID: 784134504}
+  truck: {fileID: 234534150}
 --- !u!114 &784134504
 MonoBehaviour:
   m_ObjectHideFlags: 0
