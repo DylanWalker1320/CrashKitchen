@@ -7,22 +7,34 @@ public class Meat : Ingredient
     public int cookRate;
     public bool isCooked;
     public bool isCooking;
+    public Renderer renderer;
 
     void Start()
     {
+
+        renderer = GetComponentInChildren<MeshRenderer>();
+        if (!renderer)
+        {
+            Debug.LogError("Renderer not found on " + this.name);
+        }
+
         foodName = this.name;
         if(!isCooked)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(1f, 0.75f, 0.79f));
+            renderer.material.SetColor("_BaseColor", new Color(1f, 0.75f, 0.79f));
         }
         else
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+            renderer.material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
         }
     }
 
     void Update()
     {
+        if (!renderer)
+        {
+            Debug.LogError("[Update]: Renderer not found on " + this.name);
+        }
         QualityChange();
     }
 
@@ -45,26 +57,31 @@ public class Meat : Ingredient
 
     public void QualityChange()
     {
+        if (!renderer)
+        {
+            return;
+        }
+
         if (cookPercent > 50 & cookPercent < 100)
         {
             if(gameObject.name == "Steak")
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", Color.red);
+                //renderer.materials[1].SetColor("_BaseColor", Color.red);
             }
             else
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+                renderer.material.SetColor("_BaseColor", Color.red);
             }
         }
         else if (cookPercent >= 100 && !isCooked)
         {
             if(gameObject.name == "Steak")
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                //renderer.materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
             }
             else
             {
-                this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                renderer.material.SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
             }
             isCooked = true;
             name = "Cooked " + this.name;

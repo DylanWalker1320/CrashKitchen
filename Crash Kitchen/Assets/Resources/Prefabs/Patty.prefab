@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patty
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
