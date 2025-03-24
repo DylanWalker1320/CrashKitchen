@@ -14,7 +14,7 @@
         },
         {
             "name": "Mega Glizzy",
-            "ingredients": ["HotdogBun", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog"]
+            "ingredients": ["Hotdog Bun", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog"]
         }
     ]
 }
