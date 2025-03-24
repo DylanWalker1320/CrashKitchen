@@ -7,6 +7,7 @@ public class Meat : Ingredient
     public int cookRate;
     public bool isCooked;
     public bool isCooking;
+    public MeatType meatType;
     public Renderer renderer;
 
     public enum MeatType
@@ -73,18 +74,22 @@ public class Meat : Ingredient
         {
             switch(meatType)
             {
-                //renderer.materials[1].SetColor("_BaseColor", Color.red);
-            }
-            else
-            {
-                renderer.material.SetColor("_BaseColor", Color.red);
+                case MeatType.Steak:
+                    renderer.materials[1].SetColor("_BaseColor", Color.red);
+                    break;
+                case MeatType.Patty:
+                    renderer.material.SetColor("_BaseColor", Color.red);
+                    break;
+                case MeatType.Hotdog:                 
+                    renderer.material.SetColor("_BaseColor", Color.red);
+                    break;
             }
         }
         else if (cookPercent >= 100 && !isCooked)
         {
-            if(gameObject.name == "Steak")
+            if(MeatType.Steak == meatType)
             {
-                //renderer.materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
+                renderer.materials[1].SetColor("_BaseColor", new Color(0.4f, 0.2f, 0.1f));
             }
             else
             {
