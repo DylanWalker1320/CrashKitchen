@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 478371504440421027}
   - component: {fileID: 5314034226435722031}
   - component: {fileID: 5540497251548292584}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Deluxe Hamburger Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
