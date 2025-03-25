@@ -14,6 +14,7 @@ TagManager:
   - ShadowPlayer
   - Resettable
   - Water
+  - Waypoint
   layers:
   - Default
   - TransparentFX
