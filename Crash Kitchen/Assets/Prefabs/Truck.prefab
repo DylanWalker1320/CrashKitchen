@@ -15177,7 +15177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 206692205
+  GlobalObjectIdHash: 3393669485
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -19410,7 +19410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2981795183
+  GlobalObjectIdHash: 3947105113
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -19749,9 +19749,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1853670849017213469}
   - component: {fileID: 6187091838086690279}
-  - component: {fileID: 6085204244002592653}
   - component: {fileID: 6281994895035037981}
   - component: {fileID: 1456954234675321885}
+  - component: {fileID: 4050524458300044876}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -19827,14 +19827,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6085204244002592653
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433275235035686995}
-  m_Enabled: 1
 --- !u!114 &6281994895035037981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19980,6 +19972,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &4050524458300044876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433275235035686995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &1462430644766580186
 GameObject:
   m_ObjectHideFlags: 0
@@ -23297,7 +23303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1080501447
+  GlobalObjectIdHash: 1563042787
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 1
@@ -29180,7 +29186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3341349973
+  GlobalObjectIdHash: 3793629791
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -39341,7 +39347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 975839510
+  GlobalObjectIdHash: 3066241817
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -70544,7 +70550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 518642737
+  GlobalObjectIdHash: 921432657
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -80267,7 +80273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3650861682
+  GlobalObjectIdHash: 3450310211
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 1
@@ -82871,7 +82877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4066603873
+  GlobalObjectIdHash: 3227422675
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -82907,6 +82913,13 @@ MonoBehaviour:
   knob: {fileID: 1695518060162396033}
   lever: {fileID: 2123830275257500497}
   driveAction: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  engineStateEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &7245783056972529024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86137,7 +86150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1880875712
+  GlobalObjectIdHash: 1597145186
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 1
@@ -87892,7 +87905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3676093148
+  GlobalObjectIdHash: 590710661
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -99509,7 +99522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1177865991
+  GlobalObjectIdHash: 2521075286
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8
@@ -101373,7 +101386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1084331565
+  GlobalObjectIdHash: 3050428686
   InScenePlacedSourceGlobalObjectIdHash: 3227422675
   DeferredDespawnTick: 0
   Ownership: 8

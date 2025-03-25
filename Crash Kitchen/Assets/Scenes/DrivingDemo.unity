@@ -46046,6 +46046,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23
       objectReference: {fileID: 0}
+    - target: {fileID: 4050524458300044876, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: attenuationObject
+      value: 
+      objectReference: {fileID: 334119796}
     - target: {fileID: 4130675347561388305, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -46177,6 +46181,46 @@ PrefabInstance:
     - target: {fileID: 6030198827417754207, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2444403837
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: brakeTorque
+      value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: motorTorque
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: steeringRange
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineSoundEmitter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineStateEvent.Path
+      value: event:/Vehicles/Car Engine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: steeringRangeAtMaxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineStateEvent.Guid.Data1
+      value: 209937332
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineStateEvent.Guid.Data2
+      value: 1335632815
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineStateEvent.Guid.Data3
+      value: 1359563695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147843638837050052, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: engineStateEvent.Guid.Data4
+      value: -2072128577
       objectReference: {fileID: 0}
     - target: {fileID: 6176082326060347787, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
@@ -46321,6 +46365,10 @@ PrefabInstance:
     - target: {fileID: 8508908161223441077, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3586197466
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522126554408689343, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_Mass
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8672459948089044100, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
@@ -65491,6 +65539,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333618864}
   m_Mesh: {fileID: 4300000, guid: 391ef46e275c80b408f222be809688a5, type: 3}
+--- !u!1 &334119796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1433275235035686995, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+  m_PrefabInstance: {fileID: 234534149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &334452576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254770,7 +254823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knob: {fileID: 1278175419}
-  lerpRate: 5
+  resetDuration: 0.5
 --- !u!1001 &1278604431
 PrefabInstance:
   m_ObjectHideFlags: 0

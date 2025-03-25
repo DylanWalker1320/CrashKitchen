@@ -23,6 +23,10 @@ public class CarControl : NetworkBehaviour
     private float vInput;
     private float hInput;
 
+    public FMODUnity.EventReference engineStateEvent;
+    public FMOD.Studio.EventInstance engineState;
+    FMOD.Studio.PARAMETER_ID engineParameterId;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,25 @@ public class CarControl : NetworkBehaviour
 
         if (!knob) knob = GetComponentInChildren<XRKnob>();
         if (!lever) lever = GetComponentInChildren<XRLever>();
+
+        InitializeSounds();
+
+    }
+
+    void InitializeSounds() {
+        // Create an instance of the engine sound event
+        engineState = FMODUnity.RuntimeManager.CreateInstance(engineStateEvent);
+        engineState.start();
+
+        // Attach the engine sound to the car
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(engineState, transform, rigidBody);
+
+        // Create a handle to the engine sound's RPM parameter
+        FMOD.Studio.EventDescription engineEventDescription;
+        engineState.getDescription(out engineEventDescription);
+        FMOD.Studio.PARAMETER_DESCRIPTION engineParameterDescription;
+        engineEventDescription.getParameterDescriptionByName("RPM", out engineParameterDescription);
+        engineParameterId = engineParameterDescription.id;
     }
 
     // FixedUpdate is called at a fixed time interval 
@@ -68,6 +91,7 @@ public class CarControl : NetworkBehaviour
 
     private void ApplyCarPhysics(float vInput, float hInput)
     {
+        
         // Calculate current speed along the car's forward axis
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
@@ -104,5 +128,15 @@ public class CarControl : NetworkBehaviour
                 wheel.WheelCollider.brakeTorque = brakeTorque;
             }
         }
+
+        engineState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, rigidBody));
+    
+        // RPM should be between ranges 1000-1500
+        engineState.setParameterByID(engineParameterId, Mathf.Lerp(125, 1000, speedFactor));
+    }
+
+    void OnDestroy()
+    {
+        engineState.release();
     }
 }
