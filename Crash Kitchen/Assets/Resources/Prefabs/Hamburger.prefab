@@ -474,6 +474,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 8435846379052594059, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635228587810587473, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4034281068713261683, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
     - {fileID: 6088399725974632997, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}

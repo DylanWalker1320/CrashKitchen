@@ -9,7 +9,6 @@ public class Meat : Ingredient
     public bool isCooking;
     public MeatType meatType;
     public Renderer renderer;
-
     public enum MeatType
     {
         Steak,
@@ -97,10 +96,11 @@ public class Meat : Ingredient
             }
             isCooked = true;
             name = "Cooked " + meatType.ToString(); // Important for DishCreator
+            Instantiate(Resources.Load<GameObject>("Prefabs/SPARKLE"), transform.position, new Quaternion(270f, 0f, 0f, 0f));
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Cooker")
         {

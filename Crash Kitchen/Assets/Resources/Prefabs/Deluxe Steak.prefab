@@ -493,7 +493,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -605,7 +605,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 864bbe2125cdaab48ad6fa06485a199e, type: 3}
 --- !u!1 &1063379026575392709
@@ -659,6 +659,8 @@ MonoBehaviour:
   cookRate: 10
   isCooked: 0
   isCooking: 0
+  meatType: 0
+  renderer: {fileID: 0}
 --- !u!1 &1072551675459013492
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +712,8 @@ MonoBehaviour:
   cookRate: 10
   isCooked: 0
   isCooking: 0
+  meatType: 0
+  renderer: {fileID: 0}
 --- !u!1 &2056272952816547289
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +762,7 @@ MonoBehaviour:
   foodName: Lettuce
   isOutline: 0
   cleanCounter: 1
+  vegetableType: 0
 --- !u!1 &2964184155172961860
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +893,7 @@ MonoBehaviour:
   foodName: Lettuce
   isOutline: 0
   cleanCounter: 1
+  vegetableType: 0
 --- !u!1 &3385342520472068796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1494,7 @@ MonoBehaviour:
   foodName: Lettuce
   isOutline: 0
   cleanCounter: 1
+  vegetableType: 0
 --- !u!1 &5116548893155762448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1543,7 @@ MonoBehaviour:
   foodName: Lettuce
   isOutline: 0
   cleanCounter: 1
+  vegetableType: 0
 --- !u!1 &5783020442986548632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,6 +1977,8 @@ MonoBehaviour:
   cookRate: 10
   isCooked: 0
   isCooking: 0
+  meatType: 0
+  renderer: {fileID: 0}
 --- !u!1 &8325867522768598596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,7 +2086,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 864bbe2125cdaab48ad6fa06485a199e, type: 3}
 --- !u!1 &8334181459510756085
@@ -2186,7 +2196,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 864bbe2125cdaab48ad6fa06485a199e, type: 3}
 --- !u!1 &8568593585535948249
@@ -2240,6 +2250,8 @@ MonoBehaviour:
   cookRate: 10
   isCooked: 0
   isCooking: 0
+  meatType: 0
+  renderer: {fileID: 0}
 --- !u!1 &8715393421111907228
 GameObject:
   m_ObjectHideFlags: 0
