@@ -334147,6 +334147,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23
       objectReference: {fileID: 0}
+    - target: {fileID: 3134865640074003034, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: isCooked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140192657488239605, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: isCooked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3744249500395286127, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

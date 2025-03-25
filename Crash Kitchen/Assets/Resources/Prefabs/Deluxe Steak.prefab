@@ -657,7 +657,7 @@ MonoBehaviour:
   foodName: Steak
   cookPercent: 100
   cookRate: 10
-  isCooked: 0
+  isCooked: 1
   isCooking: 0
   meatType: 0
   renderer: {fileID: 0}
@@ -710,7 +710,7 @@ MonoBehaviour:
   foodName: Steak
   cookPercent: 100
   cookRate: 10
-  isCooked: 0
+  isCooked: 1
   isCooking: 0
   meatType: 0
   renderer: {fileID: 0}
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   foodName: Steak
   cookPercent: 100
   cookRate: 10
-  isCooked: 0
+  isCooked: 1
   isCooking: 0
   meatType: 0
   renderer: {fileID: 0}
@@ -2248,7 +2248,7 @@ MonoBehaviour:
   foodName: Steak
   cookPercent: 100
   cookRate: 10
-  isCooked: 0
+  isCooked: 1
   isCooking: 0
   meatType: 0
   renderer: {fileID: 0}
