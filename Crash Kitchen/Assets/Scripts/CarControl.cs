@@ -54,6 +54,7 @@ public class CarControl : NetworkBehaviour
 
         // Attach the engine sound to the car
         //FMODUnity.RuntimeManager.AttachInstanceToGameObject(engineState, transform, rigidBody);
+        engineState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, rigidBody));
 
         // Create a handle to the engine sound's RPM parameter
         FMOD.Studio.EventDescription engineEventDescription;
