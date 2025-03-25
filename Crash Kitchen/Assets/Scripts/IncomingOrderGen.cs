@@ -1,26 +1,27 @@
 using UnityEngine;
-using TMPro;  // Import TextMeshPro namespace
+using TMPro;
 
 public class IncomingOrderGen : MonoBehaviour
 {
-    public TMP_Text orderText;  // Assign the TMP text object in the Inspector
-    public Transform truck;  // Assign the truck GameObject in the Inspector
+    public TMP_Text orderText;  
+    public Transform truck;  
 
     private string selectedOrder;
-    private Vector3 lastTruckPosition;  // Stores the last position of the truck
+    private Vector3 lastTruckPosition; 
+    private bool orderGenerated = false;  
 
     void Start()
     {
-        lastTruckPosition = truck.position;  // Save initial position
+        lastTruckPosition = truck.position; 
     }
 
     void Update()
     {
-        // Check if the truck has moved
-        if (truck.position != lastTruckPosition)
+
+        if (!orderGenerated && truck.position != lastTruckPosition)
         {
             GenerateOrder();
-            lastTruckPosition = truck.position;  // Update last position
+            orderGenerated = true;  
         }
     }
 
