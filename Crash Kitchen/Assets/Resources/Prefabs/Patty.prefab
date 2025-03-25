@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}
+      propertyPath: m_TagString
+      value: Resettable
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -291,6 +295,7 @@ MonoBehaviour:
   isCooked: 0
   isCooking: 0
   meatType: 1
+  renderer: {fileID: 0}
 --- !u!1 &5907459363536799363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: edc5a9164d2dd124cbc8d0a23ba42c46, type: 3}
