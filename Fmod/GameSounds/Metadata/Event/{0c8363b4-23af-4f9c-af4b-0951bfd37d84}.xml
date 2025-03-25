@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.02.00">
+<objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{0c8363b4-23af-4f9c-af4b-0951bfd37d84}">
 		<property name="note">
 			<value>A basic two-parameter engine where "RPM" is the rotations per minute of the engine and "Load" is the amount of load the engine is under, from -1.00 to 1.00.
@@ -1365,7 +1365,7 @@ Recordings by David Nichols of Track Time Audio. Engine is a 1985 Mercedes-Benz 
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-0.479999989</value>
+			<value>10</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{73fac367-d4e3-440f-830d-025fd54c1a91}">
@@ -1373,7 +1373,7 @@ Recordings by David Nichols of Track Time Audio. Engine is a 1985 Mercedes-Benz 
 			<value>-1</value>
 		</property>
 		<property name="value">
-			<value>-1.39999998</value>
+			<value>10</value>
 		</property>
 	</object>
 	<object class="Automator" id="{4ab15f90-271d-4264-be74-458310e7ef8f}">
