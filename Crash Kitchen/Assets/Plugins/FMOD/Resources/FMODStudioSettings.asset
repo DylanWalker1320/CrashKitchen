@@ -245,7 +245,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: ../Fmod/GameSounds/GameSounds.fspro
-  sourceBankPath: ../Fmod/Desktop
+  sourceBankPath: Assets/Fmod Banks/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
