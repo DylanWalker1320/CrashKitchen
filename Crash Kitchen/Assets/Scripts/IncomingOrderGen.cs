@@ -3,32 +3,46 @@ using TMPro;
 
 public class IncomingOrderGen : MonoBehaviour
 {
-    public TMP_Text orderText;  
-    public Transform truck;  
+    public enum OrderType {MegaGlizzy, HealthyBurger, DeluxeSteak, None}
 
-    private string selectedOrder;
-    private Vector3 lastTruckPosition; 
-    private bool orderGenerated = false;  
+    public TMP_Text orderText;
+    public Transform truck;
+
+    private OrderType selectedOrder = OrderType.None;
+    private Vector3 lastTruckPosition;
+    private bool orderGenerated = false;
 
     void Start()
     {
-        lastTruckPosition = truck.position; 
+        lastTruckPosition = truck.position;
     }
 
     void Update()
     {
-
         if (!orderGenerated && truck.position != lastTruckPosition)
         {
             GenerateOrder();
-            orderGenerated = true;  
+            orderGenerated = true;
+            GetCurrentOrder();
         }
     }
 
     void GenerateOrder()
     {
-        string[] orders = { "Mega Glizzy", "Healthy Burger", "Deluxe Steak" };
+        OrderType[] orders = {OrderType.MegaGlizzy, OrderType.HealthyBurger, OrderType.DeluxeSteak};
         selectedOrder = orders[Random.Range(0, orders.Length)];
-        orderText.text = selectedOrder;
+        orderText.text = selectedOrder.ToString();
+    }
+
+    public void ResetOrder()
+    {
+        Debug.Log("Order reset!");
+        orderGenerated = false;
+    }
+
+    public OrderType GetCurrentOrder()
+    {
+        Debug.Log("Current Order: " + selectedOrder);
+        return selectedOrder;
     }
 }
