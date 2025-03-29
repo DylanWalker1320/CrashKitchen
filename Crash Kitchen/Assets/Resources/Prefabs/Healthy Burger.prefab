@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5560544436629470204}
   - component: {fileID: 2242622876106272923}
   m_Layer: 13
-  m_Name: Deluxe Hamburger
+  m_Name: Healthy Burger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e446b3b37cf6674f98929f0529dea1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Deluxe Hamburger
+  foodName: Healthy Burger
   quality: 100
   isBagged: 0
 --- !u!54 &8594834426451272897

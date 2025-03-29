@@ -5,7 +5,7 @@
             "ingredients": ["Bun", "Bun", "Lettuce", "Cooked Patty"]
         },
         {
-            "name": "Deluxe Hamburger",
+            "name": "Healthy Burger",
             "ingredients": ["Bun", "Cooked Patty", "Lettuce", "Lettuce","Lettuce","Lettuce","Lettuce", "Cooked Patty", "Bun"]
         },
         {

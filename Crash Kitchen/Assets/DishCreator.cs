@@ -6,14 +6,23 @@ using UnityEngine;
 
 public class DishCreator : MonoBehaviour
 {
-    public string dishName;
+    public DishType dishType;
     public List<string> ingredients;
     public GameObject[] hiddenIngredients; // NOTE: Use ingredient prefabs, lock them into the same position as the outlined masked ingredients, and turn them off. Add them into this array in the inspector.
     [SerializeField] RecipeDatabase recipes;
     [SerializeField] bool recipeFound;
+
+    public enum DishType 
+    {
+        MegaGlizzy, 
+        HealthyBurger, 
+        DeluxeSteak
+        
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        name = dishType.ToString();
         recipes = FindAnyObjectByType<RecipeDatabase>();
     }
 
@@ -22,7 +31,7 @@ public class DishCreator : MonoBehaviour
         // Looks for the recipe's ingredients in the recipe database
         for(int i = 0; i < recipes.myRecipeList.recipes.Length; i++)
         {
-            if(dishName == recipes.myRecipeList.recipes[i].name)
+            if(dishType.ToString() == recipes.myRecipeList.recipes[i].name)
             {
                 ingredients = recipes.myRecipeList.recipes[i].ingredients;
                 recipeFound = true;
@@ -54,7 +63,7 @@ public class DishCreator : MonoBehaviour
                 return;
             }
         }
-        GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishName);
+        GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
         Instantiate(dish, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

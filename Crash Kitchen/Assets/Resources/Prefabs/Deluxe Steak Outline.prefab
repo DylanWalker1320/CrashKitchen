@@ -3687,7 +3687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bebf4320eae3e54cb2842562685b1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dishName: Deluxe Steak
+  dishType: 2
   ingredients: []
   hiddenIngredients:
   - {fileID: 4328867120131945948}
