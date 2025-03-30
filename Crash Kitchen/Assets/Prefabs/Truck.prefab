@@ -11449,7 +11449,6 @@ GameObject:
   - component: {fileID: 1393464769075606361}
   - component: {fileID: 7441181395827691756}
   - component: {fileID: 5249492658094513339}
-  - component: {fileID: 3793937072913431202}
   m_Layer: 0
   m_Name: Title (1)
   m_TagString: Untagged
@@ -11575,20 +11574,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3793937072913431202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 589720655649021236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47b3f873dcd54e49b21fde956510f4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderText: {fileID: 5249492658094513339}
-  truck: {fileID: 1390629162865018586}
 --- !u!1 &605130904147729856
 GameObject:
   m_ObjectHideFlags: 0
@@ -12025,7 +12010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 777804548
+  GlobalObjectIdHash: 4051078585
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 1
@@ -16002,7 +15987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3388641380
+  GlobalObjectIdHash: 3207896667
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -27597,7 +27582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2173058569
+  GlobalObjectIdHash: 2608358829
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -54786,7 +54771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3967235803
+  GlobalObjectIdHash: 27153299
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -58186,7 +58171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3775285698
+  GlobalObjectIdHash: 1810309869
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -59007,7 +58992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2745184975
+  GlobalObjectIdHash: 635349856
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -67121,7 +67106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2024258522
+  GlobalObjectIdHash: 920388974
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -73047,7 +73032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1484225152
+  GlobalObjectIdHash: 1487128399
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 1
@@ -84040,7 +84025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1612228232
+  GlobalObjectIdHash: 602206649
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -87097,7 +87082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3334751204
+  GlobalObjectIdHash: 2249129522
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -99449,7 +99434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1006115489
+  GlobalObjectIdHash: 2206866723
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -101295,7 +101280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2559302425
+  GlobalObjectIdHash: 2570772665
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 1

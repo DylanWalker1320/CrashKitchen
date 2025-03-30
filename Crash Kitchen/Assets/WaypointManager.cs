@@ -20,7 +20,7 @@ public class WaypointManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Init()
     {
         GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("Waypoint");
         waypoints = new Transform[waypointObjects.Length];
