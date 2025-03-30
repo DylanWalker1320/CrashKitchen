@@ -22,7 +22,7 @@ public class DishCreator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        name = dishType.ToString();
+        //name = dishType.ToString();
         recipes = FindAnyObjectByType<RecipeDatabase>();
     }
 
@@ -65,7 +65,7 @@ public class DishCreator : MonoBehaviour
         }
         GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
         Instantiate(dish, gameObject.transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     // Update is called once per frame
