@@ -321375,7 +321375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  debugMode: 0
+  debugMode: 1
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
@@ -334549,6 +334549,10 @@ PrefabInstance:
     - target: {fileID: 8990058070165917355, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052288541985686744, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_Name
+      value: MegaGlizzy
       objectReference: {fileID: 0}
     - target: {fileID: 9052288541985686744, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_IsActive
