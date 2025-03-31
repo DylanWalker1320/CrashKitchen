@@ -156369,11 +156369,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4737365782299246, guid: 21a7832e115724d42974d61698102f71, type: 3}
   m_PrefabInstance: {fileID: 802493362}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &802855512 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6803122791308217793, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
-  m_PrefabInstance: {fileID: 1667043758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &803177542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249044,16 +249039,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251182099}
   m_Mesh: {fileID: 4300000, guid: 3900d928ccec44041bdd0c3d50026c02, type: 3}
---- !u!1 &1251359399 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3677590118883376153, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
-  m_PrefabInstance: {fileID: 1667043758}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1251359400 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4133286674195914985, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
-  m_PrefabInstance: {fileID: 1667043758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1252206981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321379,10 +321364,11 @@ MonoBehaviour:
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
-  outlines:
-  - {fileID: 802855512}
-  - {fileID: 1251359400}
-  - {fileID: 1251359399}
+  outlinePrefabs:
+  - {fileID: 2779579114361893410, guid: 3ac165b00956c624da2ff1832cfa190d, type: 3}
+  - {fileID: 7054818967881423238, guid: 1fb6f0319b7794c46ad61935d17c0e82, type: 3}
+  - {fileID: 2308884994618043362, guid: 7f16266c80fcc5c45a420675dd317908, type: 3}
+  outlinePos: {fileID: 1808144151}
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334194,6 +334180,18 @@ PrefabInstance:
       propertyPath: isCooked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3582436927396727708, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.935
+      objectReference: {fileID: 0}
+    - target: {fileID: 3582436927396727708, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.228
+      objectReference: {fileID: 0}
+    - target: {fileID: 3582436927396727708, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.559
+      objectReference: {fileID: 0}
     - target: {fileID: 3677590118883376153, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Name
       value: Mega Glizzy
@@ -334578,6 +334576,9 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2902545724439009694, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
     - {fileID: 7001418895054513353, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+    - {fileID: 6803122791308217793, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+    - {fileID: 3677590118883376153, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+    - {fileID: 4133286674195914985, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6671247556090635708, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
@@ -363870,6 +363871,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4737365782299246, guid: 0509744eed6f16e4c98e542f790a84b5, type: 3}
   m_PrefabInstance: {fileID: 1807675752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1808144151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2403769433980548247, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+  m_PrefabInstance: {fileID: 1667043758}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1808212874
 GameObject:

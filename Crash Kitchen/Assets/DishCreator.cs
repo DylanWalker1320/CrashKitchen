@@ -65,7 +65,7 @@ public class DishCreator : MonoBehaviour
         }
         GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
         Instantiate(dish, gameObject.transform.position, Quaternion.identity);
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

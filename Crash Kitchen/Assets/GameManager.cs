@@ -9,10 +9,11 @@ public class GameManager : NetworkBehaviour
     public static GameManager instance;
     public bool debugMode;
     public UnityEvent OnGameStart;
-    public GameObject[] outlines;
+    public GameObject[] outlinePrefabs;
     private string debugLogPrefix = "<color=#FF4400>[GameManager]</color> ";
     private IncomingOrderGen.OrderType currentOrder;
     public Dictionary<IncomingOrderGen.OrderType, GameObject> outlineDict = new Dictionary<IncomingOrderGen.OrderType, GameObject>();
+    public GameObject outlinePos;
 
     private void Awake()
     {
@@ -34,9 +35,9 @@ public class GameManager : NetworkBehaviour
 
     private void InitDictionary()
     {
-        outlineDict.Add(IncomingOrderGen.OrderType.HealthyBurger, outlines[0]);
-        outlineDict.Add(IncomingOrderGen.OrderType.DeluxeSteak, outlines[1]);
-        outlineDict.Add(IncomingOrderGen.OrderType.MegaGlizzy, outlines[2]);
+        outlineDict.Add(IncomingOrderGen.OrderType.HealthyBurger, outlinePrefabs[0]);
+        outlineDict.Add(IncomingOrderGen.OrderType.DeluxeSteak, outlinePrefabs[1]);
+        outlineDict.Add(IncomingOrderGen.OrderType.MegaGlizzy, outlinePrefabs[2]);
 
         NewOrder();
     }
@@ -60,19 +61,13 @@ public class GameManager : NetworkBehaviour
 
     private void SpawnFood()
     {
-        Log($"Current dictionary size: {outlineDict.Count}, dictionary: {outlineDict}");
         if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
         {
-            outlineObj.SetActive(true);
+            GameObject spawnedObj = Instantiate(outlineObj, outlinePos.transform.position, outlinePos.transform.rotation);
+            spawnedObj.transform.position = outlinePos.transform.position;
 
-            // Disable all others
-            foreach (var outline in outlineDict.Values)
-            {
-                if (outline != outlineObj)
-                {
-                    outline.SetActive(false);
-                }
-            }
+            // Parent the outline to the outlinePos object
+            spawnedObj.transform.SetParent(outlinePos.transform);
         }
         else
         {
