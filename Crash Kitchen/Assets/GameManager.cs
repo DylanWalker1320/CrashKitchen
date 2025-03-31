@@ -30,8 +30,6 @@ public class GameManager : NetworkBehaviour
     {
         InitializeWaypoints();
         InitDictionary();
-
-        
     }
 
     private void InitDictionary()

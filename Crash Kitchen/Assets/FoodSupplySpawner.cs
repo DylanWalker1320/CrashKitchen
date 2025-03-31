@@ -16,7 +16,7 @@ public class FoodSupplySpawner : XRGrabInteractable
     public bool spawnAtCenter = true;
 
     [Tooltip("Scale multiplier for spawned food")]
-    public float scaleMultiplier = 2.0f;
+    public float scaleMultiplier = 0.3f;
 
     [Tooltip("Cooldown between spawns in seconds")]
     public float spawnCooldown = 1.0f;
@@ -50,24 +50,55 @@ public class FoodSupplySpawner : XRGrabInteractable
             
             if (spawnAtCenter || spawnPoint == null)
             {
-                // Use the center of this object
                 spawnPosition = transform.position;
                 spawnRotation = transform.rotation;
             }
             else
             {
-                // Use the designated spawn point
                 spawnPosition = spawnPoint.position;
                 spawnRotation = spawnPoint.rotation;
             }
 
+
             // Instantiate a food object
             GameObject spawnedFood = Instantiate(foodPrefab, spawnPosition, spawnRotation);
-            spawnedFood.transform.localScale *= scaleMultiplier;
+            Debug.Log("Spawned: "   + spawnedFood.name);
+
+            // Bun: 1
+            // Steak: 0.001
+            // Lettuce: 0.08
+            // Patty: 0.08 
+            if (spawnedFood.name == "Bun(Clone)")
+            {
+                scaleMultiplier = 1f;
+            }
+            else if (spawnedFood.name == "Steak(Clone)")
+            {
+                scaleMultiplier = 0.0024f;
+            }
+            else if (spawnedFood.name == "Lettuce(Clone)")
+            {
+                scaleMultiplier = 0.08f;
+            }
+            else if (spawnedFood.name == "Patty(Clone)")
+            {
+                scaleMultiplier = 0.08f;
+            }
+            else if (spawnedFood.name == "Hotdog Bun(Clone)")
+            {
+                scaleMultiplier = 0.03f;
+            }
+            else if (spawnedFood.name == "Hotdog(Clone)")
+            {
+                scaleMultiplier = 0.03f;
+            }
+
+            spawnedFood.transform.localScale = new Vector3(scaleMultiplier, scaleMultiplier, scaleMultiplier);
             if (foodContainer != null)
             {
                 spawnedFood.transform.SetParent(foodContainer);
             }
+
 
             // Ensure the new food object has an XRGrabInteractable component
             XRGrabInteractable grabInteractable = spawnedFood.GetComponent<XRGrabInteractable>();
@@ -75,6 +106,12 @@ public class FoodSupplySpawner : XRGrabInteractable
             {
                 grabInteractable = spawnedFood.AddComponent<XRGrabInteractable>();
             }
+
+            grabInteractable.movementType = XRBaseInteractable.MovementType.VelocityTracking;
+            grabInteractable.throwOnDetach = true;
+            grabInteractable.throwSmoothingDuration = 0.2f;
+            grabInteractable.throwSmoothingCurve = AnimationCurve.Linear(0, 1, 1, 0);
+
 
             // Transfer the interaction to the newly spawned object
             IXRSelectInteractor interactor = args.interactorObject;
