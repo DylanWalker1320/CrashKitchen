@@ -5,15 +5,15 @@
             "ingredients": ["Bun", "Bun", "Lettuce", "Cooked Patty"]
         },
         {
-            "name": "Healthy Burger",
+            "name": "HealthyBurger",
             "ingredients": ["Bun", "Cooked Patty", "Lettuce", "Lettuce","Lettuce","Lettuce","Lettuce", "Cooked Patty", "Bun"]
         },
         {
-            "name": "Deluxe Steak",
+            "name": "DeluxeSteak",
             "ingredients": ["Cooked Steak", "Cooked Steak", "Cooked Steak", "Cooked Steak", "Lettuce", "Lettuce", "Lettuce", "Lettuce"]
         },
         {
-            "name": "Mega Glizzy",
+            "name": "MegaGlizzy",
             "ingredients": ["Hotdog Bun", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog", "Cooked Hotdog"]
         }
     ]

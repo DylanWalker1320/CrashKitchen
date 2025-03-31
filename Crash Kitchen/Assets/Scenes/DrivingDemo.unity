@@ -334464,6 +334464,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.614
       objectReference: {fileID: 0}
+    - target: {fileID: 4696463424983283815, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4732560088520574148, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -334474,6 +334478,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4754300072838674985, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SmoothPosition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762251572755320884, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: UseRigidBodyForMotion
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4774427274096517304, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}

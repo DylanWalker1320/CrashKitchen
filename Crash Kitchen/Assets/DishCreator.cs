@@ -22,7 +22,8 @@ public class DishCreator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //name = dishType.ToString();
+        name = dishType.ToString();
+        Debug.Log("Dish Name: " + name);
         recipes = FindAnyObjectByType<RecipeDatabase>();
     }
 
