@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7744641776475027032}
   - component: {fileID: 8104658127689234647}
   - component: {fileID: 2168721465713551511}
+  - component: {fileID: 355729037891173674}
   m_Layer: 13
   m_Name: SpawnerSteak
   m_TagString: Resettable
@@ -255,6 +256,31 @@ MonoBehaviour:
   spawnAtCenter: 1
   scaleMultiplier: 2
   spawnCooldown: 1
+--- !u!114 &355729037891173674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589079953836931513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &4741135572793433417
 GameObject:
   m_ObjectHideFlags: 0

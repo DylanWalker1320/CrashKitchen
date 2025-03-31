@@ -53285,6 +53285,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276786086}
   m_Mesh: {fileID: 4300000, guid: 3900d928ccec44041bdd0c3d50026c02, type: 3}
+--- !u!114 &277615677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 207741862211733087, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+  m_PrefabInstance: {fileID: 1667043758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e601cf28e9702c945abe3b90e7f51974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &277741179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334024,6 +334035,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4.531
       objectReference: {fileID: 0}
+    - target: {fileID: 176993731893545142, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2459546489
+      objectReference: {fileID: 0}
+    - target: {fileID: 176993731893545142, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
+      objectReference: {fileID: 0}
     - target: {fileID: 651617779801997168, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1861004542
@@ -334132,6 +334151,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1527072525149268965, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1991172748
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527072525149268965, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
+      objectReference: {fileID: 0}
     - target: {fileID: 1632297018593648520, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -334168,6 +334195,14 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2553688792
       objectReference: {fileID: 0}
+    - target: {fileID: 1844429274982382886, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1154412435
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844429274982382886, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
+      objectReference: {fileID: 0}
     - target: {fileID: 2016027765281760332, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -334188,6 +334223,10 @@ PrefabInstance:
       propertyPath: m_SmoothPosition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2090246943743435330, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: lever
+      value: 
+      objectReference: {fileID: 277615677}
     - target: {fileID: 2090246943743435330, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: brakeTorque
       value: 40000
@@ -334219,6 +334258,14 @@ PrefabInstance:
     - target: {fileID: 2226724453495293911, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2330570024881995640, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1439978972
+      objectReference: {fileID: 0}
+    - target: {fileID: 2330570024881995640, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
       objectReference: {fileID: 0}
     - target: {fileID: 2359003856332652284, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -334396,6 +334443,14 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 3.6827228
       objectReference: {fileID: 0}
+    - target: {fileID: 3877050646682913207, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4281650664
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877050646682913207, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
+      objectReference: {fileID: 0}
     - target: {fileID: 4059194296211765139, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Name
       value: DeluxeSteak
@@ -334423,6 +334478,14 @@ PrefabInstance:
     - target: {fileID: 4195619364133603414, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308540709497967738, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 109429979
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308540709497967738, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2553688792
       objectReference: {fileID: 0}
     - target: {fileID: 4538202024922515762, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Size.x
