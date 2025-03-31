@@ -334194,6 +334194,10 @@ PrefabInstance:
       propertyPath: isCooked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3677590118883376153, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_Name
+      value: Mega Glizzy
+      objectReference: {fileID: 0}
     - target: {fileID: 3744249500395286127, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -334209,6 +334213,10 @@ PrefabInstance:
     - target: {fileID: 4059194296211765139, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133286674195914985, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: m_Name
+      value: Deluxe Steak
       objectReference: {fileID: 0}
     - target: {fileID: 4195619364133603414, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_AnchorMax.y
@@ -334436,7 +334444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6803122791308217793, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_Name
-      value: HealthyBurger
+      value: Healthy Burger
       objectReference: {fileID: 0}
     - target: {fileID: 6803122791308217793, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_IsActive

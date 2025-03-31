@@ -31,7 +31,7 @@ public class DishCreator : MonoBehaviour
         // Looks for the recipe's ingredients in the recipe database
         for(int i = 0; i < recipes.myRecipeList.recipes.Length; i++)
         {
-            if(dishType.ToString() == recipes.myRecipeList.recipes[i].name)
+            if(name == recipes.myRecipeList.recipes[i].name)
             {
                 ingredients = recipes.myRecipeList.recipes[i].ingredients;
                 recipeFound = true;
