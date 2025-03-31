@@ -334188,6 +334188,10 @@ PrefabInstance:
       propertyPath: m_SmoothPosition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2090246943743435330, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+      propertyPath: brakeTorque
+      value: 40000
+      objectReference: {fileID: 0}
     - target: {fileID: 2103240349577265646, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_MovementType
       value: 0
