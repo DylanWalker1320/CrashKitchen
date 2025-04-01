@@ -64,36 +64,8 @@ public class FoodSupplySpawner : XRGrabInteractable
             GameObject spawnedFood = Instantiate(foodPrefab, spawnPosition, spawnRotation);
             Debug.Log("Spawned: "   + spawnedFood.name);
 
-            // Bun: 1
-            // Steak: 0.001
-            // Lettuce: 0.08
-            // Patty: 0.08 
-            if (spawnedFood.name == "Bun(Clone)")
-            {
-                scaleMultiplier = 1f;
-            }
-            else if (spawnedFood.name == "Steak(Clone)")
-            {
-                scaleMultiplier = 0.0024f;
-            }
-            else if (spawnedFood.name == "Lettuce(Clone)")
-            {
-                scaleMultiplier = 0.08f;
-            }
-            else if (spawnedFood.name == "Patty(Clone)")
-            {
-                scaleMultiplier = 0.08f;
-            }
-            else if (spawnedFood.name == "Hotdog Bun(Clone)")
-            {
-                scaleMultiplier = 0.03f;
-            }
-            else if (spawnedFood.name == "Hotdog(Clone)")
-            {
-                scaleMultiplier = 0.03f;
-            }
+            AdjustFoodScale(spawnedFood);
 
-            spawnedFood.transform.localScale = new Vector3(scaleMultiplier, scaleMultiplier, scaleMultiplier);
             if (foodContainer != null)
             {
                 spawnedFood.transform.SetParent(foodContainer);
@@ -127,8 +99,40 @@ public class FoodSupplySpawner : XRGrabInteractable
         }
     }
 
+    private void AdjustFoodScale(GameObject spawnedFood)
+    {
+        if (spawnedFood.name == "Bun(Clone)")
+        {
+            scaleMultiplier = 1f;
+        }
+        else if (spawnedFood.name == "Steak(Clone)")
+        {
+            scaleMultiplier = 0.0024f;
+        }
+        else if (spawnedFood.name == "Lettuce(Clone)")
+        {
+            scaleMultiplier = 0.08f;
+        }
+        else if (spawnedFood.name == "Patty(Clone)")
+        {
+            scaleMultiplier = 0.08f;
+        }
+        else if (spawnedFood.name == "Hotdog Bun(Clone)")
+        {
+            scaleMultiplier = 0.03f;
+        }
+        else if (spawnedFood.name == "Hotdog(Clone)")
+        {
+            scaleMultiplier = 0.03f;
+        }
+
+        spawnedFood.transform.localScale = new Vector3(scaleMultiplier, scaleMultiplier, scaleMultiplier);
+    }
+
+
     private void ResetSpawn()
     {
         canSpawn = true;
     }
 }
+

@@ -44,10 +44,27 @@ public class GameManager : NetworkBehaviour
 
     public void NewOrder() 
     {
-        GenerateOrder();
-        SpawnFood();
-        // Waypoints are handled individually
+        if (!IsServer) return; // Ensure only the server runs this logic
+
+        StartCoroutine(WaitForOrderThenSpawn());
     }
+
+    private System.Collections.IEnumerator WaitForOrderThenSpawn()
+
+    {
+        GenerateOrder();
+
+        // Wait until currentOrder is set properly
+        while (currentOrder == IncomingOrderGen.OrderType.None) 
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        SpawnFood();
+    }
+
+
+
 
     private void InitializeWaypoints()
     {
@@ -61,6 +78,8 @@ public class GameManager : NetworkBehaviour
 
     private void SpawnFood()
     {
+        if (!IsServer) return; // Ensure only the server spawns objects
+
         if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
         {
             GameObject spawnedObj = Instantiate(outlineObj, outlinePos.transform.position, outlinePos.transform.rotation);
@@ -68,12 +87,24 @@ public class GameManager : NetworkBehaviour
 
             // Parent the outline to the outlinePos object
             spawnedObj.transform.SetParent(outlinePos.transform);
+
+            // Network-Spawn the food so it's visible across all clients
+            NetworkObject netObj = spawnedObj.GetComponent<NetworkObject>();
+            if (netObj != null)
+            {
+                netObj.Spawn();
+            }
+            else
+            {
+                Debug.LogError("Spawned object does not have a NetworkObject component!");
+            }
         }
         else
         {
             Debug.LogError("No prefab found for order type: " + currentOrder);
         }
     }
+
 
     public void Log(string message)
     {
