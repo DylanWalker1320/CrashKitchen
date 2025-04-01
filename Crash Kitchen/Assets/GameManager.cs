@@ -38,7 +38,12 @@ public class GameManager : NetworkBehaviour
         outlineDict.Add(IncomingOrderGen.OrderType.HealthyBurger, outlinePrefabs[0]);
         outlineDict.Add(IncomingOrderGen.OrderType.DeluxeSteak, outlinePrefabs[1]);
         outlineDict.Add(IncomingOrderGen.OrderType.MegaGlizzy, outlinePrefabs[2]);
+    }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        
         NewOrder();
     }
 
@@ -50,7 +55,6 @@ public class GameManager : NetworkBehaviour
     }
 
     private System.Collections.IEnumerator WaitForOrderThenSpawn()
-
     {
         GenerateOrder();
 
@@ -78,25 +82,30 @@ public class GameManager : NetworkBehaviour
 
     private void SpawnFood()
     {
-        if (!IsServer) return; // Ensure only the server spawns objects
+        if (!IsServer) return;
 
         if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
         {
-            GameObject spawnedObj = Instantiate(outlineObj, outlinePos.transform.position, outlinePos.transform.rotation);
-            spawnedObj.transform.position = outlinePos.transform.position;
-
-            // Parent the outline to the outlinePos object
-            spawnedObj.transform.SetParent(outlinePos.transform);
-
-            // Network-Spawn the food so it's visible across all clients
-            NetworkObject netObj = spawnedObj.GetComponent<NetworkObject>();
-            if (netObj != null)
+            // Get the NetworkObject component from the prefab
+            NetworkObject prefabNetObj = outlineObj.GetComponent<NetworkObject>();
+            
+            if (prefabNetObj != null)
             {
-                netObj.Spawn();
+                NetworkObject spawnedNetObj = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
+                    prefabNetObj,                      // The prefab to spawn
+                    NetworkManager.ServerClientId,     // Server owns this object
+                    false,                            // Don't destroy with scene
+                    false,                            // Not a player object
+                    false,                            // Don't force override
+                    outlinePos.transform.position,    // Position
+                    outlinePos.transform.rotation     // Rotation
+                );
+                
+                spawnedNetObj.transform.SetParent(outlinePos.transform);
             }
             else
             {
-                Debug.LogError("Spawned object does not have a NetworkObject component!");
+                Debug.LogError("Outline prefab does not have a NetworkObject component!");
             }
         }
         else
