@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
     private IncomingOrderGen.OrderType currentOrder;
     public Dictionary<IncomingOrderGen.OrderType, GameObject> outlineDict = new Dictionary<IncomingOrderGen.OrderType, GameObject>();
     public GameObject outlinePos;
+    public bool currentOrderDone;
 
     private void Awake()
     {
@@ -63,6 +64,7 @@ public class GameManager : NetworkBehaviour
     {
         if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
         {
+            currentOrderDone = false;
             GameObject spawnedObj = Instantiate(outlineObj, outlinePos.transform.position, outlinePos.transform.rotation);
             spawnedObj.transform.position = outlinePos.transform.position;
 

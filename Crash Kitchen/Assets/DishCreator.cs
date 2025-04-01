@@ -66,6 +66,7 @@ public class DishCreator : MonoBehaviour
         }
         GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
         Instantiate(dish, gameObject.transform.position, Quaternion.identity);
+        GameManager.instance.currentOrderDone = true;
         Destroy(gameObject);
     }
 
