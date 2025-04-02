@@ -181,7 +181,7 @@ public class FoodSupplySpawner : XRGrabInteractable
         // Configure spawned food
         ConfigureSpawnedFood(spawnedFood);
         
-        // Parenting logic...
+        // Parenting logic - SERVER ONLY
         if (foodContainer != null)
         {
             NetworkObject containerNetObj = foodContainer.GetComponent<NetworkObject>();
@@ -191,11 +191,11 @@ public class FoodSupplySpawner : XRGrabInteractable
                 Vector3 worldPos = position;
                 Quaternion worldRot = rotation;
 
-                // Try both parenting approaches
+                // Try network parenting
                 bool networkParented = spawnedNetObj.TrySetParent(containerNetObj);
-        
-                // ALSO set normal parenting as a backup
-                spawnedFood.transform.SetParent(foodContainer);
+                
+                // Don't use regular transform.SetParent at all - this is causing the error
+                // spawnedFood.transform.SetParent(foodContainer); <-- REMOVE THIS LINE
                 
                 // Force position immediately after parenting
                 spawnedFood.transform.position = worldPos;
@@ -206,6 +206,7 @@ public class FoodSupplySpawner : XRGrabInteractable
             }
         }
 
+        // Notify the local client to grab the food, if it's theirs
         if (ownerClientId == NetworkManager.Singleton.LocalClientId && lastInteractor != null)
         {
             // Start a coroutine to grab the spawned food after it's fully configured
@@ -248,36 +249,67 @@ public class FoodSupplySpawner : XRGrabInteractable
     // New method to enable auto-grabbing after spawn:
     private IEnumerator AutoGrabFoodNextFrame(IXRSelectInteractor interactor, GameObject spawnedFood)
     {
-        if (interactor == null) yield break;
+        if (interactor == null || spawnedFood == null)
+        {
+            Debug.LogWarning("Cannot auto-grab: interactor or food is null");
+            yield break;
+        }
         
         // Wait for everything to initialize
         yield return new WaitForSeconds(0.1f);
         
-        // Get the interactor's transform
+        // Safety checks
+        if (spawnedFood == null)
+        {
+            Debug.LogWarning("Food object was destroyed before it could be grabbed");
+            yield break;
+        }
+        
+        // Get the interactor's transform with null check
         Transform interactorTransform = (interactor as MonoBehaviour)?.transform;
+        if (interactorTransform == null)
+        {
+            Debug.LogWarning("Cannot auto-grab: interactor transform is null");
+            yield break;
+        }
         
         // Get the interaction manager
         var interactionManager = FindObjectOfType<XRInteractionManager>();
-        if (interactionManager == null) yield break;
+        if (interactionManager == null)
+        {
+            Debug.LogWarning("Cannot auto-grab: XR Interaction Manager not found");
+            yield break;
+        }
         
-        // Get the grab component
         XRGrabInteractable grabInteractable = spawnedFood.GetComponent<XRGrabInteractable>();
-        if (grabInteractable == null) yield break;
+        if (grabInteractable == null)
+        {
+            Debug.LogWarning("Cannot auto-grab: food does not have XRGrabInteractable");
+            yield break;
+        }
         
-        // Move the food object close to the interactor
+        // Move the food object close to the interactor - BUT don't reparent!
         spawnedFood.transform.position = interactorTransform.position + 
                                         interactorTransform.forward * 0.1f;
         
         // Release the spawner
-        interactionManager.SelectExit(interactor, this);
-        
-        // Wait a tiny bit for exit to process
-        yield return new WaitForSeconds(0.05f);
+        try {
+            interactionManager.SelectExit(interactor, this);
+        } catch (System.Exception e) {
+            Debug.LogError($"Error releasing spawner: {e.Message}");
+            yield break;
+        }
+         
+        // Wait for exit to process
+        yield return new WaitForSeconds(0.1f);
         
         // Force selection of the food object
-        interactionManager.SelectEnter(interactor, grabInteractable);
-        
-        Debug.Log($"Auto-grabbed food: {spawnedFood.name}");
+        try {
+            interactionManager.SelectEnter(interactor, grabInteractable);
+            Debug.Log($"Auto-grabbed food: {spawnedFood.name}");
+        } catch (System.Exception e) {
+            Debug.LogError($"Error grabbing food: {e.Message}");
+        }
     }
 
     private IEnumerator DelayedPhysicsActivation(Rigidbody rb)
