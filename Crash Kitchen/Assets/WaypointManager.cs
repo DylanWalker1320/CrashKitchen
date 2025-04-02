@@ -1,13 +1,12 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class WaypointManager : MonoBehaviour
+public class WaypointManager : NetworkBehaviour
 {
-
     public static WaypointManager instance;
     public Transform[] waypoints;
-    public GameObject activeWaypoint;
-
     public GameObject waypointPrefab;
+    public NetworkObject activeWaypoint;
     public int waypointsCleared = 0;
 
     void Awake()
@@ -15,13 +14,17 @@ public class WaypointManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } else { 
-            Destroy(this); 
+        }
+        else
+        {
+            Destroy(this);
         }
     }
 
     public void Init()
     {
+        if (!IsServer) return; // Only the server should handle waypoint setup
+
         GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("Waypoint");
         waypoints = new Transform[waypointObjects.Length];
 
@@ -32,25 +35,23 @@ public class WaypointManager : MonoBehaviour
 
         if (waypoints.Length > 0)
         {
-            SetNewWaypoint();
+            SetNewWaypointServerRpc();
         }
     }
 
-    public void SetNewWaypoint()
+    [ServerRpc]
+    public void SetNewWaypointServerRpc()
     {
-        // Clean up the old waypoint first
-        if (activeWaypoint != null) {
-            Destroy(activeWaypoint);
+        if (activeWaypoint != null)
+        {
+            activeWaypoint.Despawn();
             waypointsCleared++;
             GameManager.instance.NewOrder();
         }
 
-        // Get a random waypoint from the list
         Transform waypointPos = waypoints[Random.Range(0, waypoints.Length)];
-
-        activeWaypoint = Instantiate(waypointPrefab, waypointPos.position, waypointPos.rotation);
-
-        
+        GameObject newWaypoint = Instantiate(waypointPrefab, waypointPos.position, waypointPos.rotation);
+        activeWaypoint = newWaypoint.GetComponent<NetworkObject>();
+        activeWaypoint.Spawn();
     }
-
 }
