@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 89843409168878457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -114, y: 3.2, z: 45.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -53,6 +53,37 @@ MonoBehaviour:
   isPatty: 1
   isGlizzy: 0
   isSteak: 0
+--- !u!1 &1366280057150081299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6086025360421530135}
+  m_Layer: 13
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6086025360421530135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366280057150081299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3137747083252471560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3025639514348382875
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,11 +223,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6660331956298799430}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -19.323, y: 1.436, z: -3.01}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 6086025360421530135}
   - {fileID: 753474111348117955}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -219,8 +251,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 86.05902, y: 42.469975, z: 88.62673}
-  m_Center: {x: -114.393036, y: 21.890162, z: 45.489883}
+  m_Size: {x: 84.78559, y: 39.557396, z: 84.41408}
+  m_Center: {x: 0.36577877, y: 15.084661, z: 0.9906962}
 --- !u!54 &1151097965582063656
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -243,8 +275,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 3
@@ -383,8 +415,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
   foodPrefab: {fileID: 3203828576797982298, guid: d4e0ef58ef532004fa447ec52f1d97d5, type: 3}
-  spawnPoint: {fileID: 3137747083252471560}
-  spawnAtCenter: 1
+  spawnPoint: {fileID: 6086025360421530135}
+  spawnAtCenter: 0
   scaleMultiplier: 2
   spawnCooldown: 1
 --- !u!114 &-7604585468898020142

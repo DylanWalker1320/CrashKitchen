@@ -31,10 +31,11 @@ Transform:
   m_GameObject: {fileID: 74682579061701738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -19.323, y: 1.436, z: -3.91}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 279139588868958541}
   - {fileID: 4518549447767353}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,8 +58,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 173.40067, y: 23.80227, z: 178.42467}
-  m_Center: {x: -165.11285, y: 12.55631, z: 50.456646}
+  m_Size: {x: 175.45906, y: 35.5831, z: 171.8765}
+  m_Center: {x: -39.96071, y: 46.99019, z: -14.159112}
 --- !u!54 &5953360996005264644
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81,8 +82,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 3
@@ -221,8 +222,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
   foodPrefab: {fileID: 7993018022010482606, guid: f72d6ce0f6372b8429c7c7e027c8ddff, type: 3}
-  spawnPoint: {fileID: 8569390842739339812}
-  spawnAtCenter: 1
+  spawnPoint: {fileID: 279139588868958541}
+  spawnAtCenter: 0
   scaleMultiplier: 2
   spawnCooldown: 1
 --- !u!114 &1441699128221263133
@@ -473,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 818490974250184579}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -124.9, y: -5.2, z: 55.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -500,6 +501,37 @@ MonoBehaviour:
   isPatty: 0
   isGlizzy: 0
   isSteak: 0
+--- !u!1 &1800864704921186882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279139588868958541}
+  m_Layer: 13
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &279139588868958541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800864704921186882}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8569390842739339812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6152994173348631195
 GameObject:
   m_ObjectHideFlags: 0
