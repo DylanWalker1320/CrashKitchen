@@ -120,6 +120,28 @@ public class FoodSupplySpawner : XRGrabInteractable
         SpawnFoodServerSide(prefabName, position, rotation, ownerClientId);
     }
 
+    // Server RPC method to parent food
+    [ServerRpc(RequireOwnership = false)]
+    private void ReturnToPositionServerRpc(Vector3 position, Quaternion rotation, ulong clientId)
+    {
+        // Only process on server
+        if (!NetworkManager.Singleton.IsServer) return;
+        
+        Debug.Log($"Server returning {gameObject.name} to original position");
+        
+        // Find the kitchen container by tag
+        GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
+        if (kitchenContainer != null)
+        {
+            // Perform parenting on server
+            transform.SetParent(kitchenContainer.transform);
+            
+            // Set position/rotation
+            transform.position = position;
+            transform.rotation = rotation;
+        }
+    }
+
     // Common spawning logic (runs on server only)
     private void SpawnFoodServerSide(string prefabName, Vector3 position, Quaternion rotation, ulong ownerClientId)
     {
@@ -367,29 +389,33 @@ public class FoodSupplySpawner : XRGrabInteractable
     {
         base.OnSelectExited(args);
         
-        // Find the kitchen container by tag
-        GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
-        if (kitchenContainer != null)
+        // Store current values for reference
+        Vector3 finalPosition = originalPosition;
+        Quaternion finalRotation = originalRotation;
+        
+        // Log for debugging
+        Debug.Log($"Exited selection of {gameObject.name}, requesting return to position");
+        
+        if (NetworkManager.Singleton.IsServer)
         {
-            // First parent to kitchen objects
-            transform.SetParent(kitchenContainer.transform);
-            
-            // Then restore the position/rotation
-            transform.position = originalPosition;
-            transform.rotation = originalRotation;
-            
-            Debug.Log($"Returned {gameObject.name} to kitchen container at original position");
+            // Server can direct parent
+            GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
+            if (kitchenContainer != null)
+            {
+                transform.SetParent(kitchenContainer.transform);
+                transform.position = finalPosition;
+                transform.rotation = finalRotation;
+                Debug.Log($"Server directly returning {gameObject.name} to kitchen container");
+            }
         }
         else
         {
-            // Fallback if kitchen objects container isn't found
-            transform.position = originalPosition;
-            transform.rotation = originalRotation;
-            if (originalParent != null)
-            {
-                transform.SetParent(originalParent);
-            }
-            Debug.Log($"Could not find InteriorKitchenObjects, using original parent instead");
+            // Clients request the server to do parenting
+            ReturnToPositionServerRpc(finalPosition, finalRotation, NetworkManager.Singleton.LocalClientId);
+            
+            // Apply locally but don't parent (server will handle parenting)
+            transform.position = finalPosition;
+            transform.rotation = finalRotation;
         }
     }
 }
