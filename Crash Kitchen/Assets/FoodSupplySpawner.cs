@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -28,10 +29,15 @@ public class FoodSupplySpawner : XRGrabInteractable
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Transform originalParent;
+    private NetworkObject networkObject;
+    private IXRSelectInteractor interactor;
+    private IXRSelectInteractor lastInteractor;
     
     protected override void Awake()
     {
         base.Awake();
+
+        networkObject = GetComponent<NetworkObject>();
 
         GameObject FoodHolder = GameObject.FindWithTag("FoodHolder");
         if (FoodHolder != null)
@@ -40,9 +46,11 @@ public class FoodSupplySpawner : XRGrabInteractable
             // Make sure FoodHolder has a NetworkObject component
             if (!FoodHolder.TryGetComponent<NetworkObject>(out _))
             {
-                NetworkObject containerNetObj = FoodHolder.AddComponent<NetworkObject>();
+                var containerNetObj = FoodHolder.AddComponent<NetworkObject>();
                 containerNetObj.DontDestroyWithOwner = true;
-                containerNetObj.Spawn();
+                
+                if (NetworkManager.Singleton.IsServer)
+                    containerNetObj.Spawn();
             }
         }
         else
@@ -55,166 +63,268 @@ public class FoodSupplySpawner : XRGrabInteractable
     {        
         Debug.Log($"Food supply grabbed {args}");
         
-        if (canSpawn && foodPrefab != null)
+        if (!canSpawn || foodPrefab == null) return;
+        
+        lastInteractor = args.interactorObject as IXRSelectInteractor;
+
+        Transform interactorTransform = null;
+        if (args.interactorObject is IXRInteractor xrInteractor)
         {
-            Debug.Log("Spawning food");
+            interactorTransform = (xrInteractor as MonoBehaviour)?.transform;
+        }
 
-            Vector3 spawnPosition;
-            Quaternion spawnRotation;
-            
-            if (spawnAtCenter || spawnPoint == null)
+        // Determine spawn position/rotation
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 1f; // Add 3 to the y axis to spawn above the spawner
+        Quaternion spawnRotation = transform.rotation;
+
+        if (interactorTransform != null)
+        {
+            // Set position to be right in front of the controller/ray
+            spawnPosition = interactorTransform.position + interactorTransform.forward * 0.2f;
+            spawnRotation = interactorTransform.rotation;
+        }
+        else
+        {
+            // Fallback to spawner position
+            spawnPosition = transform.position;
+            spawnPosition.y += 0.2f; // Slightly above spawner
+            spawnRotation = transform.rotation;
+        }
+
+        // Get local client ID for ownership
+        ulong clientId = NetworkManager.Singleton.LocalClientId;
+        
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Server can spawn directly
+            SpawnFoodServerSide(foodPrefab.name, spawnPosition, spawnRotation, clientId);
+        }
+        else
+        {
+            // Clients need to request server to spawn
+            SpawnFoodServerRpc(foodPrefab.name, spawnPosition, spawnRotation, clientId);
+        }
+        
+        // Cooldown regardless of whether server/client
+        canSpawn = false;
+        Invoke(nameof(ResetSpawn), spawnCooldown);
+    }
+
+    // Server RPC method called by clients
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnFoodServerRpc(string prefabName, Vector3 position, Quaternion rotation, ulong ownerClientId)
+    {
+        // Only process on server
+        if (!NetworkManager.Singleton.IsServer) return;
+        
+        Debug.Log($"Server received spawn request for {prefabName}");
+        SpawnFoodServerSide(prefabName, position, rotation, ownerClientId);
+    }
+
+    // Common spawning logic (runs on server only)
+    private void SpawnFoodServerSide(string prefabName, Vector3 position, Quaternion rotation, ulong ownerClientId)
+    {
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            Debug.LogError("SpawnFoodServerSide should only be called on server!");
+            return;
+        }
+        
+        // Find the matching prefab
+        NetworkObject prefabNetObj = foodPrefab.GetComponent<NetworkObject>();
+        if (prefabNetObj == null)
+        {
+            Debug.LogError("Food prefab must have a NetworkObject component!");
+            return;
+        }
+        
+        // Spawn the food object
+        NetworkObject spawnedNetObj = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
+            prefabNetObj,
+            NetworkManager.ServerClientId,  // Server spawns initially
+            false,                         
+            false,                         
+            false,                         
+            position,                 
+            rotation                  
+        );
+        
+        // Transfer ownership to requesting client
+        if (spawnedNetObj.OwnerClientId != ownerClientId)
+        {
+            spawnedNetObj.ChangeOwnership(ownerClientId);
+        }
+        
+        GameObject spawnedFood = spawnedNetObj.gameObject;
+        
+        // Configure spawned food
+        ConfigureSpawnedFood(spawnedFood);
+        
+        // Parenting logic...
+        if (foodContainer != null)
+        {
+            NetworkObject containerNetObj = foodContainer.GetComponent<NetworkObject>();
+            if (containerNetObj != null && containerNetObj.IsSpawned)
             {
-                spawnPosition = transform.position;
-                spawnRotation = transform.rotation;
-            }
-            else
-            {
-                spawnPosition = spawnPoint.position;
-                spawnRotation = spawnPoint.rotation;
-            }
+                // Store the position we spawned the food at
+                Vector3 worldPos = position;
+                Quaternion worldRot = rotation;
 
-            NetworkObject prefabNetObj = foodPrefab.GetComponent<NetworkObject>();
-            if (prefabNetObj == null)
-            {
-                Debug.LogError("Food prefab must have a NetworkObject component!");
-                return;
-            }
-
-            Debug.Log("Spawning food prefab: " + prefabNetObj.name);
-
-            NetworkObject spawnedNetObj = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
-                prefabNetObj,                  // The prefab to spawn
-                NetworkManager.ServerClientId, // Server owns this object
-                false,                         // Don't destroy with scene
-                false,                         // Not a player object  
-                false,                         // Don't force override
-                spawnPosition,                 // Position
-                spawnRotation                  // Rotation
-            );
-
-            Debug.Log("Spawned food prefab: " + spawnedNetObj.name);
-            GameObject spawnedFood = spawnedNetObj.gameObject;
-            Debug.Log("Spawned: "   + spawnedFood.name);
-
-            AdjustFoodScale(spawnedFood);
-
-            if (args.interactorObject is IXRInteractor xrInteractor)
-            {
-                Transform interactorTransform = (xrInteractor as MonoBehaviour)?.transform;
-                if (interactorTransform != null)
-                {
-                    // Set position to be right in front of the controller
-                    spawnedFood.transform.position = interactorTransform.position + 
-                                                    interactorTransform.forward * 0.1f;
-                    spawnedFood.transform.rotation = interactorTransform.rotation;
-                }
-            }
-
-            // Set the rigidbody settings for the spawned food object
-            Rigidbody foodRigidbody = spawnedFood.GetComponent<Rigidbody>();
-            if (foodRigidbody != null)
-            {
-                Debug.Log("Found Rigidbody on spawned food prefab: " + foodRigidbody.name);
-                foodRigidbody.isKinematic = false;
-                foodRigidbody.useGravity = true;
-                foodRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-                foodRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                foodRigidbody.constraints = RigidbodyConstraints.None;
-            }
-            else
-            {
-                Debug.LogError("Spawned food prefab does not have a Rigidbody component!");
-            }
-
-            if (foodContainer != null)
-            {
-                Debug.Log("Attempting to parent spawned food to FoodHolder");
-                NetworkObject containerNetObj = foodContainer.GetComponent<NetworkObject>();
-                if (containerNetObj != null && containerNetObj.IsSpawned)
-                {
-                    // Store the world position before parenting
-                    Vector3 worldPos = spawnedFood.transform.position;
-                    Quaternion worldRot = spawnedFood.transform.rotation;
-
-                    // Use Netcode's proper parenting API
-                    bool success = spawnedNetObj.TrySetParent(containerNetObj);
-                    Debug.Log($"Parenting result: {success}");
-                    
-                    if (success) {
-                        // Don't reset to zero - keep the object at the original spawn position relative to parent
-                        // Calculate relative position from parent to spawner
-                        // Vector3 relativePosition = containerNetObj.transform.InverseTransformPoint(transform.position);
-                        // spawnedNetObj.transform.localPosition = relativePosition;
-
-                        spawnedFood.transform.position = worldPos;
-                        spawnedFood.transform.rotation = worldRot;
-                    }
-                }
-                else
-                {
-                    Debug.LogError("FoodHolder NetworkObject not found or not spawned!");
-                }
-            }
-
-
-            // Ensure the new food object has an XRGrabInteractable component
-            XRGrabInteractable grabInteractable = spawnedFood.GetComponent<XRGrabInteractable>();
-            if (grabInteractable == null)
-            {
-                grabInteractable = spawnedFood.AddComponent<XRGrabInteractable>();
-            }
-
-            grabInteractable.movementType = XRBaseInteractable.MovementType.VelocityTracking; 
-            grabInteractable.throwOnDetach = true;
-            grabInteractable.throwSmoothingDuration = 0.2f;
-            grabInteractable.throwSmoothingCurve = AnimationCurve.Linear(0, 1, 1, 0);
-
-            // Transfer the interaction to the newly spawned object
-            IXRSelectInteractor interactor = args.interactorObject;
-            if (interactor != null)
-            {
-                if (spawnedNetObj != null)
-                {
-                    ulong clientId = NetworkManager.Singleton.LocalClientId;
-                    spawnedNetObj.ChangeOwnership(clientId);
-                }
-
-                StartCoroutine(TransferGrabNextFrame(interactor, grabInteractable));
-                // // First release the current object
-                // interactionManager.SelectExit(interactor, this);
+                // Try both parenting approaches
+                bool networkParented = spawnedNetObj.TrySetParent(containerNetObj);
+        
+                // ALSO set normal parenting as a backup
+                spawnedFood.transform.SetParent(foodContainer);
                 
-                // // Then select the new food object
-                // interactionManager.SelectEnter(interactor, grabInteractable);
+                // Force position immediately after parenting
+                spawnedFood.transform.position = worldPos;
+                spawnedFood.transform.rotation = worldRot;
+                
+                // And schedule multiple resets through coroutine
+                StartCoroutine(ResetPositionAfterParenting(spawnedFood.transform, worldPos, worldRot));
             }
+        }
 
-            canSpawn = false;
-            Invoke(nameof(ResetSpawn), spawnCooldown);
+        if (ownerClientId == NetworkManager.Singleton.LocalClientId && lastInteractor != null)
+        {
+            // Start a coroutine to grab the spawned food after it's fully configured
+            StartCoroutine(AutoGrabFoodNextFrame(lastInteractor, spawnedFood));
         }
     }
 
-    private IEnumerator TransferGrabNextFrame(IXRSelectInteractor interactor, XRGrabInteractable grabInteractable)
+    // Configure spawned food physics & interactions
+    private void ConfigureSpawnedFood(GameObject spawnedFood)
+    {
+        AdjustFoodScale(spawnedFood);
+        
+        // Configure rigidbody
+        Rigidbody rb = spawnedFood.GetComponent<Rigidbody>();
+        if (rb == null) rb = spawnedFood.AddComponent<Rigidbody>();
+        
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+        rb.constraints = RigidbodyConstraints.None;
+        
+        // Configure grab interactable
+        XRGrabInteractable grabInteractable = spawnedFood.GetComponent<XRGrabInteractable>();
+        if (grabInteractable == null) grabInteractable = spawnedFood.AddComponent<XRGrabInteractable>();
+        
+        // Basic grab settings
+        grabInteractable.movementType = XRBaseInteractable.MovementType.VelocityTracking;
+        grabInteractable.throwOnDetach = true;
+        grabInteractable.throwSmoothingDuration = 0.2f;
+        grabInteractable.throwSmoothingCurve = AnimationCurve.Linear(0, 1, 1, 0);
+        
+        // Critical settings for ray interactor compatibility
+        grabInteractable.interactionLayers = InteractionLayerMask.GetMask("Default", "Grab", "Interactable");
+        
+        // Add a collider if missing
+        if (spawnedFood.GetComponent<Collider>() == null)
         {
-            // Wait one frame for everything to initialize
-            yield return null;
-            
-            Transform interactorTransform = (interactor as MonoBehaviour)?.transform;
-            if (interactorTransform != null)
-            {
-                grabInteractable.transform.position = interactorTransform.position + 
-                                                    interactorTransform.forward * 0.05f;
-            }
-
-            // First release the current object
-            interactionManager.SelectExit(interactor, this);
-            
-            // Wait a tiny bit
-            yield return new WaitForSeconds(0.05f);
-            
-            // Then select the new food object
-            interactionManager.SelectEnter(interactor, grabInteractable);
-            
-            Debug.Log("Transferred grab to: " + grabInteractable.name);
+            BoxCollider collider = spawnedFood.AddComponent<BoxCollider>();
+            collider.size = Vector3.one;
+            collider.center = Vector3.zero;
+            collider.isTrigger = false;
         }
+        
+        // Make sure rigidbody doesn't freeze before user can grab it
+        StartCoroutine(DelayedPhysicsActivation(rb));
+    }
+
+    // New method to enable auto-grabbing after spawn:
+    private IEnumerator AutoGrabFoodNextFrame(IXRSelectInteractor interactor, GameObject spawnedFood)
+    {
+        if (interactor == null) yield break;
+        
+        // Wait for everything to initialize
+        yield return new WaitForSeconds(0.1f);
+        
+        // Get the interactor's transform
+        Transform interactorTransform = (interactor as MonoBehaviour)?.transform;
+        
+        // Get the interaction manager
+        var interactionManager = FindObjectOfType<XRInteractionManager>();
+        if (interactionManager == null) yield break;
+        
+        // Get the grab component
+        XRGrabInteractable grabInteractable = spawnedFood.GetComponent<XRGrabInteractable>();
+        if (grabInteractable == null) yield break;
+        
+        // Move the food object close to the interactor
+        spawnedFood.transform.position = interactorTransform.position + 
+                                        interactorTransform.forward * 0.1f;
+        
+        // Release the spawner
+        interactionManager.SelectExit(interactor, this);
+        
+        // Wait a tiny bit for exit to process
+        yield return new WaitForSeconds(0.05f);
+        
+        // Force selection of the food object
+        interactionManager.SelectEnter(interactor, grabInteractable);
+        
+        Debug.Log($"Auto-grabbed food: {spawnedFood.name}");
+    }
+
+    private IEnumerator DelayedPhysicsActivation(Rigidbody rb)
+    {
+        // Briefly make kinematic to prevent falling before player can grab
+        rb.isKinematic = true;
+        yield return new WaitForSeconds(0.5f);
+        rb.isKinematic = false;
+    }
+
+    private IEnumerator ResetPositionAfterParenting(Transform objTransform, Vector3 worldPos, Quaternion worldRot)
+    {
+        // Try multiple times with increasing delays to overcome network sync issues
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.1f * i);  // Progressive delays
+            
+            // Try to get NetworkTransform if available
+            NetworkTransform networkTransform = objTransform.GetComponent<NetworkTransform>();
+            if (networkTransform != null && networkTransform.IsOwner)
+            {
+                // Use NetworkTransform to teleport
+                networkTransform.Teleport(worldPos, worldRot, objTransform.localScale);
+                Debug.Log($"Reset attempt {i}: {objTransform.name} via NetworkTransform to {worldPos}");
+            }
+            else
+            {
+                // Fallback to direct transform setting
+                objTransform.position = worldPos;
+                objTransform.rotation = worldRot;
+                Debug.Log($"Reset attempt {i}: {objTransform.name} directly to {worldPos}");
+            }
+        }
+    }
+
+    // private IEnumerator TransferGrabNextFrame(IXRSelectInteractor interactor, XRGrabInteractable grabInteractable)
+    //     {
+    //         // Wait one frame for everything to initialize
+    //         yield return null;
+            
+    //         Transform interactorTransform = (interactor as MonoBehaviour)?.transform;
+    //         if (interactorTransform != null)
+    //         {
+    //             grabInteractable.transform.position = interactorTransform.position + 
+    //                                                 interactorTransform.forward * 0.05f;
+    //         }
+
+    //         // First release the current object
+    //         interactionManager.SelectExit(interactor, this);
+            
+    //         // Wait a tiny bit
+    //         yield return new WaitForSeconds(0.05f);
+            
+    //         // Then select the new food object
+    //         interactionManager.SelectEnter(interactor, grabInteractable);
+            
+    //         Debug.Log("Transferred grab to: " + grabInteractable.name);
+    //     }
 
     private void AdjustFoodScale(GameObject spawnedFood)
     {
@@ -261,7 +371,7 @@ public class FoodSupplySpawner : XRGrabInteractable
         originalRotation = transform.rotation;
         originalParent = transform.parent;
         
-        Debug.Log("Stored position when grabbed");
+        SpawnNewFood(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
