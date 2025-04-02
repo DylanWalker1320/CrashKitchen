@@ -142,6 +142,44 @@ public class FoodSupplySpawner : XRGrabInteractable
         }
     }
 
+    public void RequestParenting(NetworkObject childObj, NetworkObject parentObj)
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Direct parenting on server
+            bool success = childObj.TrySetParent(parentObj);
+            Debug.Log($"Server parenting result: {success}");
+        }
+        else
+        {
+            // Client requests server to parent via RPC
+            ParentObjectServerRpc(childObj.NetworkObjectId, parentObj.NetworkObjectId);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ParentObjectServerRpc(ulong childObjectId, ulong parentObjectId)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(childObjectId, out NetworkObject child) &&
+            NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(parentObjectId, out NetworkObject parent))
+        {
+            if (!child.TrySetParent(parent, true))
+            {
+                Debug.LogError($"Failed to set {child.name} as a child of {parent.name}.");
+            }
+            else
+            {
+                Debug.Log($"Set {child.name} as a child of {parent.name}.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Parent or Child object not found!");
+        }
+    }
+
+
+
     // Common spawning logic (runs on server only)
     private void SpawnFoodServerSide(string prefabName, Vector3 position, Quaternion rotation, ulong ownerClientId)
     {
@@ -192,7 +230,10 @@ public class FoodSupplySpawner : XRGrabInteractable
                 Quaternion worldRot = rotation;
 
                 // Try network parenting
-                bool networkParented = spawnedNetObj.TrySetParent(containerNetObj);
+                // bool networkParented = spawnedNetObj.TrySetParent(containerNetObj); <- Old aproach
+
+                // Request parenting through server RPC
+                RequestParenting(spawnedNetObj, containerNetObj);
                 
                 // Don't use regular transform.SetParent at all - this is causing the error
                 // spawnedFood.transform.SetParent(foodContainer); <-- REMOVE THIS LINE
