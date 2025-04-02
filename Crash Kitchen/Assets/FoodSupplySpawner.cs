@@ -11,8 +11,6 @@ public class FoodSupplySpawner : XRGrabInteractable
     [Header("Food Supply Settings")]
     [Tooltip("Prefab for the food object to spawn")]
     public GameObject foodPrefab;
-    [Tooltip("Spawn point for the food (could be a child transform)")]
-    public Transform spawnPoint;
 
     [Tooltip("Spawn the food at the center of this object")]
     public bool spawnAtCenter = true;
@@ -75,22 +73,22 @@ public class FoodSupplySpawner : XRGrabInteractable
 
         // Determine spawn position/rotation
         Vector3 spawnPosition = transform.position;
-        spawnPosition.y += 1f; // Add 3 to the y axis to spawn above the spawner
+        // spawnPosition.y += 1f; // Add 3 to the y axis to spawn above the spawner
         Quaternion spawnRotation = transform.rotation;
 
-        if (interactorTransform != null)
-        {
-            // Set position to be right in front of the controller/ray
-            spawnPosition = interactorTransform.position + interactorTransform.forward * 0.2f;
-            spawnRotation = interactorTransform.rotation;
-        }
-        else
-        {
-            // Fallback to spawner position
-            spawnPosition = transform.position;
-            spawnPosition.y += 0.2f; // Slightly above spawner
-            spawnRotation = transform.rotation;
-        }
+        // if (interactorTransform != null)
+        // {
+        //     // Set position to be right in front of the controller/ray
+        //     spawnPosition = interactorTransform.position + interactorTransform.forward * 0.2f;
+        //     spawnRotation = interactorTransform.rotation;
+        // }
+        // else
+        // {
+        //     // Fallback to spawner position
+        //     spawnPosition = transform.position;
+        //     spawnPosition.y += 0.2f; // Slightly above spawner
+        //     spawnRotation = transform.rotation;
+        // }
 
         // Get local client ID for ownership
         ulong clientId = NetworkManager.Singleton.LocalClientId;
@@ -220,15 +218,6 @@ public class FoodSupplySpawner : XRGrabInteractable
         
         // Critical settings for ray interactor compatibility
         grabInteractable.interactionLayers = InteractionLayerMask.GetMask("Default", "Grab", "Interactable");
-        
-        // Add a collider if missing
-        if (spawnedFood.GetComponent<Collider>() == null)
-        {
-            BoxCollider collider = spawnedFood.AddComponent<BoxCollider>();
-            collider.size = Vector3.one;
-            collider.center = Vector3.zero;
-            collider.isTrigger = false;
-        }
         
         // Make sure rigidbody doesn't freeze before user can grab it
         StartCoroutine(DelayedPhysicsActivation(rb));
