@@ -280,7 +280,7 @@ public class FoodSupplySpawner : XRGrabInteractable
     private IEnumerator ResetPositionAfterParenting(Transform objTransform, Vector3 worldPos, Quaternion worldRot)
     {
         // Try multiple times with increasing delays to overcome network sync issues
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
         {
             yield return new WaitForSeconds(0.1f * i);  // Progressive delays
             
