@@ -171983,7 +171983,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857911314}
-  - component: {fileID: 857911315}
   - component: {fileID: 857911313}
   m_Layer: 0
   m_Name: WaypointLocations
@@ -172004,10 +172003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed07f70402b88454883cbff39151c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   waypoints: []
-  waypointPrefab: {fileID: 1932598820688129862, guid: d11a9a4a661403e41b1a818b58086d3c, type: 3}
   activeWaypoint: {fileID: 0}
+  waypointPrefab: {fileID: 1932598820688129862, guid: d11a9a4a661403e41b1a818b58086d3c, type: 3}
   waypointsCleared: 0
 --- !u!4 &857911314
 Transform:
@@ -172029,31 +172027,6 @@ Transform:
   - {fileID: 1321093736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &857911315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857911312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 560489389
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1001 &858063516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321407,7 +321380,6 @@ MonoBehaviour:
   - {fileID: 7054818967881423238, guid: 1fb6f0319b7794c46ad61935d17c0e82, type: 3}
   - {fileID: 2308884994618043362, guid: 7f16266c80fcc5c45a420675dd317908, type: 3}
   outlinePos: {fileID: 1808144151}
-  currentOrderDone: 0
 --- !u!114 &1613579130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334714,10 +334686,6 @@ PrefabInstance:
     - target: {fileID: 5812531068625496027, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128035364314760031, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
-      propertyPath: Ownership
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6128035364314760031, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: GlobalObjectIdHash

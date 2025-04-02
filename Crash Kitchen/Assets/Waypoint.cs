@@ -1,17 +1,14 @@
-using Unity.Netcode;
 using UnityEngine;
 
-public class Waypoint : NetworkBehaviour
+public class Waypoint : MonoBehaviour
 {
     public void OnTriggerEnter(Collider other)
     {
-        if (!IsServer) return; // Ensure only the server processes collisions
-
-        if (other.CompareTag("Truck"))
+        if (other.tag == "Truck")
         {
-            if (GameManager.instance.currentOrderDone)
+            if(GameManager.instance.currentOrderDone)
             {
-                WaypointManager.instance.SetNewWaypointServerRpc();
+                WaypointManager.instance.SetNewWaypoint();
             }
         }
     }
