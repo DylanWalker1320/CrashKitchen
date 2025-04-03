@@ -30411,8 +30411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 340164889020335790}
-  drivingStation: {fileID: 0}
-  cookingStation: {fileID: 0}
+  drivingStation: {fileID: 8046674419608761634}
+  cookingStation: {fileID: 750639967440554525}
 --- !u!1 &2585914213460789757
 GameObject:
   m_ObjectHideFlags: 0
@@ -58349,7 +58349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2553688792
+  GlobalObjectIdHash: 2745184975
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -84576,7 +84576,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8334987442522442406}
   m_HandleRect: {fileID: 2936242884450566936}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
