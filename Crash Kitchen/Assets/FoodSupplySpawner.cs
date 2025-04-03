@@ -26,7 +26,6 @@ public class FoodSupplySpawner : XRGrabInteractable
     // Store original position, rotation, and parent for this game object
     private Vector3 originalPosition;
     private Quaternion originalRotation;
-    private Transform originalParent;
     private NetworkObject networkObject;
     private IXRSelectInteractor interactor;
     private IXRSelectInteractor lastInteractor;
@@ -107,6 +106,18 @@ public class FoodSupplySpawner : XRGrabInteractable
         // Cooldown regardless of whether server/client
         canSpawn = false;
         Invoke(nameof(ResetSpawn), spawnCooldown);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestOwnershipServerRpc(ulong clientId, ulong objectId)
+    {
+        if (!NetworkManager.Singleton.IsServer) return;
+        
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
+        {
+            networkObject.ChangeOwnership(clientId);
+            Debug.Log($"Changed ownership of {networkObject.name} to client {clientId}");
+        }
     }
 
     // Server RPC method called by clients
@@ -279,6 +290,8 @@ public class FoodSupplySpawner : XRGrabInteractable
         grabInteractable.throwOnDetach = true;
         grabInteractable.throwSmoothingDuration = 0.2f;
         grabInteractable.throwSmoothingCurve = AnimationCurve.Linear(0, 1, 1, 0);
+        grabInteractable.attachTransform = null;
+        grabInteractable.useDynamicAttach = true;
         
         // Critical settings for ray interactor compatibility
         grabInteractable.interactionLayers = InteractionLayerMask.GetMask("Default", "Grab", "Interactable");
@@ -448,12 +461,23 @@ public class FoodSupplySpawner : XRGrabInteractable
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        base.OnSelectEntered(args);
-        
+        if (networkObject != null && 
+            NetworkManager.Singleton != null && 
+            !NetworkManager.Singleton.IsServer && 
+            networkObject.IsSpawned
+        )
+        {
+            RequestOwnershipServerRpc(NetworkManager.Singleton.LocalClientId, networkObject.NetworkObjectId);
+        }
+
+        attachTransform = null;
+        useDynamicAttach = true;
+
         // Store position at moment of grabbing
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
-        originalParent = transform.parent;
+        // originalPosition = transform.position;
+        // originalRotation = transform.rotation;
+
+        base.OnSelectEntered(args);
         
         SpawnNewFood(args);
     }
@@ -462,34 +486,9 @@ public class FoodSupplySpawner : XRGrabInteractable
     {
         base.OnSelectExited(args);
         
-        // Store current values for reference
-        Vector3 finalPosition = originalPosition;
-        Quaternion finalRotation = originalRotation;
-        
-        // Log for debugging
-        Debug.Log($"Exited selection of {gameObject.name}, requesting return to position");
-        
-        if (NetworkManager.Singleton.IsServer)
-        {
-            // Server can direct parent
-            GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
-            if (kitchenContainer != null)
-            {
-                transform.SetParent(kitchenContainer.transform);
-                transform.position = finalPosition;
-                transform.rotation = finalRotation;
-                Debug.Log($"Server directly returning {gameObject.name} to kitchen container");
-            }
-        }
-        else
-        {
-            // Clients request the server to do parenting
-            ReturnToPositionServerRpc(finalPosition, finalRotation, NetworkManager.Singleton.LocalClientId);
-            
-            // Apply locally but don't parent (server will handle parenting)
-            transform.position = finalPosition;
-            transform.rotation = finalRotation;
-        }
+        GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
+
+        transform.SetParent(kitchenContainer.transform);
     }
 }
 
