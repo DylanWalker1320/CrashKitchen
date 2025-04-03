@@ -29696,7 +29696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2579725679
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -33345,7 +33345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1317621201
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -58348,7 +58348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2745184975
+  GlobalObjectIdHash: 2553688792
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -74588,7 +74588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2560484872
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -102272,6 +102272,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1946738815976100774}
     m_Modifications:
+    - target: {fileID: 355729037891173674, guid: a97d5a27fc3d82846ba61fdcf424b4ae, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3980032936
+      objectReference: {fileID: 0}
     - target: {fileID: 2589079953836931513, guid: a97d5a27fc3d82846ba61fdcf424b4ae, type: 3}
       propertyPath: m_Name
       value: SpawnerSteak
@@ -102334,6 +102338,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1946738815976100774}
     m_Modifications:
+    - target: {fileID: -7604585468898020142, guid: ef9b88b56660ac94499577737998138c, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2571972742
+      objectReference: {fileID: 0}
     - target: {fileID: 3137747083252471560, guid: ef9b88b56660ac94499577737998138c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.767
@@ -102400,6 +102408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnerLettuce
       objectReference: {fileID: 0}
+    - target: {fileID: 1441699128221263133, guid: 30ae03c9e73b9424f89eae2c6bfe1903, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 833445741
+      objectReference: {fileID: 0}
     - target: {fileID: 8569390842739339812, guid: 30ae03c9e73b9424f89eae2c6bfe1903, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.723
@@ -102458,6 +102470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1946738815976100774}
     m_Modifications:
+    - target: {fileID: -3706831922786421272, guid: 7a335e8b73dc5794fa19b597f106cad8, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 339238636
+      objectReference: {fileID: 0}
     - target: {fileID: 2556030545206513181, guid: 7a335e8b73dc5794fa19b597f106cad8, type: 3}
       propertyPath: m_Name
       value: SpawnerBun
@@ -102520,6 +102536,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1946738815976100774}
     m_Modifications:
+    - target: {fileID: -3943969974038549088, guid: 00a48e65f05f7234bb21c8192b594ceb, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1545519443
+      objectReference: {fileID: 0}
     - target: {fileID: 1522178974235245023, guid: 00a48e65f05f7234bb21c8192b594ceb, type: 3}
       propertyPath: m_Name
       value: SpawnerHotdog
@@ -102625,6 +102645,10 @@ PrefabInstance:
     - target: {fileID: 5663238215197127838, guid: 5183d102d52d1ab4f8d41854231283a9, type: 3}
       propertyPath: m_Name
       value: SpawnerGlizzyBun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079115708834647456, guid: 5183d102d52d1ab4f8d41854231283a9, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1582076677
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
