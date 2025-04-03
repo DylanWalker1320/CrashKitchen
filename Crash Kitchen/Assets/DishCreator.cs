@@ -5,7 +5,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using Unity.Netcode;
 
-public class DishCreator : MonoBehaviour
+public class DishCreator : NetworkBehaviour
 {
     public DishType dishType;
     public List<string> ingredients;
@@ -65,10 +65,17 @@ public class DishCreator : MonoBehaviour
                 return;
             }
         }
-        GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
-        Instantiate(dish, gameObject.transform.position, Quaternion.identity);
-        GameManager.instance.currentOrderDone = true;
-        Destroy(gameObject);
+        
+        // If we're on the server, handle completion directly
+        if (IsServer)
+        {
+            CompleteDishServerSide();
+        }
+        else
+        {
+            // Otherwise, request the server to complete it
+            CompleteDishServerRpc();
+        }
     }
 
     // Update is called once per frame
@@ -96,20 +103,87 @@ public class DishCreator : MonoBehaviour
                 }
             }
 
-            // If the other collider has a network object, destroy it and remove it from the ingredients list
-            if(other.gameObject.GetComponent<NetworkObject>() != null)
+            // Get the name to remove from ingredients
+            string ingredientName = other.gameObject.transform.parent.name;
+            
+            // Handle the object destruction via server RPC
+            NetworkObject netObj = other.gameObject.transform.parent.GetComponent<NetworkObject>();
+            if (netObj != null)
             {
-                other.gameObject.GetComponent<NetworkObject>().Despawn(true);
-                // Move the object to a far vector
-                other.gameObject.transform.position = new Vector3(1000, 1000, 1000);
+                DestroyIngredientServerRpc(netObj.NetworkObjectId, ingredientName);
             }
             else
             {
+                // For non-networked objects
+                ingredients.Remove(ingredientName);
                 Destroy(other.gameObject.transform.parent.gameObject);
             }
-
-            ingredients.Remove(other.gameObject.transform.parent.name);
+            
             CheckForCompletion();
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void DestroyIngredientServerRpc(ulong networkObjectId, string ingredientName)
+    {
+        // Find the network object with this ID
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject netObj))
+        {
+            // Tell clients to remove from ingredients list
+            RemoveIngredientClientRpc(ingredientName);
+            
+            // Make sure the object won't have parenting issues when despawned
+            if (netObj.transform.parent != null)
+            {
+                // Unparent the object before despawning to avoid reparenting errors
+                netObj.transform.SetParent(null);
+            }
+            
+            // Now despawn the object on the server (proper way to destroy networked objects)
+            netObj.Despawn(true);
+        }
+    }
+    
+    [ClientRpc]
+    void RemoveIngredientClientRpc(string ingredientName)
+    {
+        // Remove from ingredients list on all clients
+        if (ingredients.Contains(ingredientName))
+        {
+            ingredients.Remove(ingredientName);
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    void CompleteDishServerRpc()
+    {
+        CompleteDishServerSide();
+    }
+    
+    // Server-side implementation of dish completion
+    void CompleteDishServerSide()
+    {
+        GameObject dish = Resources.Load<GameObject>("Prefabs/" + dishType.ToString());
+        GameObject newDish = Instantiate(dish, gameObject.transform.position, Quaternion.identity);
+        
+        // If the dish has a NetworkObject component, spawn it on the network
+        NetworkObject netObj = newDish.GetComponent<NetworkObject>();
+        if (netObj != null)
+        {
+            netObj.Spawn();
+        }
+        
+        GameManager.instance.currentOrderDone = true;
+        
+        // If this GameObject has a NetworkObject, despawn it properly
+        NetworkObject thisNetObj = GetComponent<NetworkObject>();
+        if (thisNetObj != null && thisNetObj.IsSpawned)
+        {
+            thisNetObj.Despawn(true);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
