@@ -1717,6 +1717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1240929521255759010}
   - component: {fileID: 6861041240712044439}
+  - component: {fileID: 3866959993271196671}
   - component: {fileID: 7009859177590812399}
   m_Layer: 13
   m_Name: Mega Glizzy Outline
@@ -1775,6 +1776,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.1516533, y: 24.372566, z: 10.703969}
   m_Center: {x: -0.08883478, y: 10.780448, z: 0.4020334}
+--- !u!114 &3866959993271196671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308884994618043362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &7009859177590812399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,6 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bebf4320eae3e54cb2842562685b1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   dishType: 0
   ingredients: []
   hiddenIngredients:

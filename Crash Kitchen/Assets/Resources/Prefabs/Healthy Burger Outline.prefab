@@ -4236,6 +4236,7 @@ GameObject:
   - component: {fileID: 2959162439819248762}
   - component: {fileID: 3770913251076501141}
   - component: {fileID: 5314034226435722031}
+  - component: {fileID: 2270456152931825503}
   - component: {fileID: 5540497251548292584}
   m_Layer: 13
   m_Name: Healthy Burger Outline
@@ -4313,6 +4314,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18467903, y: 0.40509105, z: 0.18027973}
   m_Center: {x: -0.22758579, y: 0.13164306, z: 0.044006824}
+--- !u!114 &2270456152931825503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779579114361893410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &5540497251548292584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4325,6 +4351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bebf4320eae3e54cb2842562685b1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   dishType: 1
   ingredients: []
   hiddenIngredients:
