@@ -326233,6 +326233,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4737365782299246, guid: 0509744eed6f16e4c98e542f790a84b5, type: 3}
   m_PrefabInstance: {fileID: 1635585545}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1635747416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7108911765173112806, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
+  m_PrefabInstance: {fileID: 1667043758}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1635783309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335630,7 +335635,7 @@ PrefabInstance:
     - target: {fileID: 6391840415382433229, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1635747416}
     - target: {fileID: 6391840415382433229, guid: 9e5651b02fcd380459a0f914aab3b118, type: 3}
       propertyPath: cookingStation
       value: 
