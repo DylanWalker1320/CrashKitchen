@@ -1,10 +1,9 @@
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool debugMode;
@@ -41,16 +40,16 @@ public class GameManager : NetworkBehaviour
         outlineDict.Add(IncomingOrderGen.OrderType.MegaGlizzy, outlinePrefabs[2]);
     }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
+    // public override void OnNetworkSpawn()
+    // {
+    //     base.OnNetworkSpawn();
         
-        NewOrder();
-    }
+    //     NewOrder();
+    // }
 
     public void NewOrder() 
     {
-        if (!IsServer) return; // Ensure only the server runs this logic
+        //if (!IsServer) return; // Ensure only the server runs this logic
 
         StartCoroutine(WaitForOrderThenSpawn());
     }
@@ -83,38 +82,40 @@ public class GameManager : NetworkBehaviour
 
     private void SpawnFood()
     {
-        if (!IsServer) return;
 
-        if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
-        {
-            currentOrderDone = false;
+        return;
+        // if (!IsServer) return;
 
-            // Get the NetworkObject component from the prefab
-            NetworkObject prefabNetObj = outlineObj.GetComponent<NetworkObject>();
+        // if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
+        // {
+        //     currentOrderDone = false;
+
+        //     // Get the NetworkObject component from the prefab
+        //     NetworkObject prefabNetObj = outlineObj.GetComponent<NetworkObject>();
             
-            if (prefabNetObj != null)
-            {
-                NetworkObject spawnedNetObj = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
-                    prefabNetObj,                      // The prefab to spawn
-                    NetworkManager.ServerClientId,     // Server owns this object
-                    false,                            // Don't destroy with scene
-                    false,                            // Not a player object
-                    false,                            // Don't force override
-                    outlinePos.transform.position,    // Position
-                    outlinePos.transform.rotation     // Rotation
-                );
+        //     if (prefabNetObj != null)
+        //     {
+        //         NetworkObject spawnedNetObj = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
+        //             prefabNetObj,                      // The prefab to spawn
+        //             NetworkManager.ServerClientId,     // Server owns this object
+        //             false,                            // Don't destroy with scene
+        //             false,                            // Not a player object
+        //             false,                            // Don't force override
+        //             outlinePos.transform.position,    // Position
+        //             outlinePos.transform.rotation     // Rotation
+        //         );
                 
-                spawnedNetObj.transform.SetParent(outlinePos.transform);
-            }
-            else
-            {
-                Debug.LogError("Outline prefab does not have a NetworkObject component!");
-            }
-        }
-        else
-        {
-            Debug.LogError("No prefab found for order type: " + currentOrder);
-        }
+        //         spawnedNetObj.transform.SetParent(outlinePos.transform);
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("Outline prefab does not have a NetworkObject component!");
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.LogError("No prefab found for order type: " + currentOrder);
+        // }
     }
 
 
