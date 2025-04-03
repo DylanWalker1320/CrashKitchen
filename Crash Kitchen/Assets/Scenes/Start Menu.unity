@@ -66758,6 +66758,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 711330546}
     m_Modifications:
+    - target: {fileID: -8957626796182458973, guid: 7c41a270a8540ad47b5ffda7f3beb131, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1768956756
+      objectReference: {fileID: 0}
+    - target: {fileID: -8957626796182458973, guid: 7c41a270a8540ad47b5ffda7f3beb131, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 3626131414
+      objectReference: {fileID: 0}
     - target: {fileID: 1866141332023594065, guid: 7c41a270a8540ad47b5ffda7f3beb131, type: 3}
       propertyPath: m_Interpolate
       value: 0
@@ -73448,6 +73456,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4497011438508190, guid: 7446a392a730ac14d9cc70d21cf7ace0, type: 3}
   m_PrefabInstance: {fileID: 319449834}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &319560578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5087823492143518475, guid: 3967f87296c892e40b57e37bc8601550, type: 3}
+  m_PrefabInstance: {fileID: 1810536143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &319560579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319560578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1767719863f9661459714de95fb6bf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &319646194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433967,10 +433992,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network Manager VR Mutliplayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5087823492143518475, guid: 3967f87296c892e40b57e37bc8601550, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5087823492143518475, guid: 3967f87296c892e40b57e37bc8601550, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 319560579}
   m_SourcePrefab: {fileID: 100100000, guid: 3967f87296c892e40b57e37bc8601550, type: 3}
 --- !u!1001 &1810615344
 PrefabInstance:
@@ -459149,12 +459181,24 @@ PrefabInstance:
       value: 1935086592
       objectReference: {fileID: 0}
     - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
+      propertyPath: DontDestroyWithOwner
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: ActiveSceneSynchronization
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8647664954492677990, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: m_Name
       value: XRI_Network_Game_Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647664954492677990, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
