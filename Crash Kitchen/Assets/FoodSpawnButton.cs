@@ -81,7 +81,7 @@ public class FoodSpawnButton : NetworkBehaviour
         }
 
         // Reset the position and rotation of the spawned object
-        MoveFoodClientRpc(networkObject);
+        MoveFoodClientRpc(networkObject.NetworkObjectId);
 
 
         Rigidbody rb = networkObject.GetComponent<Rigidbody>();
@@ -93,16 +93,18 @@ public class FoodSpawnButton : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void MoveFoodClientRpc(NetworkObject networkObject)
+    private void MoveFoodClientRpc(ulong networkObjectId)
     {
-        if (networkObject == null)
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject networkObject))
         {
-            Debug.LogError("MoveFoodClientRpc: NetworkObject is null.");
-            return;
+            // Reset the position and rotation of the spawned object
+            networkObject.transform.localPosition = Vector3.zero;
+            networkObject.transform.localRotation = Quaternion.identity;
+            Debug.Log($"Client: Moved food object {networkObjectId} to local zero position");
         }
-
-        // Reset the position and rotation of the spawned object
-        networkObject.transform.localPosition = Vector3.zero;
-        networkObject.transform.localRotation = Quaternion.identity;
+        else
+        {
+            Debug.LogError($"MoveFoodClientRpc: Could not find NetworkObject with ID {networkObjectId}");
+        }
     }
 }
