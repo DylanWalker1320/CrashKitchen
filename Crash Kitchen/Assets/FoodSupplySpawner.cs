@@ -26,6 +26,7 @@ public class FoodSupplySpawner : XRGrabInteractable
     // Store original position, rotation, and parent for this game object
     private Vector3 originalPosition;
     private Quaternion originalRotation;
+    private Transform originalParent;
     private NetworkObject networkObject;
     private IXRSelectInteractor interactor;
     private IXRSelectInteractor lastInteractor;
@@ -449,6 +450,11 @@ public class FoodSupplySpawner : XRGrabInteractable
     {
         base.OnSelectEntered(args);
         
+        // Store position at moment of grabbing
+        originalPosition = transform.position;
+        originalRotation = transform.rotation;
+        originalParent = transform.parent;
+        
         SpawnNewFood(args);
     }
 
@@ -457,8 +463,8 @@ public class FoodSupplySpawner : XRGrabInteractable
         base.OnSelectExited(args);
         
         // Store current values for reference
-        // Vector3 finalPosition = originalPosition;
-        // Quaternion finalRotation = originalRotation;
+        Vector3 finalPosition = originalPosition;
+        Quaternion finalRotation = originalRotation;
         
         // Log for debugging
         Debug.Log($"Exited selection of {gameObject.name}, requesting return to position");
@@ -470,8 +476,8 @@ public class FoodSupplySpawner : XRGrabInteractable
             if (kitchenContainer != null)
             {
                 transform.SetParent(kitchenContainer.transform);
-                // transform.position = finalPosition;
-                // transform.rotation = finalRotation;
+                transform.position = finalPosition;
+                transform.rotation = finalRotation;
                 Debug.Log($"Server directly returning {gameObject.name} to kitchen container");
             }
         }
@@ -481,8 +487,8 @@ public class FoodSupplySpawner : XRGrabInteractable
             ReturnToPositionServerRpc(finalPosition, finalRotation, NetworkManager.Singleton.LocalClientId);
             
             // Apply locally but don't parent (server will handle parenting)
-            // transform.position = finalPosition;
-            // transform.rotation = finalRotation;
+            transform.position = finalPosition;
+            transform.rotation = finalRotation;
         }
     }
 }
