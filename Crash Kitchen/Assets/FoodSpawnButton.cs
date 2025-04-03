@@ -81,8 +81,7 @@ public class FoodSpawnButton : NetworkBehaviour
         }
 
         // Reset the position and rotation of the spawned object
-        networkObject.transform.localPosition = Vector3.zero;
-        networkObject.transform.localRotation = Quaternion.identity;
+        MoveFoodClientRpc(networkObject);
 
 
         Rigidbody rb = networkObject.GetComponent<Rigidbody>();
@@ -91,5 +90,19 @@ public class FoodSpawnButton : NetworkBehaviour
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         rb.constraints = RigidbodyConstraints.None;
+    }
+
+    [ClientRpc]
+    private void MoveFoodClientRpc(NetworkObject networkObject)
+    {
+        if (networkObject == null)
+        {
+            Debug.LogError("MoveFoodClientRpc: NetworkObject is null.");
+            return;
+        }
+
+        // Reset the position and rotation of the spawned object
+        networkObject.transform.localPosition = Vector3.zero;
+        networkObject.transform.localRotation = Quaternion.identity;
     }
 }
