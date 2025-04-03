@@ -100,7 +100,8 @@ public class DishCreator : MonoBehaviour
             if(other.gameObject.GetComponent<NetworkObject>() != null)
             {
                 other.gameObject.GetComponent<NetworkObject>().Despawn(true);
-                Destroy(other.gameObject.transform.parent.gameObject);
+                // Move the object to a far vector
+                other.gameObject.transform.position = new Vector3(1000, 1000, 1000);
             }
             else
             {
