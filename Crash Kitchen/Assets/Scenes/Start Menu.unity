@@ -459182,15 +459182,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: DontDestroyWithOwner
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: ActiveSceneSynchronization
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2491505289137730051, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: SceneMigrationSynchronization
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8647664954492677990, guid: 0267a1d338db2bf4c9625e450bbaaad0, type: 3}
       propertyPath: m_Name
