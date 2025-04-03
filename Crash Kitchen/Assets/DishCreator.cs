@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
@@ -9,7 +10,7 @@ public class DishCreator : NetworkBehaviour
 {
     public DishType dishType;
     public List<string> ingredients;
-    public GameObject[] hiddenIngredients; // NOTE: Use ingredient prefabs, lock them into the same position as the outlined masked ingredients, and turn them off. Add them into this array in the inspector.
+    public GameObject[] hiddenIngredients; 
     [SerializeField] RecipeDatabase recipes;
     [SerializeField] bool recipeFound;
 
@@ -18,9 +19,8 @@ public class DishCreator : NetworkBehaviour
         MegaGlizzy, 
         HealthyBurger, 
         DeluxeSteak
-        
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         name = dishType.ToString();
@@ -78,7 +78,6 @@ public class DishCreator : NetworkBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Looks for initial ingredients if not found, doesn't work in start
@@ -90,10 +89,10 @@ public class DishCreator : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Checks for collided ingredient
+        // Only proceed if this is a valid ingredient
         if(LookForIngredient(other.gameObject.transform.parent.name))
         {
-            // Iterates through each hidden Ingredient ("Turned ON" ingredients currently turned off), if they're off and the collided ingredient is found, it turns the hidden ingredient on
+            // Activate the corresponding hidden ingredient locally
             foreach(GameObject ingredient in hiddenIngredients)
             {
                 if(ingredient.name == "Turned " + other.gameObject.transform.parent.name && ingredient.activeSelf == false)
@@ -102,46 +101,52 @@ public class DishCreator : NetworkBehaviour
                     break;
                 }
             }
-
+            
             // Get the name to remove from ingredients
             string ingredientName = other.gameObject.transform.parent.name;
             
-            // Handle the object destruction via server RPC
-            NetworkObject netObj = other.gameObject.transform.parent.GetComponent<NetworkObject>();
-            if (netObj != null)
+            // Handle the object destruction
+            GameObject objectToDestroy = other.gameObject.transform.parent.gameObject;
+            
+            // If it has a NetworkObject, we need to notify the server about the ingredient use
+            if (IsServer)
             {
-                DestroyIngredientServerRpc(netObj.NetworkObjectId, ingredientName);
+                // Server side - broadcast the ingredient removal to all clients
+                RemoveIngredientClientRpc(ingredientName);
+                
+                // Destroy the object directly (no despawn)
+                Destroy(objectToDestroy);
             }
             else
             {
-                // For non-networked objects
+                // Client side - tell the server we used this ingredient
+                NotifyIngredientUsedServerRpc(ingredientName);
+                
+                // Locally destroy the object
+                Destroy(objectToDestroy);
+            }
+            
+            // Update our local ingredients list
+            if (ingredients.Contains(ingredientName))
+            {
                 ingredients.Remove(ingredientName);
-                Destroy(other.gameObject.transform.parent.gameObject);
             }
             
             CheckForCompletion();
         }
     }
-
+    
     [ServerRpc(RequireOwnership = false)]
-    void DestroyIngredientServerRpc(ulong networkObjectId, string ingredientName)
+    void NotifyIngredientUsedServerRpc(string ingredientName)
     {
-        // Find the network object with this ID
-        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject netObj))
+        // Server received notification that a client used an ingredient
+        if (ingredients.Contains(ingredientName))
         {
-            // Tell clients to remove from ingredients list
-            RemoveIngredientClientRpc(ingredientName);
-            
-            // Make sure the object won't have parenting issues when despawned
-            if (netObj.transform.parent != null)
-            {
-                // Unparent the object before despawning to avoid reparenting errors
-                netObj.transform.SetParent(null);
-            }
-            
-            // Now despawn the object on the server (proper way to destroy networked objects)
-            netObj.Despawn(true);
+            ingredients.Remove(ingredientName);
         }
+        
+        // Broadcast to all clients to remove this ingredient from their lists
+        RemoveIngredientClientRpc(ingredientName);
     }
     
     [ClientRpc]
@@ -186,27 +191,4 @@ public class DishCreator : NetworkBehaviour
             Destroy(gameObject);
         }
     }
-
-    //     Debug.Log(other.gameObject.GetComponent<MeshRenderer>().materials[0]);
-    //     if(LookForIngredient(other.gameObject.transform.parent.name))
-    //     {
-    //         for(int i = 0; i < ingredients.Count; i++)
-    //         {
-    //             if(gameObject.transform.GetChild(i).name == other.gameObject.transform.parent.name)
-    //             {
-    //                 Debug.Log("Level 1");
-    //                 if(gameObject.transform.GetChild(i).GetChild(0).GetComponent<MeshRenderer>().materials[0] != other.gameObject.GetComponent<MeshRenderer>().materials[0])
-    //                 {
-    //                     foreach(Material material in gameObject.transform.GetChild(i).GetChild(0).GetComponent<MeshRenderer>().materials)
-    //                     {
-    //                         Destroy(material);
-    //                     }
-    //                     gameObject.transform.GetChild(i).GetChild(0).GetComponent<MeshRenderer>().materials[0] = Resources.Load<Material>("Assets/" + other.gameObject.transform.parent.name + ".obj").GetComponent<MeshRenderer>().materials[0];
-    //                 }
-    //             }
-    //         }
-    //         ingredients.Remove(other.gameObject.name);
-    //         Destroy(other.gameObject.transform.parent.gameObject);
-    //     }
-    // }
 }
