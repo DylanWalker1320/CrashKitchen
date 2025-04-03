@@ -350,7 +350,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Dialogue_JP.bank
   Name: Dialogue_JP
   StudioPath: bank:/Dialogue_JP
-  lastModified: 638788690307410275
+  lastModified: 638792606253649286
   FileSizes: []
   Exists: 1
 --- !u!114 &-6345588142681225576
@@ -454,7 +454,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638788690308785935
+  lastModified: 638792606254953502
   FileSizes: []
   Exists: 1
 --- !u!114 &-5207714116956346270
@@ -872,7 +872,7 @@ MonoBehaviour:
   - {fileID: 142499136379649961}
   StringsBanks:
   - {fileID: 7633798215942843363}
-  cacheTime: 638788690308785935
+  cacheTime: 638792606254953502
   cacheVersion: 131846
 --- !u!114 &142499136379649961
 MonoBehaviour:
@@ -889,7 +889,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638788690307425619
+  lastModified: 638792606253659578
   FileSizes: []
   Exists: 1
 --- !u!114 &836171051483073861
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638788690308744972
+  lastModified: 638792606254917799
   FileSizes: []
   Exists: 1
 --- !u!114 &2040280223086920993
@@ -1270,7 +1270,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/VO.bank
   Name: VO
   StudioPath: bank:/VO
-  lastModified: 638788690308760472
+  lastModified: 638792606254927977
   FileSizes: []
   Exists: 1
 --- !u!114 &4570264814406874215
@@ -1315,7 +1315,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Dialogue_EN.bank
   Name: Dialogue_EN
   StudioPath: bank:/Dialogue_EN
-  lastModified: 638788690307394936
+  lastModified: 638792606253633980
   FileSizes: []
   Exists: 1
 --- !u!114 &5649970772997712145
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Dialogue_CN.bank
   Name: Dialogue_CN
   StudioPath: bank:/Dialogue_CN
-  lastModified: 638788690307379650
+  lastModified: 638792606253618707
   FileSizes: []
   Exists: 1
 --- !u!114 &5723925570296321922
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638788690307435865
+  lastModified: 638792606253664715
   FileSizes:
   - Name: 
     Value: 4026
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   Path: Assets/Fmod Banks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638788690308025276
+  lastModified: 638792606254164163
   FileSizes: []
   Exists: 1
 --- !u!114 &8010802995339969674

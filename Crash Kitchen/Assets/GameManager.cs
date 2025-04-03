@@ -14,7 +14,7 @@ public class GameManager : NetworkBehaviour
     private IncomingOrderGen.OrderType currentOrder;
     public Dictionary<IncomingOrderGen.OrderType, GameObject> outlineDict = new Dictionary<IncomingOrderGen.OrderType, GameObject>();
     public GameObject outlinePos;
-    public bool currentOrderDone;
+    public bool currentOrderDone = true;
 
     private void Awake()
     {
@@ -87,7 +87,7 @@ public class GameManager : NetworkBehaviour
 
         if (outlineDict.TryGetValue(currentOrder, out GameObject outlineObj))
         {
-            currentOrderDone = false;
+            //currentOrderDone = false;
 
             // Get the NetworkObject component from the prefab
             NetworkObject prefabNetObj = outlineObj.GetComponent<NetworkObject>();

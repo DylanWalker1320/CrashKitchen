@@ -42,7 +42,7 @@ public class WaypointManager : MonoBehaviour
         if (activeWaypoint != null) {
             Destroy(activeWaypoint);
             waypointsCleared++;
-            GameManager.instance.NewOrder();
+            //GameManager.instance.NewOrder();
         }
 
         // Get a random waypoint from the list
