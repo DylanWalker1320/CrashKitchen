@@ -66,11 +66,17 @@ public class FoodSpawnButton : NetworkBehaviour
         networkObject.ChangeOwnership(ownerClientId);
 
         // Parent the spawned object to the spawn point
-        networkObject.transform.SetParent(spawnPoint);
+        if (networkObject.transform.TrySetParent(spawnPoint)) {
+            Debug.Log("Spawned object parented to spawn point.");
+        }
+        else
+        {
+            Debug.LogWarning("Failed to parent spawned object to spawn point. It may be due to the object not being a child of the spawn point.");
+        }
 
         // Reset the position and rotation of the spawned object
-        networkObject.transform.localPosition = Vector3.zero;
-        networkObject.transform.localRotation = Quaternion.identity;
+        networkObject.transform.position = Vector3.zero;
+        networkObject.transform.potation = Quaternion.identity;
 
 
         Rigidbody rb = networkObject.GetComponent<Rigidbody>();
