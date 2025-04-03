@@ -456,9 +456,34 @@ public class FoodSupplySpawner : XRGrabInteractable
     {
         base.OnSelectExited(args);
         
-        GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
-
-        transform.SetParent(kitchenContainer.transform);
+        // Store current values for reference
+        // Vector3 finalPosition = originalPosition;
+        // Quaternion finalRotation = originalRotation;
+        
+        // Log for debugging
+        Debug.Log($"Exited selection of {gameObject.name}, requesting return to position");
+        
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Server can direct parent
+            GameObject kitchenContainer = GameObject.FindWithTag("InteriorKitchenObjects");
+            if (kitchenContainer != null)
+            {
+                transform.SetParent(kitchenContainer.transform);
+                // transform.position = finalPosition;
+                // transform.rotation = finalRotation;
+                Debug.Log($"Server directly returning {gameObject.name} to kitchen container");
+            }
+        }
+        else
+        {
+            // Clients request the server to do parenting
+            ReturnToPositionServerRpc(finalPosition, finalRotation, NetworkManager.Singleton.LocalClientId);
+            
+            // Apply locally but don't parent (server will handle parenting)
+            // transform.position = finalPosition;
+            // transform.rotation = finalRotation;
+        }
     }
 }
 
