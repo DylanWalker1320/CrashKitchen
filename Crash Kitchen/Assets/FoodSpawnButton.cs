@@ -4,30 +4,32 @@ using Unity.Netcode;
 public class FoodSpawnButton : NetworkBehaviour
 {
     public GameObject foodPrefab; // The prefab of the food item to spawn
-    public Transform spawnPoint; // The point where the food will be spawned
+    public GameObject spawnPoint; // The point where the food will be spawned
 
-    // This method is called when the button is clicked
     public void OnButtonClick()
     {
         if (!NetworkManager.Singleton)
         {
-            Debug.LogWarning("No NetworkManager found!");
+            Debug.LogError("NetworkManager is not initialized. Cannot spawn food.");
             return;
         }
 
         // If we're the server/host, spawn directly
         if (NetworkManager.Singleton.IsServer)
         {
+            Debug.Log("Spawning food on server for client ID: " + NetworkManager.Singleton.LocalClientId);
             SpawnFood(NetworkManager.Singleton.LocalClientId);
         }
         // If we're a client, request the server to spawn
         else if (NetworkManager.Singleton.IsClient)
         {
+            Debug.Log("Requesting server to spawn food for client ID: " + NetworkManager.Singleton.LocalClientId);
             SpawnFoodServerRpc();
         }
         else
         {
-            Debug.LogWarning("Not connected to the network, can't spawn food");
+            Debug.LogError("Not a server or client. Cannot spawn food.");
+            return;
         }
     }
 
@@ -35,6 +37,8 @@ public class FoodSpawnButton : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SpawnFoodServerRpc(ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log("SpawnFoodServerRpc called by client ID: " + serverRpcParams.Receive.SenderClientId);
+
         // Extract the client ID of the sender
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         
@@ -45,7 +49,7 @@ public class FoodSpawnButton : NetworkBehaviour
     // Common method for spawning food that runs on the server
     private void SpawnFood(ulong ownerClientId)
     {
-        Debug.Log($"Spawning food requested by client: {ownerClientId}");
+        Debug.Log("Spawning food for client ID: " + ownerClientId);
 
         NetworkObject prefabNetObj = foodPrefab.GetComponent<NetworkObject>();
         
@@ -59,24 +63,24 @@ public class FoodSpawnButton : NetworkBehaviour
 
         if (networkObject == null)
         {
-            Debug.LogError("Failed to spawn food! Ensure the prefab has a NetworkObject component and is registered with the NetworkManager.");
+            Debug.LogError("Failed to spawn food. NetworkObject is null.");
             return;
         }
         
         networkObject.ChangeOwnership(ownerClientId);
 
         // Parent the spawned object to the spawn point
-        if (networkObject.transform.TrySetParent(spawnPoint)) {
-            Debug.Log("Spawned object parented to spawn point.");
+        if (networkObject.TrySetParent(spawnPoint)) { // Set parent, and disable world position staying
+            Debug.Log("Spawned food at " + spawnPoint.transform.position + " for client ID: " + ownerClientId);
         }
         else
         {
-            Debug.LogWarning("Failed to parent spawned object to spawn point. It may be due to the object not being a child of the spawn point.");
+            Debug.LogError("Failed to set parent for spawned food. It may not be in the same scene as the spawn point.");
         }
 
         // Reset the position and rotation of the spawned object
-        networkObject.transform.position = Vector3.zero;
-        networkObject.transform.potation = Quaternion.identity;
+        networkObject.transform.localPosition = new Vector3(5, 5, 5);
+        networkObject.transform.localRotation = Quaternion.identity;
 
 
         Rigidbody rb = networkObject.GetComponent<Rigidbody>();

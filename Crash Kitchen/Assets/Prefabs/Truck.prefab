@@ -58348,7 +58348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2553688792
+  GlobalObjectIdHash: 2745184975
   InScenePlacedSourceGlobalObjectIdHash: 913959050
   DeferredDespawnTick: 0
   Ownership: 8
@@ -102470,10 +102470,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1946738815976100774}
     m_Modifications:
-    - target: {fileID: -3706831922786421272, guid: 7a335e8b73dc5794fa19b597f106cad8, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 339238636
-      objectReference: {fileID: 0}
     - target: {fileID: 2556030545206513181, guid: 7a335e8b73dc5794fa19b597f106cad8, type: 3}
       propertyPath: m_Name
       value: SpawnerBun
