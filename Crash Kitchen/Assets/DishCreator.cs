@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using Unity.Netcode;
 
 public class DishCreator : MonoBehaviour
 {
@@ -94,7 +95,18 @@ public class DishCreator : MonoBehaviour
                     break;
                 }
             }
-            Destroy(other.gameObject.transform.parent.gameObject);
+
+            // If the other collider has a network object, destroy it and remove it from the ingredients list
+            if(other.gameObject.GetComponent<NetworkObject>() != null)
+            {
+                other.gameObject.GetComponent<NetworkObject>().Despawn(true);
+                Destroy(other.gameObject.transform.parent.gameObject);
+            }
+            else
+            {
+                Destroy(other.gameObject.transform.parent.gameObject);
+            }
+
             ingredients.Remove(other.gameObject.transform.parent.name);
             CheckForCompletion();
         }
