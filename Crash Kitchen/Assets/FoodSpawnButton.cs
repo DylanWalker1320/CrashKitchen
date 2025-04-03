@@ -8,6 +8,8 @@ public class FoodSpawnButton : NetworkBehaviour
 
     public void OnButtonClick()
     {
+        Debug.Log("Food spawn button clicked. Client ID: " + NetworkManager.Singleton.LocalClientId);
+
         if (!NetworkManager.Singleton)
         {
             Debug.LogError("NetworkManager is not initialized. Cannot spawn food.");
@@ -79,7 +81,7 @@ public class FoodSpawnButton : NetworkBehaviour
         }
 
         // Reset the position and rotation of the spawned object
-        networkObject.transform.localPosition = new Vector3(5, 5, 5);
+        networkObject.transform.localPosition = Vector3.zero;
         networkObject.transform.localRotation = Quaternion.identity;
 
 
