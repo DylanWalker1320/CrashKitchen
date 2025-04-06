@@ -6,10 +6,10 @@ public class Waypoint : MonoBehaviour
     {
         if (other.tag == "Truck")
         {
-            // if(GameManager.instance.currentOrderDone)
-            // {
-                 WaypointManager.instance.SetNewWaypoint();
-            // }
+            if(GameManager.instance.currentOrderDone)
+            {
+                WaypointManager.instance.SetNewWaypoint();
+            }
         }
     }
 }

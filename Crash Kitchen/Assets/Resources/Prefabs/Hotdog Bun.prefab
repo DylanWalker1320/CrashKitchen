@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 604402540787990901}
   - component: {fileID: 2405331686856210168}
   - component: {fileID: 6569675500346412559}
-  - component: {fileID: -3242531559076930311}
+  - component: {fileID: -979821099411431885}
   m_Layer: 13
   m_Name: Hotdog Bun
   m_TagString: Resettable
@@ -169,7 +169,7 @@ Rigidbody:
   m_GameObject: {fileID: 4244561496108021156}
   serializedVersion: 4
   m_Mass: 20
-  m_Drag: 0
+  m_Drag: 100
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -184,9 +184,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!114 &2405331686856210168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
---- !u!114 &-3242531559076930311
+--- !u!114 &-979821099411431885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,8 +341,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4244561496108021156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66127f82a1c0d0c4db577247e98d36c1, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Hotdog Bun
-  bunType: 1
+  GlobalObjectIdHash: 534560959
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0

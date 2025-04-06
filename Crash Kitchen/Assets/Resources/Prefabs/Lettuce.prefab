@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.22534943
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0527
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.04208374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -100,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8635228587810587473}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5182027084569561890}
     - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: a7f1faee3d2b755499350533a14cfd5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 366749682022396173}
@@ -161,7 +164,7 @@ Rigidbody:
   m_GameObject: {fileID: 7993018022010482606}
   serializedVersion: 4
   m_Mass: 20
-  m_Drag: 0
+  m_Drag: 100
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -176,9 +179,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!114 &8435846379052594059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +327,28 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
+--- !u!114 &-5182027084569561890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993018022010482606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1397727326
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
