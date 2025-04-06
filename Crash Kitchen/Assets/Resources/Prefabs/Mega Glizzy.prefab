@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558888439676813663}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -18.953, y: 1.4321, z: -4.042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.019999996, y: 0.02, z: 0.019999996}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51,7 +51,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558888439676813663}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -69,7 +69,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &5140895103265448306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +259,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2054834477
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1
@@ -348,6 +352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1214428973
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1
@@ -437,6 +445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 14178030
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1
@@ -526,6 +538,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -979821099411431885, guid: 39069f2e59aec3c4ba31ddc138222d7b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4211123236
+      objectReference: {fileID: 0}
     - target: {fileID: 2405331686856210168, guid: 39069f2e59aec3c4ba31ddc138222d7b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -615,6 +631,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2191611444
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1
@@ -704,6 +724,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2045152431
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1
@@ -793,6 +817,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2257141501851466147}
     m_Modifications:
+    - target: {fileID: -117728429279108523, guid: e087dded02e723e409520d7e6280249d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3043922272
+      objectReference: {fileID: 0}
     - target: {fileID: 273727953168591697, guid: e087dded02e723e409520d7e6280249d, type: 3}
       propertyPath: isCooked
       value: 1

@@ -42,15 +42,12 @@ public class WaypointManager : MonoBehaviour
         if (activeWaypoint != null) {
             Destroy(activeWaypoint);
             waypointsCleared++;
-            GameManager.instance.NewOrder();
+            //GameManager.instance.NewOrder();
         }
 
         // Get a random waypoint from the list
         Transform waypointPos = waypoints[Random.Range(0, waypoints.Length)];
 
-        activeWaypoint = Instantiate(waypointPrefab, waypointPos.position, waypointPos.rotation);
-
-        
+        activeWaypoint = Instantiate(waypointPrefab, waypointPos.position, waypointPos.rotation);   
     }
-
 }
