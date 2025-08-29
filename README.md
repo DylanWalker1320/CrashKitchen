@@ -11,7 +11,7 @@ Crash Kitchen is a fast-paced, 2 person VR co-op game. The goal of the game is f
 
 #### Roles
 
-Lead Artist, Modeller, Procedural Generation: Tim Mah
-Networking, Wayfinding: Dylan Walker, Sky Good
-Cooking Mechanics, Video Editing Lead: Oscar San
-Menu Mechanics, Playtesting Lead: Dajung Yoon
+Lead Artist, Modeller, Procedural Generation: Tim Mah <br />
+Networking, Wayfinding: Dylan Walker, Sky Good <br />
+Cooking Mechanics, Video Editing Lead: Oscar San <br />
+Menu Mechanics, Playtesting Lead: Dajung Yoon <br />
